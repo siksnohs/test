@@ -1,411 +1,39 @@
-andiUA.loadmore = function(){andiUA.paginationFix = function() {
-	
-    var wrapBreadCrumbArr = andiUA.findPassebleContainer(['pagenav','pager','pagination','paging']);
-    wrapBreadCrumbArr.forEach(function(el3,j) {
-        if (el3.closest('#jilVt') == null && !el3.thasClass('UAdontrunpagenavonme') ) {
-            var FtTIP = el3;
-            FtTIP.querySelectorAll('a').forEach(function(VnIxP,i) {
-                if (!isNaN(VnIxP.innerText) ){
-    				VnIxP.addAttr({
-    				    'uapaginationpagelink': true,
-    					'role': 'link',
-    					'aria-label': andiUA.KNTQg.bbb17 + VnIxP.innerText
-    				});
-                }
-            });
-            if(FtTIP.querySelectorAll('a[uapaginationpagelink]').length > 0){
-                FtTIP.addAttr({
-                    'role': 'menubar',
-    				'tanindex':'0',
-                    'aria-label': andiUA.KNTQg.bbb18
-                });
-    
-                FtTIP.querySelectorAll('[class*="active"], [class*="current"]').forEach(function(VnIxP,i) {
-    				VnIxP.addAttr({'aria-current': 'true'});
-                });
-            }
-            
-            
-           
-        }
-    });
-};
-andiUA.paginationFix();/*andiUA.ML = function(isDynamic) {
-  isDynamic = isDynamic == "dynamic" ? true : false;
-  var n, objOfDataElms = [], arrOfObjText = [],biggestText = parseInt(localStorage.getItem("biggestText")), uoVsI = parseInt(localStorage.getItem("uoVsI")), heaing = '[role="heading"],h1,h2,h3,h5,h6,h4', headingLevel = biggestText - (uoVsI + 3);
-  headingLevel = Math.ceil(headingLevel / 5);
-  function search(myArray, textElm, elmClass, tagName) {
-    for (var i = 0; i < myArray.length; i++) {
-      if (myArray[i].jEmKP === textElm && myArray[i].tagName == tagName && myArray[i].elmClass == elmClass) {
-        return i;
-      }
-    }
-  }
-  function avoidTagFirstMap(Elm) {
-    if (!Elm.closest("#jilVt") && !Elm.closest("svg") && !Elm.isIt('[role="alert"],script,style,embed,object,noframes,svg,.accessibleIframe,.nrnYA,#jilVt')) {
-      return true;
-    }
-    return false;
-  }
-  function avoidTag(Elm) {
-    if (!Elm.isIt('select,label,option,[role="alert"],script,style,embed,object,noframes,svg,select,button,video,audio,input,textarea,.accessibleIframe,.nrnYA,[role="menu"],[role="button"],[role="tree"],#jilVt')) {
-      return true;
-    }
-    return false;
-  }
-  var countFixedHeading = 0, countFixedInput = 0, countFixedReadmorelink = 0, countFixedImg = 0, countFixedContent = 0,
-   thisElm, elemText, temoArr = [], child, walk = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, false);
-  while (child = walk.nextNode()) {
-    if (avoidTagFirstMap(child)) {
-      var innerText = null, isDefind = true;
-      child.childNodes.forEach(function(child3, index3) {
-        if (child3.nodeValue !== null && child3.nodeValue.trim() !== "") {
-          elemText = innerText = child3.nodeValue.trim();
-        }
-      });
-      if (!isDynamic && innerText) {
-        var tagName = child.tagName, elmClass = child.classList.value, indexInArr = search(arrOfObjText, innerText, elmClass, tagName);
-        if (!indexInArr) {
-          var CxhBE = {"jEmKP":innerText, "elmClass":elmClass, "tagName":child.tagName, "OOkJn":1};
-          arrOfObjText.push(CxhBE);
-        } else {
-          arrOfObjText[indexInArr].OOkJn++;
-        }
-      }
-      if (innerText === null) {
-        innerText = child.BKXPP();
-      }
-      if (child.isIt("img")) {
-        temoArr.push(["img", child.getAttribute("alt"), child]);
-      } else {
-        if (child.isIt('a,[role="link"]')) {
-          temoArr.push(["link", innerText, child]);
-        } else {
-          if (child.isIt("textarea")) {
-            temoArr.push(["textarea", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-          } else {
-            if (child.isIt("select")) {
-              temoArr.push(["select", child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-            } else {
-              if (child.isIt('button,[role="button"],[type="button"],[type="image"],[type="submit"],[type="reset"]')) {
-                temoArr.push(["button", innerText || child.value || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-              } else {
-                if (child.isIt('[role="heading"],h1,h2,h3,h4,h5,h6')) {
-                  temoArr.push(["heading", innerText, child]);
-                } else {
-                  if (child.isIt('[type="color"]')) {
-                    temoArr.push(["input_color", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                  } else {
-                    if (child.isIt('[type="date"]')) {
-                      temoArr.push(["input_date", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                    } else {
-                      if (child.isIt('[type="email"]')) {
-                        temoArr.push(["input_email", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                      } else {
-                        if (child.isIt('[type="file"]')) {
-                          temoArr.push(["input_file", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                        } else {
-                          if (child.isIt('[type="month"]')) {
-                            temoArr.push(["input_month", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                          } else {
-                            if (child.isIt('[type="number"]')) {
-                              temoArr.push(["input_number", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                            } else {
-                              if (child.isIt('[type="password"]')) {
-                                temoArr.push(["input_password", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                              } else {
-                                if (child.isIt('[type="range"]')) {
-                                  temoArr.push(["input_range", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                } else {
-                                  if (child.isIt('[type="search"]')) {
-                                    temoArr.push(["input_search", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                  } else {
-                                    if (child.isIt('[type="tel"]')) {
-                                      temoArr.push(["input_tel", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                    } else {
-                                      if (child.isIt('[type="time"]')) {
-                                        temoArr.push(["input_time", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                      } else {
-                                        if (child.isIt('[type="text"]')) {
-                                          temoArr.push(["input_text", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                        } else {
-                                          if (child.isIt('[type="URL"]')) {
-                                            temoArr.push(["input_URL", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                          } else {
-                                            if (child.isIt('[type="week"]')) {
-                                              temoArr.push(["input_week", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                            } else {
-                                              if (child.isIt('[type="checkbox"]')) {
-                                                temoArr.push(["checkbox", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                              } else {
-                                                if (child.isIt('[type="radio"]')) {
-                                                  temoArr.push(["radio", child.placeholder || child.title || (child.hasAttribute("aria-label") ? child.getAttribute("aria-label") : ""), child]);
-                                                } else {
-                                                  if (elemText !== "" && temoArr.length > 0 && elemText != temoArr[temoArr.length - 1][1]) {
-                                                    temoArr.push(["text", elemText, child]);
-                                                    isDefind = false;
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      if (elemText == "|" && !child.thasClass("NLWxW") && !child.hasAttribute("role")) {
-        child.addAttr({"role":"separator"});
-        countFixedContent++;
-      }
-      if (!child.hasAttribute("role") && !child.closest('[role="menuitem"], button') && !child.closest(heaing) && child.querySelectorAll(heaing).length === 0) {
-        var compStyles = window.getComputedStyle(child);
-        var fontsizeElm = parseInt(compStyles.getPropertyValue("font-size"));
-        if (fontsizeElm > uoVsI + 3) {
-          var level = 5;
-          var corrent = uoVsI + 3 + headingLevel;
-          while (level > 2 && fontsizeElm > corrent) {
-            corrent = corrent + headingLevel;
-            level--;
-          }
-          var tag = child.tagName.toLowerCase();
-          if( !child.isIt("[role],i,select,input,button, textarea,.icon,.fa") && !child.closest('[role="menubar"], nav, ol, ul')   ){
-              if (tag == "a") {
-                /*child.wrapInner("div");
-                child.parentElement.setAttribute("style", "display:inline;");
-                child.parentElement.setAttribute("role", "heading");
-                child.parentElement.setAttribute("aria-level", level);
-                countFixedHeading++;*//*
-              } else {
-                /*child.setAttribute("role", "heading");
-                child.setAttribute("aria-level", level);*//*
-                countFixedHeading++;
-              }
-              andiUA.headingArr.push([child, child.BKXPP(), level, "fixed"]);
-          }
-        }
-      }
-    }
-  }
-  andiUA.arrOfObjTextFilter = arrOfObjText.filter(function(Obj) {
-    return Obj.OOkJn > 2 && Obj.elmClass !== "" && Obj.jEmKP.length > 1 && (Obj.tagName === "A" || Obj.tagName === "BUTTON");
-  });
-  var findInputDesc = function(j) {
-    var preperText = "";
-    for (var t = j - 1; t >= 0; t--) {
-      if (temoArr[t][1].trim() != "" && temoArr[t][1].trim() == "*") {
-        preperText += temoArr[t][1].trim() + " ";
-      } else {
-        if (temoArr[t][1] != undefined && temoArr[t][1].trim() != "" && temoArr[t][1].trim() != "*") {
-          preperText += temoArr[t][1].trim();
-          break;
-        }
-      }
-    }
-    return preperText;
-  };
-  var findradioCheckboxDesc = function(j) {
-    var preperText = "";
-    for (var t = j + 1; t < temoArr.length; t++) {
-      if (temoArr[t][1] != undefined && temoArr[t][0] == "text" && temoArr[t][1].trim() != "" && temoArr[t][1].trim() == "*") {
-        preperText += temoArr[t][1].trim() + " ";
-      } else {
-        if (temoArr[t][1] != undefined && temoArr[t][0] == "text" && temoArr[t][1].trim() != "" && temoArr[t][1].trim() != "*") {
-          preperText += temoArr[t][1].trim();
-          break;
-        }
-      }
-    }
-    return preperText;
-  };
-  function checkInputMeanong(elm, index, prevOrNext) {
-    if (!elm.thasClass("uainput")) {
-      var InputDesc = "", inputID = elm.getAttr("id");
-      if (elm.closest("label")) {
-        InputDesc = elm.closest("label").BKXPP();
-      } else {
-        if (elm.hasAttribute("id") && UA1("label[for='" + inputID + "']")) {
-          if (UA1("label[for='" + inputID + "']").BKXPP() !== "") {
-            InputDesc = UA1("label[for='" + inputID + "']").BKXPP();
-          }
-        }
-      }
-      if (InputDesc.trim() == "") {
-        if (prevOrNext == "prev") {
-          var elmP = andiUA.getCoords(elm);
-          if (elmP.top > 150) {
-            InputDesc = findInputDesc(index);
-          }
-        } else {
-          InputDesc = findradioCheckboxDesc(index);
-        }
-      }
-      if (InputDesc != "") {
-        elm.addAttr({"tuaandiinputdiscrp":InputDesc});
-        countFixedInput++;
-      }
-      if (InputDesc != "" && !elm.hasAttribute("title")) {
-        elm.addAttr({"title":InputDesc});
-        countFixedInput++;
-      } else {
-        elm.addAttr({"title":elm.getAttribute("title") + " " + InputDesc});
-        countFixedInput++;
-      }
-      //elm.addClass("uainput");
-    }
-  }
-  for (var i = temoArr.length - 1; i >= 0; i--) {
-    if (temoArr[i][0].indexOf("input_") > -1 || temoArr[i][0] == "textarea" || temoArr[i][0] == "select") {
-      if (temoArr[i][1].trim() == "") {
-        checkInputMeanong(temoArr[i][2], i, "prev");
-      } else {
-        temoArr[i][2].addAttr({"tuaandiinputdiscrp":temoArr[i][1]});
-        if (!temoArr[i][2].hasAttribute("aria-label")) {
-          temoArr[i][2].addAttr({"aria-label":temoArr[i][1]});
-        }
-      }
-    }
-    if (temoArr[i][0] == "radio" || temoArr[i][0] == "checkbox") {
-      if (temoArr[i][1].trim() == "") {
-        checkInputMeanong(temoArr[i][2], i, "next");
-      } else {
-        temoArr[i][2].addAttr({"tuaandiinputdiscrp":temoArr[i][1]});
-        if (!temoArr[i][2].hasAttribute("aria-label")) {
-          temoArr[i][2].addAttr({"aria-label":temoArr[i][1]});
-        }
-      }
-    }
-    for (var j = 0; j < andiUA.arrOfObjTextFilter.length; j++) {
-      if (temoArr[i][1] == andiUA.arrOfObjTextFilter[j].jEmKP) {
-        var preperText = "";
-        for (var t = i - 1; t >= 0; t--) {
-          var thisObj = temoArr[t][2];
-          if (temoArr[t][0] == "heading") {
-            var thisHeadingText = temoArr[t][1];
-            if (getElementsByText(temoArr[t][2].BKXPP(), temoArr[t][2].tagName.toLowerCase()).length == 1) {
-              var plusMinusText = "";
-              if (thisObj.jEmKP == "-") {
-                plusMinusText = andiUA.KNTQg.bbb434 + " ";
-              }
-              if (thisObj.jEmKP == "+") {
-                plusMinusText = andiUA.KNTQg.bbb433 + " ";
-              }
-              if (thisObj.hasAttribute("aria-label")) {
-                var label = thisObj.getAttribute("aria-label");
-                if (label.indexOf(thisHeadingText) == -1) {
-                  thisObj.addAttr({"aria-label":plusMinusText + label + " " + thisHeadingText});
-                  countFixedReadmorelink++;
-                }
-              } else {
-                thisObj.addAttr({"aria-label":plusMinusText + thisObj.jEmKP + " " + thisHeadingText});
-                countFixedReadmorelink++;
-              }
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
-};
-andiUA.ML();*/
-/*andiUA.TextAnalysis = function(isDynamic) {
-  isDynamic = isDynamic == "dynamic" ? true : false;
-  var walk = document.createTreeWalker(UA1("body"), NodeFilter.SHOW_ELEMENT, null, false);
-  var biggestText = parseInt(localStorage.getItem("biggestText")), uoVsI = parseInt(localStorage.getItem("uoVsI")), textElm = "", thisElm, heaing = '[role="heading"],h1,h2,h3,h5,h6,h4';
-  var headingLevel = biggestText - (uoVsI + 3), headingLevel = Math.ceil(headingLevel / 5);
-  var arrOfObjText = [], countFixedHeading = 0;
-  while (thisElm = walk.nextNode()) {
-    thisElm.childNodes.forEach(function(child3, index3) {
-      if (child3.nodeValue != null && child3.nodeValue.trim() != "" && !thisElm.isIt("audio,video,embed,noframes,noscript,object,input, script,style,svg,#jilVt,.UAtextToShow, .ZWDCr,.accessibleIframe,.nrnYA") && !thisElm.closest("#jilVt")) {
-        textElm = child3.nodeValue.trim();
-        var compStyles = window.getComputedStyle(thisElm);
-        var fontsizeElm = parseInt(compStyles.getPropertyValue("font-size"));
-        if (!thisElm.hasAttribute("data-andiallelmwithtext") && !thisElm.isIt("aside,footer,dialog,menu,nav")) {
-          thisElm.setAttribute("data-andiallelmwithtext", fontsizeElm);
-        
-        }
-        if (!thisElm.hasAttribute("role") && !thisElm.closest('[role="menuitem"], button') && !thisElm.closest(heaing) && thisElm.querySelectorAll(heaing).length == 0) {
-          if (fontsizeElm > uoVsI + 3) {
-            var level = 5;
-            var corrent = uoVsI + 3 + headingLevel;
-            while (level > 2 && fontsizeElm > corrent) {
-              corrent = corrent + headingLevel;
-              level--;
-            }
-             var tag = thisElm.tagName.toLowerCase();
-             if( !thisElm.isIt("[role],i,select,input,button, textarea,.icon,.fa") && !thisElm.closest('[role="menu"],[role="menubar"], nav, ol, ul')   ){
-                  if (tag == "a") {
-                    /*thisElm.wrapInner("div");
-                    thisElm.parentElement.setAttribute("style", "display:inline;");
-                    thisElm.parentElement.setAttribute("role", "heading");
-                    thisElm.parentElement.setAttribute("aria-level", level);*//*
-                    countFixedHeading++;
-                  } else {
-                    /*thisElm.setAttribute("role", "heading");
-                    thisElm.setAttribute("aria-level", level);*//*
-                    countFixedHeading++;
-                  }
-                  andiUA.headingArr.push([thisElm, thisElm.BKXPP(), level, "fixed"]);
-             }
-          }
-        }
-      }
-    });
-  }
-  if (!isDynamic) {
-    andiUA.arrOfObjTextFilter = arrOfObjText.filter(function(Obj) {
-      return Obj.OOkJn > 2 && Obj.elmClass != "" && Obj.jEmKP.length > 1;
-    });
-  }
-};*/
-/*andiUA.TextAnalysis();*/andiUA.fixBreadcrumb = function() {
+andiUA.loadmore = function(){
+				andiUA.fixBreadcrumb = function() {
 
 	var countFixed = 0, wrapBreadCrumbArr = andiUA.findPassebleContainer(['BreadCrumb','breadcrams','breadcrumb','crumbs','crumb']);
-	wrapBreadCrumbArr.forEach(function(VnIxP,i) {
+	wrapBreadCrumbArr.forEach(function(TUAel,i) {
 		var n, textArr = [];
-		var walk = document.createTreeWalker(VnIxP, NodeFilter.SHOW_TEXT, null, false);
+		var walk = document.createTreeWalker(TUAel, NodeFilter.SHOW_TEXT, null, false);
 		while (n = walk.nextNode()) {
 			if(textArr.indexOf(n.nodeValue) == -1 && n.nodeValue.trim() !== ''){
 				var textElm = n.nodeValue.trim();
 				textArr.push(n.nodeValue);
 				if(n.parentElement.tagName == 'A'){
-					n.parentElement.addAttr({"aria-label": andiUA.KNTQg.TUABreadcrumb2 + n.nodeValue});
+					n.parentElement.addAttr({"aria-label": andiUA.TUAlanguageText.TUABreadcrumb2 + n.nodeValue});
 				} else {
-					n.parentElement.addAttr({"aria-current":"page","aria-label": andiUA.KNTQg.TUABreadcrumb1 + n.nodeValue});
+					n.parentElement.addAttr({"aria-current":"page","aria-label": andiUA.TUAlanguageText.TUABreadcrumb1 + n.nodeValue});
 				}
 			}
 		}
 		var allSentence = '';
 		for(var i = textArr.length-1; i >= 0; i--){
 			if(i == (textArr.length-1)){
-				allSentence += andiUA.KNTQg.TUABreadcrumb1 + textArr[i] + " ";
+				allSentence += andiUA.TUAlanguageText.TUABreadcrumb1 + textArr[i] + " ";
 			} else {
-				allSentence += andiUA.KNTQg.TUABreadcrumb3 + textArr[i] + " ";
+				allSentence += andiUA.TUAlanguageText.TUABreadcrumb3 + textArr[i] + " ";
 			}
 		}
-		VnIxP.addAttr({"aria-label": allSentence, "tabindex": "0", "role": "region"});
+		TUAel.addAttr({"aria-label": allSentence, "tabindex": "0", "role": "region"});
 	});
 };
-andiUA.fixBreadcrumb();var vKfJG = UA('[role="heading"],h1,h2,h3,h4,h5,h6');
-andiUA.YODzI = function() {
+andiUA.fixBreadcrumb();
+				var allHeading = UA('[role="heading"],h1,h2,h3,h4,h5,h6');
+andiUA.TUAemptyHeading = function() {
     if (UA("h1").length > 1) {
-        UA("h1").forEach(function(VnIxP,i) {
+        UA("h1").forEach(function(TUAel,i) {
             if (i > 0) {
-                VnIxP.addAttr({
+                TUAel.addAttr({
                     "aria-level": "2",
                     "role": "heading"
                 });
@@ -413,102 +41,106 @@ andiUA.YODzI = function() {
         });
     }
 };
-andiUA.eINeo = function(vKfJG) {
-	document.querySelectorAll('[role="heading"],h1,h2,h3,h4,h5,h6').forEach(function(VnIxP,i) {
-		if (VnIxP.innerText.trim() == "" && VnIxP.querySelectorAll('img,a,svg').length == 0) {
-			VnIxP.innerHTML += '<span class="sr-only">&#8203;</span>';
-			 VnIxP.addAttr({"role": "presentation"});
+andiUA.TUAsetEmptyHeading = function(allHeading) {
+	document.querySelectorAll('[role="heading"],h1,h2,h3,h4,h5,h6').forEach(function(TUAel,i) {
+		if (TUAel.innerText?.trim() == "" && TUAel.querySelectorAll('img,a,svg').length == 0) {
+			TUAel.innerHTML += '<span class="sr-only">&#8203;</span>';
+			 TUAel.addAttr({"role": "presentation"});
 		}
 	});
 };
-andiUA.TUAfixHaveNotH1 = function(vKfJG) {
+andiUA.TUAfixHaveNotH1 = function(allHeading) {
     if(!document.querySelector('h1')){
     	let htmlSRT = '<h1 class="sr-only">'+document.querySelector('title')?.innerText.trim()+'</h1>';
     	if(document.querySelector('title')) document.body.insertAdjacentHTML( 'afterbegin', htmlSRT );
     }
 }
-
-andiUA.YODzI();
-andiUA.eINeo(vKfJG);
-andiUA.TUAfixHaveNotH1();andiUA.MuUxo = function() {
+if(!UA1('#andimenu')){
+    andiUA.TUAemptyHeading();
+andiUA.TUAsetEmptyHeading(allHeading);
+andiUA.TUAfixHaveNotH1();
+}
+				andiUA.TUAfixUserImgEmptyAlt = function() {
 	
 	var alt1, alt2;
-	UA(andiUA.TUAsettingFn.SdmDC).forEach(function(VnIxP,i) {
-		 if (!VnIxP.hasAttribute("alt")) {
-			if (VnIxP.getAttr("src") !== null) {
-				alt1 = VnIxP.getAttr("src").rVDHB();
-				alt2 = VnIxP.getAttr("src").qDYoN();
+	UA(andiUA.TUAsettingFn.TUAallImg).forEach(function(TUAel,i) {
+		 if (!TUAel.hasAttribute("alt")) {
+			if (TUAel.getAttr("src") !== null) {
+				alt1 = TUAel.getAttr("src").TUAfilename();
+				alt2 = TUAel.getAttr("src").TUAfilename2();
 			}
-			if (VnIxP.getAttr("alt") === null || VnIxP.getAttr("alt") == alt1 || VnIxP.getAttr("alt") == alt2) {
-				VnIxP.addAttr({"alt":""});
+			if (TUAel.getAttr("alt") === null || TUAel.getAttr("alt") == alt1 || TUAel.getAttr("alt") == alt2) {
+				TUAel.addAttr({"alt":""});
 			}
 		 }
 	});
 };
-andiUA.MuUxo();andiUA.PTPzL = function(GMooO) {
+andiUA.TUAfixUserImgEmptyAlt();
+				andiUA.TUAsetFixedKeybourdLinks = function(TUAelementList) {
     document.querySelectorAll('a').forEach( (elm)=>{
       (!elm.hasAttribute('href'))?elm.setAttribute('tabindex', '0'):'';
     });
 };
-andiUA.PTPzL();andiUA.findAltMeaning = function() {
+andiUA.TUAsetFixedKeybourdLinks();
+				andiUA.findAltMeaning = function() {
 	
-    var HashO = 'h1,h2,h3,h4,h5.h6,[role="heading"]';
-    var areas = 'article:not(.andimenucode), [siACv="2"]:not(.dontfindAltMeaning):not(.andimenucode)';
+    var TUAallHeading = 'h1,h2,h3,h4,h5.h6,[role="heading"]';
+    var areas = 'article:not(.andimenucode), [andiarea="2"]:not(.dontfindAltMeaning):not(.andimenucode)';
     if(UA1('article'))
-    UA('article').forEach(function(VnIxP,i) {
-        var YDwKe = VnIxP;
-        if (YDwKe.querySelectorAll('img').length > 0 && YDwKe.querySelectorAll(HashO).length > 0) {
-            YDwKe.querySelectorAll('img').forEach(function(el2,j) {
-                var MGUpK = j;
-                var WvLDr = el2;
-                if ( WvLDr.closest('#jilVt') === null && WvLDr.getAttr('alt') === null || WvLDr.getAttr('alt').trim() === '') {
-					if (WvLDr.getAttribute('class') !== null && WvLDr.getAttribute('class').indexOf('avatar') > -1) {
-						WvLDr.setAttribute('alt',andiUA.KNTQg.bbb148);
+    UA('article').forEach(function(TUAel,i) {
+        var TUAthisArea = TUAel;
+        if (TUAthisArea.querySelectorAll('img').length > 0 && TUAthisArea.querySelectorAll(TUAallHeading).length > 0) {
+            TUAthisArea.querySelectorAll('img').forEach(function(el2,j) {
+                var TUAimageNum = j;
+                var TUAthisImg = el2;
+                if ( TUAthisImg.closest('#TUATUAcontainer') === null && TUAthisImg.getAttr('alt') === null || TUAthisImg.getAttr('alt').trim() === '') {
+					if (TUAthisImg.getAttribute('class') !== null && TUAthisImg.getAttribute('class').indexOf('avatar') > -1) {
+						TUAthisImg.setAttribute('alt',andiUA.TUAlanguageText.bbb148);
 					} else {
-						var xJZoQ = YDwKe.querySelectorAll(HashO);
-						var hASaa = YDwKe.querySelectorAll('*');
-						var nodes = Array.prototype.slice.call( hASaa );
-						var UMjrk = nodes.indexOf(WvLDr);
-						if(UMjrk === undefined)UMjrk = -1;
-						var dbuZJ = false;
-						for (var TUAi = UMjrk; TUAi >= 0; TUAi--) {
-							if (hASaa[TUAi].getAttribute('role') == 'heading' && HashO.indexOf(hASaa[TUAi].tagName.toLowerCase() ) > -1) {
-								WvLDr.addAttr({
-									"alt": hASaa[TUAi].innerText + ' ' +
-										andiUA.KNTQg.GGrFy + ' ' + (1 + MGUpK)
+						var TUAHeadingInArea = TUAthisArea.querySelectorAll(TUAallHeading);
+						var TUAallElmsInArea = TUAthisArea.querySelectorAll('*');
+						var nodes = Array.prototype.slice.call( TUAallElmsInArea );
+						var TUAthisIngIndex = nodes.indexOf(TUAthisImg);
+						if(TUAthisIngIndex === undefined)TUAthisIngIndex = -1;
+						var TUAweHaveHeading = false;
+						for (var TUAi = TUAthisIngIndex; TUAi >= 0; TUAi--) {
+							if (TUAallElmsInArea[TUAi].getAttribute('role') == 'heading' && TUAallHeading.indexOf(TUAallElmsInArea[TUAi].tagName.toLowerCase() ) > -1) {
+								TUAthisImg.addAttr({
+									"alt": TUAallElmsInArea[TUAi].innerText + ' ' +
+										andiUA.TUAlanguageText.TUAtimgInAreaImgNo + ' ' + (1 + TUAimageNum)
 								});
-								dbuZJ = true;
+								TUAweHaveHeading = true;
 								break;
 							}
 						}
-						if (!dbuZJ) {
-							var xJZoQTemp =  andiUA.getSiblings(el2,'next');
-							var xJZoQH = [];
-							for(var jj = 0;jj < xJZoQTemp.length;jj++){
-								if( (hASaa[jj].nodeType == 1 && hASaa[jj].getAttribute('role') == 'heading') || (xJZoQTemp[jj].nodeType == 1 && HashO.indexOf(xJZoQTemp[jj].tagName.toLowerCase() ) > -1)){
-									xJZoQH.push(xJZoQTemp[jj]);
+						if (!TUAweHaveHeading) {
+							var TUAHeadingInAreaTemp =  andiUA.getSiblings(el2,'next');
+							var TUAHeadingInAreaH = [];
+							for(var jj = 0;jj < TUAHeadingInAreaTemp.length;jj++){
+								if( (TUAallElmsInArea[jj].nodeType == 1 && TUAallElmsInArea[jj].getAttribute('role') == 'heading') || (TUAHeadingInAreaTemp[jj].nodeType == 1 && TUAallHeading.indexOf(TUAHeadingInAreaTemp[jj].tagName.toLowerCase() ) > -1)){
+									TUAHeadingInAreaH.push(TUAHeadingInAreaTemp[jj]);
 									break;
 								}
 							}
-							if (xJZoQH != undefined && xJZoQH.length > 0) {
+							if (TUAHeadingInAreaH != undefined && TUAHeadingInAreaH.length > 0) {
 								el2.addAttr({
-									"alt": xJZoQH[0].innerText
+									"alt": TUAHeadingInAreaH[0].innerText
 								});
 							} else {
-								xJZoQ =  YDwKe.querySelectorAll(HashO);
-								var WvLDr = el2;
-								var hASaa =  YDwKe.querySelectorAll("*");
-								var nodes = Array.prototype.slice.call( hASaa );
-								var UMjrk = nodes.indexOf(WvLDr);
-								if(UMjrk == undefined)UMjrk = -1;
-								var dbuZJ = false;
-								for (var TUAi = UMjrk; TUAi < hASaa.length; TUAi++) {
-									if ( hASaa[TUAi].getAttribute('role') == 'heading' && HashO.indexOf(hASaa[TUAi].tagName.toLowerCase() ) > -1 ) {
-										WvLDr.addAttr({
-											"alt":  hASaa[TUAi].innerText + ' ' +
-												andiUA.KNTQg.GGrFy + ' ' + (1 + MGUpK)
+								TUAHeadingInArea =  TUAthisArea.querySelectorAll(TUAallHeading);
+								var TUAthisImg = el2;
+								var TUAallElmsInArea =  TUAthisArea.querySelectorAll("*");
+								var nodes = Array.prototype.slice.call( TUAallElmsInArea );
+								var TUAthisIngIndex = nodes.indexOf(TUAthisImg);
+								if(TUAthisIngIndex == undefined)TUAthisIngIndex = -1;
+								var TUAweHaveHeading = false;
+								for (var TUAi = TUAthisIngIndex; TUAi < TUAallElmsInArea.length; TUAi++) {
+									if ( TUAallElmsInArea[TUAi].getAttribute('role') == 'heading' && TUAallHeading.indexOf(TUAallElmsInArea[TUAi].tagName.toLowerCase() ) > -1 ) {
+										TUAthisImg.addAttr({
+											"alt":  TUAallElmsInArea[TUAi].innerText + ' ' +
+												andiUA.TUAlanguageText.TUAtimgInAreaImgNo + ' ' + (1 + TUAimageNum)
 										});
-										dbuZJ = true;
+										TUAweHaveHeading = true;
 										break;
 									}
 								}
@@ -521,17 +153,17 @@ andiUA.PTPzL();andiUA.findAltMeaning = function() {
     });
 };
 
-andiUA.MuUxo = function() {
+andiUA.TUAfixUserImgEmptyAlt = function() {
 	
 	var alt1, alt2;
-	UA(andiUA.TUAsettingFn.SdmDC).forEach(function(VnIxP,i) {
-		 if (!VnIxP.hasAttribute("alt")) {
-			if (VnIxP.getAttr("src") !== null) {
-				alt1 = VnIxP.getAttr("src").rVDHB();
-				alt2 = VnIxP.getAttr("src").qDYoN();
+	UA(andiUA.TUAsettingFn.TUAallImg).forEach(function(TUAel,i) {
+		 if (!TUAel.hasAttribute("alt")) {
+			if (TUAel.getAttr("src") !== null) {
+				alt1 = TUAel.getAttr("src").TUAfilename();
+				alt2 = TUAel.getAttr("src").TUAfilename2();
 			}
-			if (VnIxP.getAttr("alt") === null || VnIxP.getAttr("alt") == alt1 || VnIxP.getAttr("alt") == alt2) {
-				VnIxP.addAttr({"alt":""});
+			if (TUAel.getAttr("alt") === null || TUAel.getAttr("alt") == alt1 || TUAel.getAttr("alt") == alt2) {
+				TUAel.addAttr({"alt":""});
 			}
 		 }
 	});
@@ -539,64 +171,66 @@ andiUA.MuUxo = function() {
 	    if(!elm.hasAttribute('alt')) elm.setAttribute('alt', '');
 	});
 };
-andiUA.MuUxo();
-andiUA.findAltMeaning();andiUA.QTtHf = function() {
-	UA('br, hr').forEach(function(VnIxP) {
-		VnIxP.addAttr({"role":"presentation"});
+andiUA.TUAfixUserImgEmptyAlt();
+andiUA.findAltMeaning();
+				andiUA.TUAremoveBrTagToScreenReader = function() {
+	UA('br, hr').forEach(function(TUAel) {
+		TUAel.addAttr({"role":"presentation"});
 	});
 };
-andiUA.QTtHf();andiUA.TJlPR = function() {
+andiUA.TUAremoveBrTagToScreenReader();
+				andiUA.TUAlinksAccessibility = function() {
 	
-	var iQBPT = UA('[onclick*="location"],[onclick*="window.open"]');
-    for (var TUAi = 0; TUAi < iQBPT.length; TUAi++) {
-        iQBPT[TUAi].setAttribute("role", "link");
-        iQBPT[TUAi].addAttr({"tabindex": "0"});
+	var linksList = UA('[onclick*="location"],[onclick*="window.open"]');
+    for (var TUAi = 0; TUAi < linksList.length; TUAi++) {
+        linksList[TUAi].setAttribute("role", "link");
+        linksList[TUAi].addAttr({"tabindex": "0"});
     }
-    var vZzsf = andiUA.KNTQg;
-    var iXwlj = ['a[href$=".amr"],a[href$=".mp2"],a[href$=".ram"],a[href$=".aiff"],a[href$=".aif"],a[href$=".wma"],a[href$=".wav"],a[href$=".m4v"]', 'a[href$=".ogg"],a[href$=".m4v"],a[href$=".divx"],a[href$=".mpeg"],a[href$=".m4a"],a[href$=".mp4"],a[href$=".mov"],a[href$=".mpg"],a[href$=".avi"],a[href$=".wmv"]', 'a[href$=".exe"]', 'a[href$=".vcd"]', 'a[href$=".cab"]', 'a[href$=".ace"]', 'a[href$=".gz"]', 'a[href$=".dmg"]', 'a[href$=".iso"]', 'a[href$=".jar"]', 'a[href$=".rar"]', 'a[href$=".zip"],a[href$=".7z"]',
+    var tests = andiUA.TUAlanguageText;
+    var typeFile = ['a[href$=".amr"],a[href$=".mp2"],a[href$=".ram"],a[href$=".aiff"],a[href$=".aif"],a[href$=".wma"],a[href$=".wav"],a[href$=".m4v"]', 'a[href$=".ogg"],a[href$=".m4v"],a[href$=".divx"],a[href$=".mpeg"],a[href$=".m4a"],a[href$=".mp4"],a[href$=".mov"],a[href$=".mpg"],a[href$=".avi"],a[href$=".wmv"]', 'a[href$=".exe"]', 'a[href$=".vcd"]', 'a[href$=".cab"]', 'a[href$=".ace"]', 'a[href$=".gz"]', 'a[href$=".dmg"]', 'a[href$=".iso"]', 'a[href$=".jar"]', 'a[href$=".rar"]', 'a[href$=".zip"],a[href$=".7z"]',
         'a[href$=".psd"]', 'a[href$=".ai"]', 'a[href$=".indd"]', 'a[href$=".ppt"],a[href$=".pptx"],a[href$=".pptm"],a[href$=".pps"],a[href$=".ppsx"]', 'a[href$=".xlsx"],a[href$=".ods"],a[href$=".xls"]', 'a[href$=".doc"],a[href$=".docx"],a[href$=".odt"],a[href$=".wps"]', 'a[href$=".txt"]', '[href$=".pdf"]',
     ];
-    var QMJOW = ["BqMJY", "inDOZ", "JIsVF", "RqVvc", "Wrabi", "PgFAt", "FQAaD", "IfqZG", "ohJrF", "wETxL", "YXXZo", "gMYVm", "drGpF", "cOTzC", "OYIqp", "DWyFL", "Qskym", "hXqyl", "gJIGO", "QcPnt", "svTkx"];
-    var pibCE = ["sound", "movie", "exe", "vcd", "cab", "ace", "gz", "dmg", "iso", "jar", "rar", "zip", "psd", "ai", "indd", "powerpoint", "excel", "doc", "txt", "pdf", "newwindow"];
-    var KMyeW = [vZzsf.HxVeb, vZzsf.sHUHK, vZzsf.LkMTc, vZzsf.PZDnw, vZzsf.GLjwD, vZzsf.tSXFw, vZzsf.xeZfw, vZzsf.CkRRZ, vZzsf.YLbvw, vZzsf.eNzUz, vZzsf.IXqvO, vZzsf.eNsmF, vZzsf.dwNzD, vZzsf.ANDI2yrGrB, vZzsf.ANDI2byiLQ, vZzsf.ANDI2CQOmt,
-        vZzsf.ANDI2PfNPS, vZzsf.Nvfzl, vZzsf.coDFH, vZzsf.irUUM, vZzsf.LuAsi
+    var addAttrName = ["andiAccLiknssound", "andiAccLiknsmovie", "andiAccLiknsexe", "andiAccLiknsvcd", "andiAccLiknscab", "andiAccLiknsace", "andiAccLiknsgz", "andiAccLiknsdmg", "andiAccLiknsiso", "andiAccLiknsjar", "andiAccLiknsrar", "andiAccLiknszip", "andiAccLiknspsd", "andiAccLiknsai", "andiAccLiknsindd", "andiAccLiknspowerpoint", "andiAccLiknsexcel", "andiAccLiknsdoc", "andiAccLiknstxt", "andiAccLiknspdf", "andiAccLiknsnewwindow"];
+    var addAttrValue = ["sound", "movie", "exe", "vcd", "cab", "ace", "gz", "dmg", "iso", "jar", "rar", "zip", "psd", "ai", "indd", "powerpoint", "excel", "doc", "txt", "pdf", "newwindow"];
+    var addText = [tests.TUAaccessibleLinksAUDIO, tests.TUAaccessibleLinksMOVIE, tests.TUAaccessibleLinksEXE, tests.TUAaccessibleLinksVCD, tests.TUAaccessibleLinksCAB, tests.TUAaccessibleLinksACE, tests.TUAaccessibleLinksGZ, tests.TUAaccessibleLinksDMG, tests.TUAaccessibleLinksISO, tests.TUAaccessibleLinksJAR, tests.TUAaccessibleLinksRAR, tests.TUAaccessibleLinksZIP, tests.TUAaccessibleLinksPSD, tests.ANDI2accessibleLinksIllustrator, tests.ANDI2accessibleLinksInDesign, tests.ANDI2accessibleLinksPOWERPOINT,
+        tests.ANDI2accessibleLinksEXCEL, tests.TUAaccessibleLinksDOC, tests.TUAaccessibleLinksTXT, tests.TUAaccessibleLinksPDF, tests.TUAaccessibleLinksNewWindows
     ];
 	
-    for (var i = 0; i < iXwlj.length; ++i) {
+    for (var i = 0; i < typeFile.length; ++i) {
         
         
-        var YPgLs = i;
-		UA(iXwlj[YPgLs]).forEach(function(VnIxP) {
+        var locationInArr = i;
+		UA(typeFile[locationInArr]).forEach(function(TUAel) {
 		    
-		    if(!VnIxP.hasAttribute('TJlPR')){
+		    if(!TUAel.hasAttribute('TUAlinksAccessibility')){
 		    
-           if (	!VnIxP.thasClass(QMJOW[YPgLs])		) {
-                var OALWI = "";
-                var Mhkir = VnIxP.innerText;
-                if (Mhkir === "" && VnIxP.querySelectorAll("img").length > 0 ) {
-                    var jlsNR = VnIxP.querySelectorAll("img")[0];
-                    if (jlsNR && jlsNR.getAttr("alt") !== null) {
-                        Mhkir = jlsNR.getAttr("alt");
+           if (	!TUAel.thasClass(addAttrName[locationInArr])		) {
+                var newMeaning = "";
+                var linkText = TUAel.innerText;
+                if (linkText === "" && TUAel.querySelectorAll("img").length > 0 ) {
+                    var findFirstImg = TUAel.querySelectorAll("img")[0];
+                    if (findFirstImg && findFirstImg.getAttr("alt") !== null) {
+                        linkText = findFirstImg.getAttr("alt");
                     } else {
-                        if (jlsNR && jlsNR.getAttr("aria-label") !== null) {
-                            Mhkir = jlsNR.getAttr("aria-label");
+                        if (findFirstImg && findFirstImg.getAttr("aria-label") !== null) {
+                            linkText = findFirstImg.getAttr("aria-label");
                         }
                     }
                 }
-                var TUAariaLabelLink = VnIxP.getAttr("aria-label");
+                var TUAariaLabelLink = TUAel.getAttr("aria-label");
                 if (TUAariaLabelLink !== undefined && TUAariaLabelLink !== null) {
-                    TUAariaLabelLink.indexOf(Mhkir) == -1 ? OALWI = Mhkir + " " + TUAariaLabelLink : OALWI = TUAariaLabelLink;
-                } else if (VnIxP.getAttr("title") !== null && VnIxP.getAttr("title") !== '') {
-                    var TUAtitleLink = VnIxP.getAttr("title");
-                    TUAtitleLink.indexOf(Mhkir) == -1 ? OALWI = Mhkir + " " + TUAtitleLink : OALWI = TUAtitleLink;
+                    TUAariaLabelLink.indexOf(linkText) == -1 ? newMeaning = linkText + " " + TUAariaLabelLink : newMeaning = TUAariaLabelLink;
+                } else if (TUAel.getAttr("title") !== null && TUAel.getAttr("title") !== '') {
+                    var TUAtitleLink = TUAel.getAttr("title");
+                    TUAtitleLink.indexOf(linkText) == -1 ? newMeaning = linkText + " " + TUAtitleLink : newMeaning = TUAtitleLink;
 				}
-                if (OALWI === '') VnIxP.addAttr({
-                    "aria-label": Mhkir + ", " + KMyeW[YPgLs]
+                if (newMeaning === '') TUAel.addAttr({
+                    "aria-label": linkText + ", " + addText[locationInArr]
                 });
-                OALWI !== undefined && OALWI !== '' && OALWI.length >= 1 ?
-				VnIxP.addAttr({"aria-label": OALWI + ", " + KMyeW[YPgLs]}) : '';
-				VnIxP.taddClass(QMJOW[YPgLs]);
-				VnIxP.addAttr({"TJlPR": true});
+                newMeaning !== undefined && newMeaning !== '' && newMeaning.length >= 1 ?
+				TUAel.addAttr({"aria-label": newMeaning + ", " + addText[locationInArr]}) : '';
+				TUAel.taddClass(addAttrName[locationInArr]);
+				TUAel.addAttr({"TUAlinksAccessibility": true});
 				
 				
                 
@@ -612,24 +246,25 @@ andiUA.QTtHf();andiUA.TJlPR = function() {
         
     }
 };
-andiUA.TJlPR();andiUA.defindMainContent = function() {
+andiUA.TUAlinksAccessibility();
+				andiUA.defindMainContent = function() {
 	if(!UA1('.UAmainlink')){
         var wrapMAinContentArr = [];
     	if(!UA1('[role="main"]')){
-    		UA('.content,.main-container,main,#main,#content,#main-content,#mainContent,#maincontent,.main-content,.maincontent,#content-main,#contentmain,.content-main,.contentmain').forEach(function(VnIxP, i) {
-    			if(!VnIxP.isIt('head,html,body,script,style')){
-    				if(VnIxP.isIt('.content,.main-container') && UA('.content').length == 1 && !UA1('[role="main"]')){
-    					VnIxP.addAttr({"role": "main"});
+    		UA('.content,.main-container,main,#main,#content,#main-content,#mainContent,#maincontent,.main-content,.maincontent,#content-main,#contentmain,.content-main,.contentmain').forEach(function(TUAel, i) {
+    			if(!TUAel.isIt('head,html,body,script,style')){
+    				if(TUAel.isIt('.content,.main-container') && UA('.content').length == 1 && !UA1('[role="main"]')){
+    					TUAel.addAttr({"role": "main"});
     				} else 	if(!UA1('[role="main"]')){
-    					VnIxP.addAttr({"role": "main"});
+    					TUAel.addAttr({"role": "main"});
     				}
     			}
     		});
     	}
     	setTimeout(function(){
     		if(UA1('[role="main"]') && !UA1('.UAmainlink')){
-    			var allSkipLInks = UA(".nrnYA").length;
-    			UA1('body').brAmf('<a class="nrnYA UAmainlink" href="#" tabindex="0" >'+andiUA.KNTQg.WybfR+'</a>');
+    			var allSkipLInks = UA(".UA2skipAreaAutomate").length;
+    			UA1('body').prependHtml('<a class="UA2skipAreaAutomate UAmainlink" href="#" tabindex="0" >'+andiUA.TUAlanguageText.TUAfirstSkiplink+'</a>');
     			UA1('.UAmainlink').addEventListener('click', function(e){
     				e.preventDefault();
     				UA1('[role="main"]').addAttr({"tabindex": "0"});
@@ -639,7 +274,8 @@ andiUA.TJlPR();andiUA.defindMainContent = function() {
     	},500);
 	}
 };
-andiUA.defindMainContent();//ZWDCr
+andiUA.defindMainContent();
+				//TUAaccessibilityHidden
 var langs = {};
 langs.heb = {};
 langs.en = {};
@@ -722,7 +358,7 @@ langs.en.wp36 = 'Whatsapp';
 var headingTags = 'h1,h2,h3,h4,h5,h6,[role="heading"]';
 var CurrencyCoins = ['¥', '₪', '₹', '₽', '฿', '₿', '€', '£', '$'];
 var wptext = {};
-if (UA1('html').getAttribute('vFaKz') == "he" || UA1('html').getAttribute('lang') == "he-IL" || UA1('html').getAttribute('lang') == "he") {
+if (UA1('html').getAttribute('andilang') == "he" || UA1('html').getAttribute('lang') == "he-IL" || UA1('html').getAttribute('lang') == "he") {
     wptext = langs.heb;
 } else {
     wptext = langs.en;
@@ -731,8 +367,8 @@ if (UA1('html').getAttribute('vFaKz') == "he" || UA1('html').getAttribute('lang'
 
 
 UA('button,[role="button"],a').forEach(function(el, index) {
-    if (el.BKXPP().trim() == '+') el.setAttribute('aria-label',wptext.wp33);
-    if (el.BKXPP().trim() == '-') el.setAttribute('aria-label',wptext.wp34);
+    if (el.getText().trim() == '+') el.setAttribute('aria-label',wptext.wp33);
+    if (el.getText().trim() == '-') el.setAttribute('aria-label',wptext.wp34);
 });
 
 UA('.closeLightboxButton').forEach(function(elm){
@@ -747,24 +383,24 @@ UA(headingTags).forEach(function(el, index) {
 
 UA('del').forEach(function(el, index) {
     for (var i = 0; i < CurrencyCoins.length; i++) {
-        if (el.BKXPP().trim().indexOf(CurrencyCoins[i]) > -1) {
-            el.addAttr({ 'tabindex': '0', 'role': 'tooltip', 'aria-label': wptext.wp18 + ' ' + el.BKXPP() });
+        if (el.getText().trim().indexOf(CurrencyCoins[i]) > -1) {
+            el.addAttr({ 'tabindex': '0', 'role': 'tooltip', 'aria-label': wptext.wp18 + ' ' + el.getText() });
         }
     }
 });
 
 UA('.meta-category a').forEach(function(el, index) {
-    el.addAttr({ 'tabindex': '0', 'role': 'link', 'aria-label': wptext.wp25 + ' ' + el.BKXPP() });
+    el.addAttr({ 'tabindex': '0', 'role': 'link', 'aria-label': wptext.wp25 + ' ' + el.getText() });
 });
 UA('.post-like a').forEach(function(el, index) {
     el.addAttr({ 'tabindex': '0', 'role': 'button', 'aria-label': wptext.wp24 + ' ' });
 });
 
 UA('.meta-views').forEach(function(el, index) {
-    el.addAttr({ 'tabindex': '0', 'role': 'tooltip', 'aria-label': wptext.wp26 + ' ' + el.BKXPP() });
+    el.addAttr({ 'tabindex': '0', 'role': 'tooltip', 'aria-label': wptext.wp26 + ' ' + el.getText() });
 });
 UA('.entry-date').forEach(function(el, index) {
-    el.addAttr({ 'tabindex': '0', 'role': 'tooltip', 'aria-label': wptext.wp13 + ' ' + el.BKXPP() });
+    el.addAttr({ 'tabindex': '0', 'role': 'tooltip', 'aria-label': wptext.wp13 + ' ' + el.getText() });
 });
 
 UA('.entry-share').forEach(function(elm){
@@ -779,13 +415,13 @@ UA('#ast-scroll-top ,.ast-scroll-top-icon ,.fa .fa-chevron-up,.pojo-scroll-up-bu
 /****** STARS ******/
 UA('.yotpo-rating-bars').forEach(function(elm){
     let all = elm.querySelectorAll('.yotpo-product-related-field-score-bar').length;
-    let OOkJn = elm.querySelectorAll('.yotpo-rating-bar-full').length;
-    elm.addAttr({ 'role': 'tooltip', 'tabindex': '0', 'aria-label': 'דירוג ' + OOkJn + ' מתוך ' + all });
+    let times = elm.querySelectorAll('.yotpo-rating-bar-full').length;
+    elm.addAttr({ 'role': 'tooltip', 'tabindex': '0', 'aria-label': 'דירוג ' + times + ' מתוך ' + all });
 });
 
 document.querySelectorAll('article.post').forEach(function(el, index) {
     if (el.querySelector('div.post-more') && el.querySelector(headingTags)) {
-        let Htext = el.querySelector(headingTags).BKXPP();
+        let Htext = el.querySelector(headingTags).getText();
         el2 = el.querySelectorAll('div.post-more');
         el2.forEach(function(el4) {
             el4.querySelectorAll('a').forEach(function(el3) {
@@ -794,9 +430,9 @@ document.querySelectorAll('article.post').forEach(function(el, index) {
         });
     }
     if (el.querySelector(headingTags)) {
-        var Htext = el.querySelector(headingTags).BKXPP();
+        var Htext = el.querySelector(headingTags).getText();
         el.querySelectorAll('a').forEach(function(el2, index) {
-            if (el2.BKXPP().trim() == '' && !el2.hasAttribute('aria-label')) {
+            if (el2.getText().trim() == '' && !el2.hasAttribute('aria-label')) {
                 el2.setAttribute('aria-label', wptext.wp4 + ' ' + Htext);
             }
         });
@@ -805,7 +441,7 @@ document.querySelectorAll('article.post').forEach(function(el, index) {
 
 
 UA('[href^="?letter"]').forEach(function(elm){
-    elm.addAttr({ 'aria-label': wptext.wp14 + elm.BKXPP() });
+    elm.addAttr({ 'aria-label': wptext.wp14 + elm.getText() });
 });
 
 UA('.ee-gallery__media.elementor-clickable').forEach(function(el, index) {
@@ -815,15 +451,15 @@ UA('.ee-gallery__media.elementor-clickable').forEach(function(el, index) {
 UA('.image-link img').forEach(function(el) {
 	if( el.closest('li') && el.closest('li').querySelector('h2') ){
 		var ImgT = el.closest('li').querySelector('h2');
-		el.setAttribute('aria-label', ImgT.BKXPP());
+		el.setAttribute('aria-label', ImgT.getText());
 	}
 });
 
 UA('.elementor-widget-wrap').forEach(function(el) {
     var thatWrap = el;
     thatWrap.querySelectorAll('a.elementor-icon').forEach(function(el, i) {
-        if (thatWrap.querySelectorAll('h2').length == 1 && el.BKXPP().trim() == '') {
-            var thatText = thatWrap.querySelector('h2').BKXPP();
+        if (thatWrap.querySelectorAll('h2').length == 1 && el.getText().trim() == '') {
+            var thatText = thatWrap.querySelector('h2').getText();
             if (el.hasAttribute('aria-label')) {
                 el.setAttribute('aria-label', thatText + el.getAttribute('aria-label'));
             } else {
@@ -871,8 +507,8 @@ UA(requiredFields).forEach(function(elm){
 UA('button,[role="button"]').forEach(function(el, i) {
     el.addEventListener('click', function() {
         setTimeout(function() {
-            if (UA1('.woocommerce-error') && UA1('.woocommerce-error').BKXPP().trim() != '') {
-                andiUA.nAtDr(wptext.wp30 + ' ' + UA1('.woocommerce-error').BKXPP().trim());
+            if (UA1('.woocommerce-error') && UA1('.woocommerce-error').getText().trim() != '') {
+                andiUA.TUAscreenReaderMassege(wptext.wp30 + ' ' + UA1('.woocommerce-error').getText().trim());
                 UA1('.woocommerce-error').addAttr({ 'tabindex': '0' });
                 UA1('.woocommerce-error').focus();
             }
@@ -886,7 +522,7 @@ allCheckBoxAndRadio.forEach(function(el) {
         el.taddClass('UAscreenReaderOnly');
         el.setAttribute('UAradio', 'true');
         if (el.closest('label') && !el.hasAttribute('aria-label'))
-            el.setAttribute('aria-label', el.closest('label').BKXPP());
+            el.setAttribute('aria-label', el.closest('label').getText());
     }
 });
 
@@ -899,7 +535,7 @@ UA('.calcModule a').forEach(function(elm){
         'role': 'radio',
         'aria-checked': 'false',
         'tabindex': '0',
-        'aria-label': elm.parentElement.BKXPP()
+        'aria-label': elm.parentElement.getText()
     });
 });
 var UAcheckbox = ['.selection__types > div', '.selection__brands > div', '.carWrap'];
@@ -975,17 +611,17 @@ document.querySelectorAll('.elementor-menu-toggle').forEach(function(elm, index)
 
 UA('.item').forEach(function(elm){
     elm.querySelectorAll('.entry-link').forEach(function(innerElm){
-        innerElm.setAttribute('aria-label', wptext.wp4 + ' ' + elm.querySelector('.entry-title')?.BKXPP());
+        innerElm.setAttribute('aria-label', wptext.wp4 + ' ' + elm.querySelector('.entry-title')?.getText());
     });
 });
 
 UA('[id^="main-navigation-item-"]').forEach(function(elm){
-    let headerText = elm.querySelector('.entry-title')?.BKXPP() || '';
+    let headerText = elm.querySelector('.entry-title')?.getText() || '';
     elm.querySelectorAll('a').forEach(function(link){
-        if(!link.BKXPP.trim()) link.setAttribute('aria-label', wptext.wp4 + ' ' + headerText);
-        if(!link.BKXPP.trim() == 'לפרטים נוספים') link.setAttribute('aria-label', wptext.wp4 + ' ' + headerText);
+        if(!link.getText.trim()) link.setAttribute('aria-label', wptext.wp4 + ' ' + headerText);
+        if(!link.getText.trim() == 'לפרטים נוספים') link.setAttribute('aria-label', wptext.wp4 + ' ' + headerText);
         link.querySelectorAll('.entry-link').forEach(function(innerElm){
-            innerElm.setAttribute('aria-label', wptext.wp4 + ' ' + link.querySelector('.entry-title')?.BKXPP());
+            innerElm.setAttribute('aria-label', wptext.wp4 + ' ' + link.querySelector('.entry-title')?.getText());
         });
     });    
 });
@@ -1075,25 +711,25 @@ function datePicker() {
 
 
     UA('.datepicker th.day').forEach(function(elm){
-        elm.setAttribute('aria-label', '  ,בתאריך ' + elm.BKXPP() + ' לחודש ');
+        elm.setAttribute('aria-label', '  ,בתאריך ' + elm.getText() + ' לחודש ');
     });
 
     UA('.datepicker th.dow').forEach(function(elm){
-        elm.setAttribute('aria-label', '  יום ' + elm.BKXPP());
+        elm.setAttribute('aria-label', '  יום ' + elm.getText());
     });
 
     UA('.datepicker td.new.day').forEach(function(elm){
         var dateTEXT1 = 'של החודש הבא';
-        elm.addAttr({'tabindex': '-1', 'aria-label': '  בתאריך ' + elm.BKXPP() + ' ' + (dateTEXT1)});
+        elm.addAttr({'tabindex': '-1', 'aria-label': '  בתאריך ' + elm.getText() + ' ' + (dateTEXT1)});
     });
 
 
     UA('.react-datepicker__day').forEach(function(elm){
-        elm.addAttr({ 'tabindex': '0', 'aria-label': '  ,בתאריך ' + elm.BKXPP() + ' לחודש ' });
+        elm.addAttr({ 'tabindex': '0', 'aria-label': '  ,בתאריך ' + elm.getText() + ' לחודש ' });
     });
 
     UA('.react-datepicker__day-name').forEach(function(elm){
-        elm.setAttribute('aria-label', '  יום ' + elm.BKXPP());
+        elm.setAttribute('aria-label', '  יום ' + elm.getText());
     });
 
 }
@@ -1135,7 +771,7 @@ function setCalinder() {
     });
 
     UA('.closeLightboxButton').forEach(function(elm){
-        elm.addAttr({ 'tabindex': '0', 'aria-label': '  ,בתאריך ' + elm.BKXPP() + ' לחודש ' });
+        elm.addAttr({ 'tabindex': '0', 'aria-label': '  ,בתאריך ' + elm.getText() + ' לחודש ' });
         elm.addEventListener('keyup', function(e){
             if (e.keyCode == 13) {
                 this.click();
@@ -1144,7 +780,7 @@ function setCalinder() {
     });
 
     UA('.react-datepicker__day-name').forEach(function(elm){
-        elm.setAttribute('aria-label', '  יום ' + elm.BKXPP());
+        elm.setAttribute('aria-label', '  יום ' + elm.getText());
     });
 
     UA('[role="option"]').forEach(function(elm){
@@ -1201,10 +837,10 @@ for (var i = 0; i < wrapcalendar.length; i++) {
         elm.addAttr({ 'role': 'region', 'aria-label': wptext.wp19 });
     });
     UA(dayInWeek[i]).forEach(function(elm){
-        elm.addAttr({ 'role': 'button', 'aria-disabled': 'true', 'aria-label': wptext.wp20 + ' ' + elm?.BKXPP().trim() });
+        elm.addAttr({ 'role': 'button', 'aria-disabled': 'true', 'aria-label': wptext.wp20 + ' ' + elm?.getText().trim() });
     });
     UA(dayInMonth[i]).forEach(function(elm){
-       // elm.addAttr({ 'role': 'button', 'aria-disabled': 'true', 'aria-label': ' ' + elm.BKXPP().trim() + ' ' + thisWrap[0]?.querySelector(Month[i])?.BKXPP().trim() });
+       // elm.addAttr({ 'role': 'button', 'aria-disabled': 'true', 'aria-label': ' ' + elm.getText().trim() + ' ' + thisWrap[0]?.querySelector(Month[i])?.getText().trim() });
     });
     
 
@@ -1214,7 +850,7 @@ for (var i = 0; i < wrapcalendar.length; i++) {
             elm.closest('[role="button"]').tremoveAttr('aria-disabled');
             elm.closest('[role="button"]').tremoveAttr('aria-label');
             elm.closest('[role="button"]').tremoveAttr('role');
-            elm.addAttr({ 'aria-label': elm.BKXPP.trim() + ' ' + thisWrap.querySelector(Month[i]).BKXPP().trim() + wptext.wp21 });
+            elm.addAttr({ 'aria-label': elm.getText.trim() + ' ' + thisWrap.querySelector(Month[i]).getText().trim() + wptext.wp21 });
         }
     });
     UA(prevMonthBtn[i]).forEach(function(elm){
@@ -1259,9 +895,9 @@ UA('.owl-carousel').forEach(function(elm){
 
 UA('.owl-item article').forEach(function(elm){
     elm.querySelectorAll('a').forEach(function(innerElm){
-        let VTMMs = innerElm.querySelector('entry-header-wrapper')?.BKXPP();
-        if (innerElm.querySelector('noscript') && VTMMs) innerElm.addAttr('aria-label', VTMMs);
-        else if (!innerElm.hasAttribute('aria-label') && innerElm.BKXPP().trim() == '' && VTMMs) innerElm.setAttribute('aria-label', VTMMs);
+        let thisText = innerElm.querySelector('entry-header-wrapper')?.getText();
+        if (innerElm.querySelector('noscript') && thisText) innerElm.addAttr('aria-label', thisText);
+        else if (!innerElm.hasAttribute('aria-label') && innerElm.getText().trim() == '' && thisText) innerElm.setAttribute('aria-label', thisText);
     });
 });
 
@@ -1344,16 +980,16 @@ li:focus-within > .sub_menu { display:block;visibility: visible; opacity: 1;}
 body .profiles-list .profiles-list__item a:focus .profiles-list__details{ opacity: 1;}
 .single-box:focus-within .image::before { opacity: 1;}
 .single-box:focus-within {border-color: #0c5adb;}
-[class*="ypXpr"] > * {display: block !important; float: unset !important; position: static !important; margin: 0 !important; background-color: #fff;}
-[class*="ypXpr"] {height: 100% !important;}
+[class*="TUAinnerWrapAccessibilitySliderPause"] > * {display: block !important; float: unset !important; position: static !important; margin: 0 !important; background-color: #fff;}
+[class*="TUAinnerWrapAccessibilitySliderPause"] {height: 100% !important;}
 .uawrapareaInstroctions{z-index: 99999999999999; display:none; position: fixed;font-size: 18px; bottom: 0; background-color: #000; color: #fff; padding: 5px; border-radius: 3px; left: calc(50% - 125px);line-height: 100%; direction: ltr; }
 .uawrapareaInstroctions span{display:inline-block;margin:0 5px; font-size:28px;}
 [uawraparea]:focus-within .uawrapareaInstroctions{display:block;}
 
 .uawrapareaInstroctions hr{background-color: #767676; border: 0; height: 2px; margin: 5px auto; max-width: 100%; text-align: center;}
-[vFaKz="he"] .uawrapareaInstroctions, [vFaKz="he"] .uawrapareaInstroctions *{direction:rtl !importnat;}`;
+[andilang="he"] .uawrapareaInstroctions, [andilang="he"] .uawrapareaInstroctions *{direction:rtl !importnat;}`;
 
-UA1('#wpcss')?.zOhhK();
+UA1('#wpcss')?.removeElm();
 UA1('head')?.appendHtml('<style id="wpcss">' + styles + '</style>');
 
 
@@ -1557,7 +1193,7 @@ let AriaFuncitons = {
                 thisPanel.setAttribute('role', "region");
                 thisPanel.setAttribute('faqpanelnum', index);
                 if (thisArea.querySelector('[faqnum="' + index + '"]')) {
-                    let thisHtext = thisArea.querySelector('[faqnum="' + index + '"]').BKXPP().trim();
+                    let thisHtext = thisArea.querySelector('[faqnum="' + index + '"]').getText().trim();
                     thisPanel.setAttribute('aria-label', thisHtext);
                 }
 
@@ -1588,7 +1224,7 @@ let AriaFuncitons = {
                 });
                 if (isAllHrefIsTheSame) {
                     thisArticleSum.setAttribute('role', 'article');
-                    let Htext = thisArticleSum.querySelector(headingTags).BKXPP().trim();
+                    let Htext = thisArticleSum.querySelector(headingTags).getText().trim();
                     thisArticleSum.querySelectorAll('a').forEach(function(link, index) {
                         link.setAttribute('aria-label', wptext.wp4 + ' ' + Htext);
                     });
@@ -2008,7 +1644,7 @@ let keyboardAriaNavigation = {
     },
 
     showInstroctions: function() {
-        if(UA1('html').getAttribute('vFaKz') == 'he'){
+        if(UA1('html').getAttribute('andilang') == 'he'){
             document.querySelector('body').insertAdjacentHTML('beforeend', '<div role="tooltip" id="uatabsinstroctions" class="uawrapareaInstroctions"> הגעת לקומפוננטת הכרטיסיות: <hr/>השתמש בחצים לניווט <span>&larr;</span><span>&rarr;</span><hr/>השתמש ב-Tab להמשך לפאנל הכרטיסיות<span>&#8633;</span></div>');
             document.querySelector('body').insertAdjacentHTML('beforeend', '<div role="tooltip" id="uamenusinstroctions" class="uawrapareaInstroctions"> הגעת לקומפוננטת התפריט: <hr/>השתמש בחצים לניווט <span>&larr;</span><span>&rarr;</span><hr/>השתמש ב-Tab לכניסה לתת-תפריט<span>&#8633;</span><hr/>בתת-תפריט השתמש בחצים למעלה ולמטה<span>&uarr;</span><span>&darr;</span></div>');
 
@@ -2018,11 +1654,11 @@ let keyboardAriaNavigation = {
         }
         document.addEventListener('keydown', function(e) {
             setTimeout(function() {
-                let Dpbwt = document.activeElement;
-                if (Dpbwt.hasAttribute('role') && Dpbwt.getAttribute('role') == 'tab') {
+                let thisFocus = document.activeElement;
+                if (thisFocus.hasAttribute('role') && thisFocus.getAttribute('role') == 'tab') {
                     if (document.querySelector('#uatabsinstroctions'))
                         document.querySelector('#uatabsinstroctions').style.display = 'block';
-                } else if (Dpbwt.hasAttribute('role') && Dpbwt.getAttribute('role') == 'menuitem') {
+                } else if (thisFocus.hasAttribute('role') && thisFocus.getAttribute('role') == 'menuitem') {
                     if (document.querySelector('#uamenusinstroctions'))
                         document.querySelector('#uamenusinstroctions').style.display = 'block';
                 } else {
@@ -2051,29 +1687,32 @@ keyboardAriaNavigation.showInstroctions();
 
 document.querySelectorAll('.price').forEach(function(price){
 
-    if(price.querySelector('del') &&  price.querySelector('ins')){
+    if(price.querySelector('del') &&  price.querySelector('ins') && !price.querySelector('#uaerrors4')){
         price.querySelectorAll('*').forEach(function(elm){
             elm.setAttribute('aria-hidden', 'true');
         });
         let prevPrice = price.querySelector('del').innerText.trim() || 'אין מחיר קודם';
         let thisPrice = price.querySelector('ins').innerText.trim();
-        let str = `המחיר הקודם הוא ${prevPrice} המחיר הנוכחי הוא ${thisPrice}`;
-        price.appendHtml('<span id="uaerrors" class="sr-only" >'+str+'</span>');
+        let str = `המחיר הקודם הוא ${prevPrice} המחיר הנוכחי הוא ${thisPrice}`
+    
+        price.appendHtml('<span id="uaerrors4" class="sr-only" >'+str+'</span>');
     }
-});andiUA.shopify = function(){
+});
+				andiUA.shopify = function(){
    UA('#main-collection-product-grid .grid__item,  .grid__item.slider__slide.slick-slide').forEach(function(elm){
-    let textH3 = elm.querySelector('h2,h1,h3,h4,h5').BKXPP().trim();
-    console.log(elm.BKXPP().indexOf('Sold out'))
-    if(elm.BKXPP().indexOf('Sold out') > -1){
+    let textH3 = elm.querySelector('h2,h1,h3,h4,h5').getText().trim();
+    console.log(elm.getText().indexOf('Sold out'))
+    if(elm.getText().indexOf('Sold out') > -1){
         textH3 = textH3 + ' ' + 'Sold out';
     }
     elm.querySelectorAll('a').forEach(function(link){
-        if(link.BKXPP().trim() == '') link.addAttr({'aria-label': textH3});
+        if(link.getText().trim() == '') link.addAttr({'aria-label': textH3});
     });
 })
 }
 
-andiUA.shopify();andiUA.aKOuR = function(TUAiQBPT) {
+andiUA.shopify();
+				andiUA.TUAfindsocial_network = function(TUAlinksList) {
 	let langs = {};
 	langs.heb = {};
 	langs.en = {};
@@ -2095,7 +1734,7 @@ andiUA.shopify();andiUA.aKOuR = function(TUAiQBPT) {
 	langs.en.wp36 = 'Whatsapp';
 	langs.en.wp37 = 'telegram';
 	langs.en.wp0000 = 'open in new window';
-	if (UA1('html')?.getAttribute('vFaKz') == "he" || UA1('html')?.getAttribute('lang') == "he-IL" || UA1('html')?.getAttribute('lang') == "he") {
+	if (UA1('html')?.getAttribute('andilang') == "he" || UA1('html')?.getAttribute('lang') == "he-IL" || UA1('html')?.getAttribute('lang') == "he") {
 		wptext = langs.heb;
 	} else {
 		wptext = langs.en;
@@ -2104,25 +1743,25 @@ andiUA.shopify();andiUA.aKOuR = function(TUAiQBPT) {
 	function shareLink( selector, labelText ){
 		document.querySelectorAll(selector).forEach(function(el, index) {
 		    if(!el.hasAttribute('sharelink')){
-    			let Mhkir = el.innerText?.trim() || '';
+    			let linkText = el.innerText?.trim() || '';
     			if(el.hasAttribute('target')) labelText = labelText + ', ' + wptext.wp0000;
-    			el.setAttribute('aria-label', Mhkir + ' ' +labelText);
+    			el.setAttribute('aria-label', linkText + ' ' +labelText);
     			el.setAttribute('role', 'link');
     			el.setAttribute('tabindex', 0);
     			el.setAttribute('sharelink', 1);
-    			el.querySelector('img')?.setAttribute('alt', Mhkir + ' ' +labelText);
+    			el.querySelector('img')?.setAttribute('alt', linkText + ' ' +labelText);
 		    }
 		});	
 	}
-	shareLink( '[href*="facebook.com/"]',  andiUA.KNTQg.ettRS );
-	shareLink( '[href*="twitter.com/"]',  andiUA.KNTQg.JkOki );
-	shareLink( '[href*="youtube.com/"]',  andiUA.KNTQg.NhJjz );
-	shareLink( '[href*="waze://?q"]',  andiUA.KNTQg.hUWLJ );
-	shareLink( '[href*="instagram.com/"]',  andiUA.KNTQg.UoAdE );
-	shareLink( '[href*="linkedin.com/"]',  andiUA.KNTQg.DnQXA );
-	shareLink( '[href*="plus.google.com/"]',  andiUA.KNTQg.EeagL );
+	shareLink( '[href*="facebook.com/"]',  andiUA.TUAlanguageText.TUAfacebook );
+	shareLink( '[href*="twitter.com/"]',  andiUA.TUAlanguageText.TUAtwitter );
+	shareLink( '[href*="youtube.com/"]',  andiUA.TUAlanguageText.TUAyoutube );
+	shareLink( '[href*="waze://?q"]',  andiUA.TUAlanguageText.TUAwaze );
+	shareLink( '[href*="instagram.com/"]',  andiUA.TUAlanguageText.TUAinstagram );
+	shareLink( '[href*="linkedin.com/"]',  andiUA.TUAlanguageText.TUAlinkedin );
+	shareLink( '[href*="plus.google.com/"]',  andiUA.TUAlanguageText.TUAgoogleplus );
 	shareLink( '[href*="pinterest.com/"]',  wptext.wp172 );
-	shareLink( '[href*="mailto:"]',  andiUA.KNTQg.Cerbq );
+	shareLink( '[href*="mailto:"]',  andiUA.TUAlanguageText.TUAmailto );
 	shareLink( '.at-share-btn.at-svc-facebook, [data-social="facebook"] a.facebook', wptext.wp31 + ' facebook' );
 	shareLink( '.at-share-btn.at-svc-email', wptext.wp31 + ' email' );
 	shareLink( '.at-share-btn.at-svc-twitter', wptext.wp31 + ' twitter' );
@@ -2137,7 +1776,8 @@ andiUA.shopify();andiUA.aKOuR = function(TUAiQBPT) {
 	shareLink( '[href^="https://pinterest.com/pin/create/"]',  wptext.wp17 );
 	shareLink( '[data-social="telegram"] a.telegram',  wptext.wp37 );
 };
-andiUA.aKOuR();andiUA.removeOtherAccComponents = function(){
+andiUA.TUAfindsocial_network();
+				andiUA.removeOtherAccComponents = function(){
     document.querySelector('#enable-toolbar')?.remove();
     document.querySelector('#pojo-a11y-toolbar')?.remove();
     document.querySelector('#sogo_overlay')?.remove();
@@ -2165,12 +1805,18 @@ andiUA.aKOuR();andiUA.removeOtherAccComponents = function(){
     document.querySelector('#accessability')?.remove();
     document.querySelector('#real-accessability')?.remove();
     document.querySelector('#b-acc-toolbarWrap')?.remove();
+    document.querySelector('.BigAccessWidget')?.remove();
+    document.querySelector('.bigaccessWidget')?.remove();
+    document.querySelector('.accessWidget')?.remove();
+    document.querySelector('.accesswidget')?.remove();
+    document.querySelector('#NG_Main')?.remove();
 
 }
-andiUA.removeOtherAccComponents();andiUA.findDescToLinksFromTitleAttr = function(cssSelector, desc){
+andiUA.removeOtherAccComponents();
+				andiUA.findDescToLinksFromTitleAttr = function(cssSelector, desc){
     UA('a').forEach(function(link, index){
         let haveDesc = false;
-        if(link.BKXPP().trim() == '' && !link.ariaLabel ){
+        if(link.getText().trim() == '' && !link.ariaLabel ){
             if(link.querySelector('img')){
                 link.querySelectorAll('img').forEach(function(img, index){
                     if(img.alt?.trim() != '' && !img.ariaLabel){
@@ -2199,13 +1845,16 @@ andiUA.addDescToLinks('[href*="/my-account/"]', 'החשבון שלי');
 andiUA.addDescToLinks('[href*="wishlist"]', 'אהבתי');
 andiUA.addDescToLinks('[href*="/myaccount/"]', 'החשבון שלי');
 
+andiUA.addDescToLinks('#elementor-menu-cart__toggle_button', 'פתח עגלת קניות');
+
+
 
 //
-UA('[vFaKz="he"] [aria-label="Next slide"]').forEach(function(elm){
+UA('[andilang="he"] [aria-label="Next slide"], .owl-prev').forEach(function(elm){
     elm.addAttr({'aria-label':'לשקופית הבאה'});
 });
 
-UA('[vFaKz="he"] [aria-label="Previous slide"]').forEach(function(elm){
+UA('[andilang="he"] [aria-label="Previous slide"], .owl-next').forEach(function(elm){
     elm.addAttr({'aria-label':'לשקופית הקודם'});
 });
 
@@ -2219,7 +1868,19 @@ UA('[id="g-recaptcha-response"] , [name="g-recaptcha-response"]').forEach(functi
 
 
 UA('.jet-filters-pagination__link').forEach(function(link, index){
-    link.addAttr({'role':'link', 'tabindex':'0','aria-label':'עבור לעמוד מספר '+ link.BKXPP()});
+    link.addAttr({'role':'link', 'tabindex':'0','aria-label':'עבור לעמוד מספר '+ link.getText()});
+    link.addEventListener('keydown',function(e){
+        if(e.key == 'Enter'){
+            this.click();
+        }
+    });
+});
+
+
+
+
+UA('a:has(.e-font-icon-svg.e-fas-bars)').forEach(function(link, index){
+    link.addAttr({'role':'link', 'tabindex':'0','aria-label': 'פתח תפריט'});
     link.addEventListener('keydown',function(e){
         if(e.key == 'Enter'){
             this.click();
@@ -2231,7 +1892,7 @@ UA('.jet-filters-pagination__link').forEach(function(link, index){
 var allLinks = document.querySelectorAll('a');
 var imageLinks = [];
 
-// עוברים על כל הקישורים ובודקים אם הם מכילים קישור לתמונה
+
 allLinks.forEach(function(link, index) {
   var href = link.href;
   if(href.indexOf('?')) href = href.split('?')[0]
@@ -2246,8 +1907,10 @@ imageLinks.forEach(function(link, index) {
      if( link.querySelectorAll('img').length == 1) {
        altText = link.querySelector('img').alt;
       }
-    link.setAttribute('aria-label', altText + ' להצגת תמונה  מספר ' + (index+1) + ' , נפתח בחלונית פופ-אפ או טאב חדש');
-});andiUA.reackClick = function(element){
+      let thisLinkText = link.innerText?.trim();
+     link.setAttribute('aria-label',	`  להצגת תמונה (${thisLinkText}) מספר 	${altText}  להצגת תמונה  מספר ${(index+1)}, נפתח בחלונית פופ-אפ או טאב חדש`);;
+});
+				andiUA.reackClick = function(element){
     const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
     function simulateMouseClick(element){
       mouseClickEvents.forEach(mouseEventType =>
@@ -2262,7 +1925,8 @@ imageLinks.forEach(function(link, index) {
       );
     }
     simulateMouseClick(element);
-};
+}
+				;
 andiUA.wixForm = function(){
     function sortElementsByVisualLayoutFn(){
         andiUA.sortElementsByVisualLayout = function(parent) {
@@ -2270,13 +1934,13 @@ andiUA.wixForm = function(){
                 parent.setAttribute('form-wix-fixed', 1);
                 const container = parent;
                 const elements = container.children;
-                const fIngjay = Array.from(elements);
-                fIngjay.sort((a, b) => {
+                const elementsArray = Array.from(elements);
+                elementsArray.sort((a, b) => {
                     const rectA = a.getBoundingClientRect();
                     const rectB = b.getBoundingClientRect();
                     return rectB.right - rectA.right
                 });
-                fIngjay.forEach(element => container.appendChild(element));
+                elementsArray.forEach(element => container.appendChild(element));
                 console.log('fix-wix')
             }
         }
@@ -2309,28 +1973,34 @@ if(!andiUA.runOncewixForm){
 	};
 	document.body.addEventListener ('DOMNodeInserted', OnNodeInserted, false);  
     
+}
+				andiUA.NGClick = target => {
+   const ev = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+   });
+   target.dispatchEvent(ev);
 };
-if(!UA1('[data-url*="https://static.parastorage.com/services/wix-thunderbolt"]')){
-    var node = document.createElement("STYLE");
-    var textnode = document.createTextNode(`[id*='topnav'] > li:focus-within > .sub {display:block !important;opacity:1 !important;} 
-    nav.elementor-nav-menu--main > ul.elementor-nav-menu > li::focus-within > .sub-menu{display:block !important;}
-    .main_menu > li:focus-within > .sub_menu {visibility: visible; opacity: 1;}
-    .uawrapareaInstroctions{z-index: 99999999999999; display:none; position: fixed;font-size: 18px; bottom: 0; background-color: #000; color: #fff; padding: 5px; border-radius: 3px; left: calc(50% - 125px);line-height: 100%; direction: ltr; } 
-    .uawrapareaInstroctions span{display:inline-block;margin:0 5px; font-size:28px;}
-    [uawraparea]:focus-within .uawrapareaInstroctions{display:block;}
-    .uawrapareaInstroctions hr{background-color: #767676; border: 0; height: 2px; margin: 5px auto; max-width: 100%; text-align: center;}
-    nav > ul:first-child > li:not(.cart):focus-within > ul{visibility: visible !important; opacity: 1 !important;display:block !important}
-    nav > ul:first-child > li:not(.cart) > a:focus + ul{visibility: visible !important; opacity: 1 !important;display:block !important}
-    nav > ul > li:not(.cart):focus-within > ul {opacity: 1 !important;display:block !important;visibility:visible !important;}
-    nav > ul > li:not(.cart):focus-within > div {opacity: 1 !important;display:block !important;visibility:visible !important;}
-    nav > * > ul > li:not(.cart):focus-within > ul {opacity: 1 !important;display:block !important;visibility:visible !important;}
-    nav > * > ul > li:not(.cart):focus-within > div {opacity: 1 !important;display:block !important;visibility:visible !important;}
-    ul.nav > li:not(.cart):focus-within > div {opacity: 1 !important;display:block !important;visibility:visible !important;}
-    ul.nav > li:not(.cart):focus-within > ul {opacity: 1 !important;display:block !important;visibility:visible !important;}
-    `);
-    node.appendChild(textnode);
-    document.querySelector("body").appendChild(node);
-}UA('label').forEach(function(elm, index){
+
+andiUA.NGhover = target => {
+   const ev = new MouseEvent('mouseenter', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+   });
+   target.dispatchEvent(ev);
+};
+
+andiUA.NGmouseout = target => {
+   const ev = new MouseEvent('mouseleave', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+   });
+   target.dispatchEvent(ev);
+};
+				UA('label').forEach(function(elm, index){
     let forID = elm.getAttr('for');
     let inputID = UA1('#' +forID );
     UA('[for="'+forID+'"]').forEach(function(elm2, index2){
@@ -2345,7 +2015,7 @@ if(!UA1('[data-url*="https://static.parastorage.com/services/wix-thunderbolt"]')
 UA('label').forEach(function(label){
     if(label.innerText.trim() == '' ){
         label.setAttribute('role', 'presentation');
-        label.innerHTML += '<span class="sr-only"> &#8203</span>';
+        //label.innerHTML += '<span class="sr-only"> &#8203</span>';
         //label.taddClass('sr-only')
     } 
 });
@@ -2365,23 +2035,1052 @@ UA('label').forEach(function(elm, index){
 	} else if(elm.previousElementSibling?.isIt('input')){
 		elm.previousElementSibling.id = forID;
 	}
-});if(UA1('.anditestmode')){
-    javascript:void(document.oncontextmenu=null);
-}}
-			andiUA.loadmore();
-			window.onbeforeunload = function(){
-				localStorage.removeItem("sQXGk");
-			};
-			setTimeout(function() {
-			  if (andiUA.TUAsettingFn.StfZz || UA1(".anditestmode")) {
-				var url_string = window.location.href.toString();
-				var url = new URL(url_string);
-				var c = url.searchParams.get("elm");
-				if (c != null) {
-				  c = c.hHSwe("_big_", ">").hHSwe("_id_", "#").hHSwe("_class_", ".");
-				  UA1(c).addCss2({"box-shadow":"0px 0px 0px 9999px rgba(0,0,0,0.75)", "background-color":"#FFD700"});
+});
+				if(!UA1('title') || UA1('title').getText().trim() == ''){
+    UA1('h1')? UA1('title').innerText = UA1('h1').getText():'';
+}
+				andiUA.brokenAria = function(){
+    UA('[aria-describedby]').forEach(function(aria, index){
+        if (! UA1('#'+ aria.getAttribute('aria-describedby')) ){
+            aria.removeAttribute('aria-describedby')
+        }
+    });
+    UA('[aria-labelledby]').forEach(function(aria, index){
+        if (! UA1('#'+ aria.getAttribute('aria-labelledby')) ){
+            aria.removeAttribute('aria-labelledby')
+        }
+    });
+    
+    
+    UA('[role="menubar"]').forEach(function(aria, index){
+        if (! aria.tfind('[role="menuitem"]') == 0){
+            aria.removeAttribute('role');
+        }
+    });
+     UA('[role="menu"]').forEach(function(aria, index){
+        if (! aria.tfind('[role="menuitem"]') == 0){
+            aria.removeAttribute('role');
+        }
+    });
+    
+    
+}
+
+andiUA.brokenAria();
+				andiUA.resetTabindex = function(){
+    UA('[tabindex]').forEach(function(elm){
+    	if(elm.getAttr('tabindex') != 0){
+    		elm.setAttribute('tabindex', 0);
+    	}
+    });
+}
+andiUA.resetTabindex();
+				let allDecrs = [
+        { "className": ".fa-search", "classDecr": "חיפוש" },
+        { "className": ".fa-bookmark-o", "classDecr": "סימנייה" },
+        { "className": ".fa-500px", "classDecr": "לוגו של 500px" },
+        { "className": ".fa-address-book", "classDecr": "ספר כתובות" },
+        { "className": ".fa-address-book-o", "classDecr": "ספר כתובות" },
+        { "className": ".fa-address-card", "classDecr": "כתובת" },
+        { "className": ".fa-address-card-o", "classDecr": "כתובת" },
+        { "className": ".fa-adjust", "classDecr": "התאמה" },
+        { "className": ".fa-adn", "classDecr": "לוגו של ADN" },
+        { "className": ".fa-align-center", "classDecr": "יישור למרכז" },
+        { "className": ".fa-align-justify", "classDecr": "יישור לשני הצדדים" },
+        { "className": ".fa-align-left", "classDecr": "יישור לשמאל" },
+        { "className": ".fa-align-right", "classDecr": "יישור לימין" },
+        { "className": ".fa-amazon", "classDecr": "לוגו של אמזון" },
+        { "className": ".fa-ambulance", "classDecr": "אמבולנס" },
+        { "className": ".fa-american-sign-language-interpreting", "classDecr": "פרשנות שפת הסימנים האמריקאית" },
+        { "className": ".fa-anchor", "classDecr": "עוגן" },
+        { "className": ".fa-android", "classDecr": "לוגו של אנדרואיד" },
+        { "className": ".fa-angellist", "classDecr": "לוגו של AngelList" },
+        { "className": ".fa-angle-double-down", "classDecr": "חץ כפול למטה" },
+        { "className": ".fa-angle-double-left", "classDecr": "חץ כפול לשמאל" },
+        { "className": ".fa-angle-double-right", "classDecr": "חץ כפול לימין" },
+        { "className": ".fa-angle-double-up", "classDecr": "חץ כפול למעלה" },
+        { "className": ".fa-angle-down", "classDecr": "חץ למטה" },
+        { "className": ".fa-angle-left", "classDecr": "חץ לשמאל" },
+        { "className": ".fa-angle-right", "classDecr": "חץ לימין" },
+        { "className": ".fa-angle-up", "classDecr": "חץ למעלה" },
+        { "className": ".fa-apple", "classDecr": "לוגו של אפל" },
+        { "className": ".fa-archive", "classDecr": "ארכיון" },
+        { "className": ".fa-area-chart", "classDecr": "תרשים שטח" },
+        { "className": ".fa-arrow-circle-down", "classDecr": "חץ מעגלי למטה" },
+        { "className": ".fa-arrow-circle-left", "classDecr": "חץ מעגלי לשמאל" },
+        { "className": ".fa-arrow-circle-o-down", "classDecr": "חץ מעגלי למטה" },
+        { "className": ".fa-arrow-circle-o-left", "classDecr": "חץ מעגלי לשמאל" },
+        { "className": ".fa-arrow-circle-o-right", "classDecr": "חץ מעגלי לימין" },
+        { "className": ".fa-arrow-circle-o-up", "classDecr": "חץ מעגלי למעלה" },
+        { "className": ".fa-arrow-circle-right", "classDecr": "חץ מעגלי לימין" },
+        { "className": ".fa-arrow-circle-up", "classDecr": "חץ מעגלי למעלה" },
+        { "className": ".fa-arrow-down", "classDecr": "חץ למטה" },
+        { "className": ".fa-arrow-left", "classDecr": "חץ לשמאל" },
+        { "className": ".fa-arrow-right", "classDecr": "חץ לימין" },
+        { "className": ".fa-arrow-up", "classDecr": "חץ למעלה" },
+        { "className": ".fa-arrows", "classDecr": "חצים" },
+        { "className": ".fa-arrows-alt", "classDecr": "חצים מתוחכמים" },
+        { "className": ".fa-arrows-h", "classDecr": "חצים אופקיים" },
+        { "className": ".fa-arrows-v", "classDecr": "חצים אנכיים" },
+        { "className": ".fa-asl-interpreting", "classDecr": "פרשנות שפת הסימנים" },
+        { "className": ".fa-assistive-listening-systems", "classDecr": "מערכות האזנה סיועית" },
+        { "className": ".fa-asterisk", "classDecr": "כוכבית" },
+        { "className": ".fa-at", "classDecr": "סימן הדואר האלקטרוני" },
+        { "className": ".fa-audio-description", "classDecr": "תיאור אודיו" },
+        { "className": ".fa-automobile", "classDecr": "רכב" },
+        { "className": ".fa-backward", "classDecr": "אחורה" },
+        { "className": ".fa-balance-scale", "classDecr": "קנה מידה" },
+        { "className": ".fa-ban", "classDecr": "אסור" },
+        { "className": ".fa-bandcamp", "classDecr": "Bandcamp" },
+        { "className": ".fa-bank", "classDecr": "בנק" },
+        { "className": ".fa-bar-chart", "classDecr": "תרשים עמודות" },
+        { "className": ".fa-bar-chart-o", "classDecr": "תרשים עמודות" },
+        { "className": ".fa-barcode", "classDecr": "ברקוד" },
+        { "className": ".fa-bars", "classDecr": "תפריט" },
+        { "className": ".fa-bath", "classDecr": "אמבטיה" },
+        { "className": ".fa-bathtub", "classDecr": "אמבטיה" },
+        { "className": ".fa-battery", "classDecr": "סוללה" },
+        { "className": ".fa-battery-0", "classDecr": "סוללה ריקה" },
+        { "className": ".fa-battery-1", "classDecr": "סוללה 25%" },
+        { "className": ".fa-battery-2", "classDecr": "סוללה 50%" },
+        { "className": ".fa-battery-3", "classDecr": "סוללה 75%" },
+        { "className": ".fa-battery-4", "classDecr": "סוללה מלאה" },
+        { "className": ".fa-battery-empty", "classDecr": "סוללה ריקה" },
+        { "className": ".fa-battery-full", "classDecr": "סוללה מלאה" },
+        { "className": ".fa-battery-half", "classDecr": "סוללה בחצי מילוי" },
+        { "className": ".fa-battery-quarter", "classDecr": "סוללה ברבע מילוי" },
+        { "className": ".fa-battery-three-quarters", "classDecr": "סוללה ב-3/4 מילוי" },
+        { "className": ".fa-bed", "classDecr": "מיטה" },
+        { "className": ".fa-beer", "classDecr": "בירה" },
+        { "className": ".fa-behance", "classDecr": "Behance" },
+        { "className": ".fa-behance-square", "classDecr": "Behance" },
+        { "className": ".fa-bell", "classDecr": "פעמון" },
+        { "className": ".fa-bell-o", "classDecr": "פעמון" },
+        { "className": ".fa-bell-slash", "classDecr": "פעמון מכונן" },
+        { "className": ".fa-bell-slash-o", "classDecr": "פעמון מכונן" },
+        { "className": ".fa-bicycle", "classDecr": "אופניים" },
+        { "className": ".fa-binoculars", "classDecr": "משקפת" },
+        { "className": ".fa-birthday-cake", "classDecr": "עוגת יומולדת" },
+        { "className": ".fa-bitbucket", "classDecr": "Bitbucket" },
+        { "className": ".fa-bitbucket-square", "classDecr": "Bitbucket" },
+        { "className": ".fa-bitcoin", "classDecr": "ביטקוין" },
+        { "className": ".fa-black-tie", "classDecr": "עניבה שחורה" },
+        { "className": ".fa-blind", "classDecr": "עיוור" },
+        { "className": ".fa-bluetooth", "classDecr": "בלוטות'" },
+        { "className": ".fa-bluetooth-b", "classDecr": "בלוטות' B" },
+        { "className": ".fa-bold", "classDecr": "מודגש" },
+        { "className": ".fa-bolt", "classDecr": "ברק" },
+        { "className": ".fa-bomb", "classDecr": "פצצה" },
+        { "className": ".fa-book", "classDecr": "ספר" },
+        { "className": ".fa-bookmark", "classDecr": "סימניה" },
+        { "className": ".fa-bookmark-o", "classDecr": "סימניה" },
+        { "className": ".fa-braille", "classDecr": "ברייל" },
+        { "className": ".fa-briefcase", "classDecr": "תיק עבודה" },
+        { "className": ".fa-btc", "classDecr": "ביטקוין" },
+        { "className": ".fa-bug", "classDecr": "חרק" },
+        { "className": ".fa-building", "classDecr": "בניין" },
+        { "className": ".fa-building-o", "classDecr": "בניין" },
+        { "className": ".fa-bullhorn", "classDecr": "מגבר קול" },
+        { "className": ".fa-bullseye", "classDecr": "מטרה" },
+        { "className": ".fa-bus", "classDecr": "אוטובוס" },
+        { "className": ".fa-buysellads", "classDecr": "BuySellAds" },
+        { "className": ".fa-cab", "classDecr": "מונית" },
+        { "className": ".fa-calculator", "classDecr": "מחשבון" },
+        { "className": ".fa-calendar", "classDecr": "לוח שנה" },
+        { "className": ".fa-calendar-check-o", "classDecr": "לוח שנה עם סימן סיום" },
+        { "className": ".fa-calendar-minus-o", "classDecr": "לוח שנה עם מינוס" },
+        { "className": ".fa-calendar-o", "classDecr": "לוח שנה" },
+        { "className": ".fa-calendar-plus-o", "classDecr": "לוח שנה עם פלוס" },
+        { "className": ".fa-calendar-times-o", "classDecr": "לוח שנה עם איקס" },
+        { "className": ".fa-camera", "classDecr": "מצלמה" },
+        { "className": ".fa-camera-retro", "classDecr": "מצלמה רטרו" },
+        { "className": ".fa-car", "classDecr": "רכב" },
+        { "className": ".fa-caret-down", "classDecr": "סמן למטה" },
+        { "className": ".fa-caret-left", "classDecr": "סמן שמאלה" },
+        { "className": ".fa-caret-right", "classDecr": "סמן ימינה" },
+        { "className": ".fa-caret-square-o-down", "classDecr": "סמן מרובע למטה" },
+        { "className": ".fa-caret-square-o-left", "classDecr": "סמן מרובע שמאלה" },
+        { "className": ".fa-caret-square-o-right", "classDecr": "סמן מרובע ימינה" },
+        { "className": ".fa-caret-square-o-up", "classDecr": "סמן מרובע למעלה" },
+        { "className": ".fa-caret-up", "classDecr": "סמן למעלה" },
+        { "className": ".fa-cart-arrow-down", "classDecr": "עגלה עם חץ למטה" },
+        { "className": ".fa-cart-plus", "classDecr": "עגלה עם פלוס" },
+        { "className": ".fa-cc", "classDecr": "כרטיס אשראי" },
+        { "className": ".fa-cc-amex", "classDecr": "American Express" },
+        { "className": ".fa-cc-diners-club", "classDecr": "Diners Club" },
+        { "className": ".fa-cc-discover", "classDecr": "Discover" },
+        { "className": ".fa-cc-jcb", "classDecr": "JCB" },
+        { "className": ".fa-cc-mastercard", "classDecr": "MasterCard" },
+        { "className": ".fa-cc-paypal", "classDecr": "PayPal" },
+        { "className": ".fa-cc-stripe", "classDecr": "Stripe" },
+        { "className": ".fa-cc-visa", "classDecr": "Visa" },
+        { "className": ".fa-certificate", "classDecr": "תעודה" },
+        { "className": ".fa-chain", "classDecr": "שרשרת" },
+        { "className": ".fa-chain-broken", "classDecr": "שרשרת שבורה" },
+        { "className": ".fa-check", "classDecr": "סימן סיום" },
+        { "className": ".fa-check-circle", "classDecr": "סמן עגלגל בצורת וי" },
+        { "className": ".fa-check-circle-o", "classDecr": "סמן עגלגל בצורת וי" },
+        { "className": ".fa-check-square", "classDecr": "סימן סיום " },
+        { "className": ".fa-check-square-o", "classDecr": "סימן סיום " },
+        { "className": ".fa-chevron-circle-down", "classDecr": "חץ מעגלי למטה" },
+        { "className": ".fa-chevron-circle-left", "classDecr": "חץ מעגלי שמאלה" },
+        { "className": ".fa-chevron-circle-right", "classDecr": "חץ מעגלי ימינה" },
+        { "className": ".fa-chevron-circle-up", "classDecr": "חץ מעגלי למעלה" },
+        { "className": ".fa-chevron-left", "classDecr": "חץ שמאלה" },
+        { "className": ".fa-chevron-right", "classDecr": "חץ ימינה" },
+        { "className": ".fa-chevron-up", "classDecr": "חץ למעלה" },
+        { "className": ".fa-child", "classDecr": "ילד" },
+        { "className": ".fa-chrome", "classDecr": "Chrome" },
+        { "className": ".fa-circle", "classDecr": "עגלגל" },
+        { "className": ".fa-circle-o", "classDecr": "עגלגל ריק" },
+        { "className": ".fa-circle-o-notch", "classDecr": "עגלגל עם חריצים" },
+        { "className": ".fa-circle-thin", "classDecr": "עגלגל דק" },
+        { "className": ".fa-clipboard", "classDecr": "לוח קטעים" },
+        { "className": ".fa-clock-o", "classDecr": "שעון" },
+        { "className": ".fa-clone", "classDecr": "שכפול" },
+        { "className": ".fa-close", "classDecr": "סגירה" },
+        { "className": ".fa-cloud", "classDecr": "ענן" },
+        { "className": ".fa-cloud-download", "classDecr": "הורדה מהענן" },
+        { "className": ".fa-cloud-upload", "classDecr": "העלאה לענן" },
+        { "className": ".fa-cny", "classDecr": "יואן" },
+        { "className": ".fa-code", "classDecr": "קוד" },
+        { "className": ".fa-code-fork", "classDecr": "הפצלת קוד" },
+        { "className": ".fa-codepen", "classDecr": "CodePen" },
+        { "className": ".fa-codiepie", "classDecr": "CodiePie" },
+        { "className": ".fa-coffee", "classDecr": "כוס קפה" },
+        { "className": ".fa-cog", "classDecr": "גלגל שיניים" },
+        { "className": ".fa-cogs", "classDecr": "גלגלי שיניים" },
+        { "className": ".fa-columns", "classDecr": "טורים" },
+        { "className": ".fa-comment", "classDecr": "הערה" },
+        { "className": ".fa-comment-o", "classDecr": "הערה" },
+        { "className": ".fa-commenting", "classDecr": "הוספת הערה" },
+        { "className": ".fa-commenting-o", "classDecr": "הוספת הערה" },
+        { "className": ".fa-comments", "classDecr": "הערות" },
+        { "className": ".fa-comments-o", "classDecr": "הערות" },
+        { "className": ".fa-compass", "classDecr": "מצפן" },
+        { "className": ".fa-compress", "classDecr": "דחיסה" },
+        { "className": ".fa-connectdevelop", "classDecr": "ConnectDevelop" },
+        { "className": ".fa-contao", "classDecr": "Contao" },
+        { "className": ".fa-copy", "classDecr": "העתקה" },
+        { "className": ".fa-copyright", "classDecr": "זכויות יוצרים" },
+        { "className": ".fa-creative-commons", "classDecr": "Creative Commons" },
+        { "className": ".fa-credit-card", "classDecr": "כרטיס אשראי" },
+        { "className": ".fa-credit-card-alt", "classDecr": "כרטיס אשראי חלופי" },
+        { "className": ".fa-crop", "classDecr": "חיתוך" },
+        { "className": ".fa-crosshairs", "classDecr": "סמן מטוס" },
+        { "className": ".fa-css3", "classDecr": "CSS3" },
+        { "className": ".fa-cube", "classDecr": "קובייה" },
+        { "className": ".fa-cubes", "classDecr": "קוביות" },
+        { "className": ".fa-cut", "classDecr": "גזירה" },
+        { "className": ".fa-cutlery", "classDecr": "סכום" },
+        { "className": ".fa-dashboard", "classDecr": "לוח בקרה" },
+        { "className": ".fa-dashcube", "classDecr": "Dashcube" },
+        { "className": ".fa-database", "classDecr": "מסד נתונים" },
+        { "className": ".fa-deaf", "classDecr": "חירשות" },
+        { "className": ".fa-deafness", "classDecr": "חירשות" },
+        { "className": ".fa-dedent", "classDecr": "הזחה לאחור" },
+        { "className": ".fa-delicious", "classDecr": "Delicious" },
+        { "className": ".fa-desktop", "classDecr": "מחשב שולחני" },
+        { "className": ".fa-deviantart", "classDecr": "DeviantArt" },
+        { "className": ".fa-diamond", "classDecr": "יהלום" },
+        { "className": ".fa-digg", "classDecr": "Digg" },
+        { "className": ".fa-dollar", "classDecr": "דולר" },
+        { "className": ".fa-dot-circle-o", "classDecr": "נקודה בתוך עגלגל" },
+        { "className": ".fa-download", "classDecr": "הורדה" },
+        { "className": ".fa-dribbble", "classDecr": "Dribbble" },
+        { "className": ".fa-drivers-license", "classDecr": "רשיון נהיגה" },
+        { "className": ".fa-drivers-license-o", "classDecr": "רשיון נהיגה" },
+        { "className": ".fa-dropbox", "classDecr": "Dropbox" },
+        { "className": ".fa-drupal", "classDecr": "Drupal" },
+        { "className": ".fa-edge", "classDecr": "Edge" },
+        { "className": ".fa-edit", "classDecr": "עריכה" },
+        { "className": ".fa-eercast", "classDecr": "Eercast" },
+        { "className": ".fa-eject", "classDecr": "הוצאה" },
+        { "className": ".fa-ellipsis-h", "classDecr": "נקודות רשות אופקיות" },
+        { "className": ".fa-ellipsis-v", "classDecr": "נקודות רשות אנכיות" },
+        { "className": ".fa-empire", "classDecr": "אימפריה" },
+        { "className": ".fa-envelope", "classDecr": "מעטפה" },
+        { "className": ".fa-envelope-o", "classDecr": "מעטפה" },
+        { "className": ".fa-envelope-open", "classDecr": "מעטפה פתוחה" },
+        { "className": ".fa-envelope-open-o", "classDecr": "מעטפה פתוחה" },
+        { "className": ".fa-envelope-square", "classDecr": "מעטפה מרובעת" },
+        { "className": ".fa-envira", "classDecr": "Envira" },
+        { "className": ".fa-eraser", "classDecr": "מחק" },
+        { "className": ".fa-etsy", "classDecr": "Etsy" },
+        { "className": ".fa-eur", "classDecr": "יורו" },
+        { "className": ".fa-euro", "classDecr": "יורו" },
+        { "className": ".fa-exchange", "classDecr": "החלפה" },
+        { "className": ".fa-exclamation", "classDecr": "תרנגולת" },
+        { "className": ".fa-exclamation-circle", "classDecr": "תרנגולת בתוך עגלגל" },
+        { "className": ".fa-exclamation-triangle", "classDecr": "תרנגולת בתוך משולש" },
+        { "className": ".fa-expand", "classDecr": "הרחבה" },
+        { "className": ".fa-expeditedssl", "classDecr": "ExpeditedSSL" },
+        { "className": ".fa-external-link", "classDecr": "קישור חיצוני" },
+        { "className": ".fa-external-link-square", "classDecr": "קישור חיצוני מרובע" },
+        { "className": ".fa-eye", "classDecr": "עין" },
+        { "className": ".fa-eye-slash", "classDecr": "עין עם קו" },
+        { "className": ".fa-eyedropper", "classDecr": "מנטרה" },
+        { "className": ".fa-fa", "classDecr": "Font Awesome" },
+        { "className": ".fa-facebook", "classDecr": "Facebook" },
+        { "className": ".fa-facebook-f", "classDecr": "Facebook" },
+        { "className": ".fa-facebook-official", "classDecr": "Facebook רשמי" },
+        { "className": ".fa-facebook-square", "classDecr": "Facebook מרובע" },
+        { "className": ".fa-fast-backward", "classDecr": "אחורה מהיר" },
+        { "className": ".fa-fast-forward", "classDecr": "קדימה מהיר" },
+        { "className": ".fa-fax", "classDecr": "פקס" },
+        { "className": ".fa-feed", "classDecr": "הזנה" },
+        { "className": ".fa-female", "classDecr": "נקבה" },
+        { "className": ".fa-fighter-jet", "classDecr": "מטוס לחימה" },
+        { "className": ".fa-file", "classDecr": "קובץ" },
+        { "className": ".fa-file-archive-o", "classDecr": "ארכיון" },
+        { "className": ".fa-file-audio-o", "classDecr": "קובץ אודיו" },
+        { "className": ".fa-file-code-o", "classDecr": "קובץ קוד" },
+        { "className": ".fa-file-excel-o", "classDecr": "קובץ Excel" },
+        { "className": ".fa-file-image-o", "classDecr": "קובץ תמונה" },
+        { "className": ".fa-file-movie-o", "classDecr": "קובץ סרט" },
+        { "className": ".fa-file-o", "classDecr": "קובץ" },
+        { "className": ".fa-file-pdf-o", "classDecr": "קובץ PDF" },
+        { "className": ".fa-file-photo-o", "classDecr": "קובץ תמונה" },
+        { "className": ".fa-file-picture-o", "classDecr": "קובץ תמונה" },
+        { "className": ".fa-file-powerpoint-o", "classDecr": "קובץ PowerPoint" },
+        { "className": ".fa-file-sound-o", "classDecr": "קובץ קול" },
+        { "className": ".fa-file-text", "classDecr": "קובץ טקסט" },
+        { "className": ".fa-file-text-o", "classDecr": "קובץ טקסט" },
+        { "className": ".fa-file-video-o", "classDecr": "קובץ וידאו" },
+        { "className": ".fa-file-word-o", "classDecr": "קובץ Word" },
+        { "className": ".fa-file-zip-o", "classDecr": "קובץ ZIP" },
+        { "className": ".fa-files-o", "classDecr": "קבצים" },
+        { "className": ".fa-film", "classDecr": "סרט" },
+        { "className": ".fa-filter", "classDecr": "מסנן" },
+        { "className": ".fa-fire", "classDecr": "אש" },
+        { "className": ".fa-fire-extinguisher", "classDecr": "כיבוי אש" },
+        { "className": ".fa-firefox", "classDecr": "Firefox" },
+        { "className": ".fa-first-order", "classDecr": "First Order" },
+        { "className": ".fa-flag", "classDecr": "דגל" },
+        { "className": ".fa-flag-checkered", "classDecr": "דגל בדפוס שחור לבן" },
+        { "className": ".fa-flag-o", "classDecr": "דגל" },
+        { "className": ".fa-flash", "classDecr": "בזק" },
+        { "className": ".fa-flask", "classDecr": "מבחנה" },
+        { "className": ".fa-flickr", "classDecr": "Flickr" },
+        { "className": ".fa-floppy-o", "classDecr": "דיסקט" },
+        { "className": ".fa-folder", "classDecr": "תיקייה" },
+        { "className": ".fa-folder-o", "classDecr": "תיקייה" },
+        { "className": ".fa-folder-open", "classDecr": "תיקייה פתוחה" },
+        { "className": ".fa-folder-open-o", "classDecr": "תיקייה פתוחה" },
+        { "className": ".fa-font", "classDecr": "גופן" },
+        { "className": ".fa-font-awesome", "classDecr": "Font Awesome" },
+        { "className": ".fa-fonticons", "classDecr": "סמלי גופן" },
+        { "className": ".fa-fort-awesome", "classDecr": "Fort Awesome" },
+        { "className": ".fa-forumbee", "classDecr": "Forumbee" },
+        { "className": ".fa-forward", "classDecr": "קדימה" },
+        { "className": ".fa-foursquare", "classDecr": "Foursquare" },
+        { "className": ".fa-free-code-camp", "classDecr": "Free Code Camp" },
+        { "className": ".fa-frown-o", "classDecr": "מקצוע" },
+        { "className": ".fa-futbol-o", "classDecr": "כדורגל" },
+        { "className": ".fa-gamepad", "classDecr": "ג'ויסטיק" },
+        { "className": ".fa-gavel", "classDecr": "פטיש" },
+        { "className": ".fa-gbp", "classDecr": "לישטרלינג" },
+        { "className": ".fa-ge", "classDecr": "GE" },
+        { "className": ".fa-gear", "classDecr": "גיר" },
+        { "className": ".fa-gears", "classDecr": "גירים" },
+        { "className": ".fa-genderless", "classDecr": "ללא מגדר" },
+        { "className": ".fa-get-pocket", "classDecr": "Get Pocket" },
+        { "className": ".fa-gg", "classDecr": "GG" },
+        { "className": ".fa-gg-circle", "classDecr": "GG עם מעגל" },
+        { "className": ".fa-gift", "classDecr": "מתנה" },
+        { "className": ".fa-git", "classDecr": "Git" },
+        { "className": ".fa-git-square", "classDecr": "Git " },
+        { "className": ".fa-github", "classDecr": "GitHub" },
+        { "className": ".fa-github-alt", "classDecr": "GitHub אלטרנטיבי" },
+        { "className": ".fa-github-square", "classDecr": "GitHub " },
+        { "className": ".fa-gitlab", "classDecr": "GitLab" },
+        { "className": ".fa-gittip", "classDecr": "Gittip" },
+        { "className": ".fa-glass", "classDecr": "כוס" },
+        { "className": ".fa-glide", "classDecr": "Glide" },
+        { "className": ".fa-glide-g", "classDecr": "Glide G" },
+        { "className": ".fa-globe", "classDecr": "גלובוס" },
+        { "className": ".fa-google", "classDecr": "Google" },
+        { "className": ".fa-google-plus, .fa-google-plus-circle, .fa-google-plus-official, .fa-google-plus-square", "classDecr": "Google Plus" },
+
+        { "className": ".fa-google-wallet", "classDecr": "Google Wallet" },
+        { "className": ".fa-graduation-cap", "classDecr": "כובע בוגר" },
+        { "className": ".fa-gratipay", "classDecr": "Gratipay" },
+        { "className": ".fa-grav", "classDecr": "Grav" },
+        { "className": ".fa-group", "classDecr": "קבוצה" },
+        { "className": ".fa-h-square", "classDecr": "H " },
+        { "className": ".fa-hacker-news", "classDecr": "חדשות ההאקרים" },
+        { "className": ".fa-hand-grab-o", "classDecr": "יד מחזיקה" },
+        { "className": ".fa-hand-lizard-o", "classDecr": "יד וזיקית" },
+        { "className": ".fa-hand-o-down", "classDecr": "יד למטה" },
+        { "className": ".fa-hand-o-left", "classDecr": "יד לשמאל" },
+        { "className": ".fa-hand-o-right", "classDecr": "יד לימין" },
+        { "className": ".fa-hand-o-up", "classDecr": "יד למעלה" },
+        { "className": ".fa-hand-paper-o", "classDecr": "יד ונייר" },
+        { "className": ".fa-hand-peace-o", "classDecr": "יד שלום" },
+        { "className": ".fa-hand-pointer-o", "classDecr": "יד מצביעה" },
+        { "className": ".fa-hand-rock-o", "classDecr": "יד אבן" },
+        { "className": ".fa-hand-scissors-o", "classDecr": "יד מספריים" },
+        { "className": ".fa-hand-spock-o", "classDecr": "יד ספוק" },
+        { "className": ".fa-hand-stop-o", "classDecr": "יד עצור" },
+        { "className": ".fa-handshake-o", "classDecr": "לחיצת יד" },
+        { "className": ".fa-hard-of-hearing", "classDecr": "קשי שמיעה" },
+        { "className": ".fa-hashtag", "classDecr": "השטג" },
+        { "className": ".fa-hdd-o", "classDecr": "כונן קשיח" },
+        { "className": ".fa-header", "classDecr": "כותרת" },
+        { "className": ".fa-headphones", "classDecr": "אוזניות" },
+        { "className": ".fa-heart", "classDecr": "לב" },
+        { "className": ".fa-heart-o", "classDecr": "לב מתולתל" },
+        { "className": ".fa-heartbeat", "classDecr": "דפיקת לב" },
+        { "className": ".fa-history", "classDecr": "היסטוריה" },
+        { "className": ".fa-home", "classDecr": "בית" },
+        { "className": ".fa-hospital-o", "classDecr": "בית חולים" },
+        { "className": ".fa-hotel", "classDecr": "מלון" },
+
+        { "className": ".fa-hourglass, .fa-hourglass-1, .fa-hourglass-2, .fa-hourglass-3", "classDecr": "שעון חול" },
+
+
+        { "className": ".fa-hourglass-end", "classDecr": "סוף שעון החול" },
+        { "className": ".fa-hourglass-half", "classDecr": "שעון חול חצי" },
+        { "className": ".fa-hourglass-o", "classDecr": "שעון חול מתולתל" },
+        { "className": ".fa-hourglass-start", "classDecr": "התחלת שעון חול" },
+        { "className": ".fa-houzz", "classDecr": "Houzz" },
+        { "className": ".fa-html5", "classDecr": "HTML5" },
+        { "className": ".fa-i-cursor", "classDecr": "סמן" },
+        { "className": ".fa-id-badge", "classDecr": "תג זיהוי" },
+        { "className": ".fa-id-card", "classDecr": "כרטיס זיהוי" },
+        { "className": ".fa-id-card-o", "classDecr": "כרטיס זיהוי מתולתל" },
+        { "className": ".fa-ils", "classDecr": "שח" },
+        { "className": ".fa-image", "classDecr": "תמונה" },
+        { "className": ".fa-imdb", "classDecr": "IMDb" },
+        { "className": ".fa-inbox", "classDecr": "תיבת דואר נכנס" },
+        { "className": ".fa-indent", "classDecr": "הזחה" },
+        { "className": ".fa-industry", "classDecr": "תעשייה" },
+        { "className": ".fa-info", "classDecr": "מידע" },
+        { "className": ".fa-info-circle", "classDecr": "מידע במעגל" },
+        { "className": ".fa-inr", "classDecr": "רופי הודית" },
+        { "className": ".fa-instagram", "classDecr": "Instagram" },
+        { "className": ".fa-institution", "classDecr": "מוסד" },
+        { "className": ".fa-internet-explorer", "classDecr": "Internet Explorer" },
+        { "className": ".fa-intersex", "classDecr": "אינטרסקס" },
+        { "className": ".fa-ioxhost", "classDecr": "ioxhost" },
+        { "className": ".fa-italic", "classDecr": "נטוי" },
+        { "className": ".fa-joomla", "classDecr": "Joomla" },
+        { "className": ".fa-jpy", "classDecr": "ין יפני" },
+        { "className": ".fa-jsfiddle", "classDecr": "JSFiddle" },
+        { "className": ".fa-key", "classDecr": "מפתח" },
+        { "className": ".fa-keyboard-o", "classDecr": "מקלדת" },
+        { "className": ".fa-krw", "classDecr": "וון דרום קוריאני" },
+        { "className": ".fa-language", "classDecr": "שפה" },
+        { "className": ".fa-laptop", "classDecr": "מחשב נייד" },
+        { "className": ".fa-lastfm", "classDecr": "LastFM" },
+        { "className": ".fa-lastfm-square", "classDecr": "LastFM " },
+        { "className": ".fa-leaf", "classDecr": "עלה" },
+        { "className": ".fa-leanpub", "classDecr": "Leanpub" },
+        { "className": ".fa-legal", "classDecr": "משפטי" },
+        { "className": ".fa-lemon-o", "classDecr": "לימון" },
+        { "className": ".fa-level-down", "classDecr": "הורדת רמה" },
+        { "className": ".fa-level-up", "classDecr": "שיפור רמה" },
+        { "className": ".fa-life-bouy", "classDecr": "ציוד הצלה" },
+        { "className": ".fa-life-buoy", "classDecr": "ציוד הצלה" },
+        { "className": ".fa-life-ring", "classDecr": "ציוד הצלה" },
+        { "className": ".fa-life-saver", "classDecr": "מציל חיים" },
+        { "className": ".fa-lightbulb-o", "classDecr": "נורה" },
+        { "className": ".fa-line-chart", "classDecr": "גרף קווי" },
+        { "className": ".fa-link", "classDecr": "קישור" },
+        { "className": ".fa-linkedin, .fa-linkedin-square", "classDecr": "LinkedIn" },
+        { "className": ".fa-linode", "classDecr": "Linode" },
+        { "className": ".fa-linux", "classDecr": "Linux" },
+        { "className": ".fa-list", "classDecr": "רשימה" },
+        { "className": ".fa-list-alt", "classDecr": "רשימה אלטרנטיבית" },
+        { "className": ".fa-list-ol", "classDecr": "רשימה ממוספרת" },
+        { "className": ".fa-list-ul", "classDecr": "רשימה לא ממוספרת" },
+        { "className": ".fa-location-arrow", "classDecr": "חץ מיקום" },
+        { "className": ".fa-lock", "classDecr": "נעילה" },
+        { "className": ".fa-long-arrow-down", "classDecr": "חץ ארוך למטה" },
+        { "className": ".fa-long-arrow-left", "classDecr": "חץ ארוך לשמאל" },
+        { "className": ".fa-long-arrow-right", "classDecr": "חץ ארוך לימין" },
+        { "className": ".fa-long-arrow-up", "classDecr": "חץ ארוך למעלה" },
+        { "className": ".fa-low-vision", "classDecr": "ראייה גרועה" },
+        { "className": ".fa-magic", "classDecr": "קסם" },
+        { "className": ".fa-magnet", "classDecr": "מגנט" },
+        { "className": ".fa-mail-forward", "classDecr": "העברת דואר" },
+        { "className": ".fa-mail-reply", "classDecr": "תגובה לדואר" },
+        { "className": ".fa-mail-reply-all", "classDecr": "תגובה לכולם" },
+        { "className": ".fa-male", "classDecr": "זכר" },
+        { "className": ".fa-map", "classDecr": "מפה" },
+        { "className": ".fa-map-marker", "classDecr": "סמן מפה" },
+        { "className": ".fa-map-o", "classDecr": "מפה מתולתלת" },
+        { "className": ".fa-map-pin", "classDecr": "סיכה למפה" },
+        { "className": ".fa-map-signs", "classDecr": "שלטי מפה" },
+        { "className": ".fa-mars", "classDecr": "מאדים" },
+        { "className": ".fa-mars-double", "classDecr": "מאדים כפול" },
+        { "className": ".fa-mars-stroke", "classDecr": "קו מאדים" },
+        { "className": ".fa-mars-stroke-h", "classDecr": "קו מאדים אופקי" },
+        { "className": ".fa-mars-stroke-v", "classDecr": "קו מאדים אנכי" },
+        { "className": ".fa-maxcdn", "classDecr": "MaxCDN" },
+        { "className": ".fa-meanpath", "classDecr": "Meanpath" },
+        { "className": ".fa-medium", "classDecr": "Medium" },
+        { "className": ".fa-medkit", "classDecr": "ערכת ראשונות" },
+        { "className": ".fa-meetup", "classDecr": "Meetup" },
+        { "className": ".fa-meh-o", "classDecr": "אדיש" },
+        { "className": ".fa-mercury", "classDecr": "חומר" },
+        { "className": ".fa-microchip", "classDecr": "מיקרושבב" },
+        { "className": ".fa-microphone", "classDecr": "מיקרופון" },
+        { "className": ".fa-microphone-slash", "classDecr": "מיקרופון מושבת" },
+
+        { "className": ".fa-minus, .fa-minus-circle, .fa-minus-square, .fa-minus-square-o", "classDecr": "מינוס" },
+
+
+        { "className": ".fa-mixcloud", "classDecr": "Mixcloud" },
+        { "className": ".fa-mobile", "classDecr": "נייד" },
+        { "className": ".fa-mobile-phone", "classDecr": "טלפון נייד" },
+        { "className": ".fa-modx", "classDecr": "MODx" },
+        { "className": ".fa-money", "classDecr": "כסף" },
+        { "className": ".fa-moon-o", "classDecr": "ירח" },
+        { "className": ".fa-mortar-board", "classDecr": "כובע בוגר" },
+        { "className": ".fa-motorcycle", "classDecr": "אופנוע" },
+        { "className": ".fa-mouse-pointer", "classDecr": "מצביע העכבר" },
+        { "className": ".fa-music", "classDecr": "מוזיקה" },
+        { "className": ".fa-navicon", "classDecr": "תפריט" },
+        { "className": ".fa-neuter", "classDecr": "נייטרלי" },
+        { "className": ".fa-newspaper-o", "classDecr": "עיתון" },
+        { "className": ".fa-object-group", "classDecr": "קבוצת אובייקטים" },
+        { "className": ".fa-object-ungroup", "classDecr": "ביטול קיבוץ אובייקטים" },
+        { "className": ".fa-odnoklassniki", "classDecr": "Odnoklassniki" },
+        { "className": ".fa-odnoklassniki-square", "classDecr": "Odnoklassniki " },
+        { "className": ".fa-opencart", "classDecr": "OpenCart" },
+        { "className": ".fa-openid", "classDecr": "OpenID" },
+        { "className": ".fa-opera", "classDecr": "Opera" },
+        { "className": ".fa-optin-monster", "classDecr": "Optin Monster" },
+        { "className": ".fa-outdent", "classDecr": "הזחה החוצה" },
+        { "className": ".fa-pagelines", "classDecr": "PageLines" },
+        { "className": ".fa-paint-brush", "classDecr": "מברשת צביעה" },
+        { "className": ".fa-paper-plane", "classDecr": "מטוס נייר" },
+        { "className": ".fa-paper-plane-o", "classDecr": "מטוס נייר חסר" },
+        { "className": ".fa-paperclip", "classDecr": "אטב" },
+        { "className": ".fa-paragraph", "classDecr": "פסקה" },
+        { "className": ".fa-paste", "classDecr": "הדבקה" },
+        { "className": ".fa-pause", "classDecr": "השהייה" },
+        { "className": ".fa-pause-circle", "classDecr": "עיגול השהייה" },
+        { "className": ".fa-pause-circle-o", "classDecr": "עיגול השהייה חסר" },
+        { "className": ".fa-paw", "classDecr": "כף רגל" },
+        { "className": ".fa-paypal", "classDecr": "PayPal" },
+        { "className": ".fa-pencil", "classDecr": "עט" },
+        { "className": ".fa-pencil-square", "classDecr": "מרובע עט" },
+        { "className": ".fa-pencil-square-o", "classDecr": "מרובע עט חסר" },
+        { "className": ".fa-percent", "classDecr": "אחוז" },
+        { "className": ".fa-phone", "classDecr": "טלפון" },
+        { "className": ".fa-phone-square", "classDecr": "טלפון " },
+        { "className": ".fa-photo", "classDecr": "תמונה" },
+        { "className": ".fa-picture-o", "classDecr": "תמונה" },
+        { "className": ".fa-pie-chart", "classDecr": "תרשים פאי" },
+        { "className": ".fa-pied-piper", "classDecr": "Pied Piper" },
+        { "className": ".fa-pied-piper-alt", "classDecr": "Pied Piper Alt" },
+        { "className": ".fa-pied-piper-pp", "classDecr": "Pied Piper PP" },
+        { "className": ".fa-pinterest", "classDecr": "Pinterest" },
+        { "className": ".fa-pinterest-p", "classDecr": "Pinterest P" },
+        { "className": ".fa-pinterest-square", "classDecr": "Pinterest " },
+        { "className": ".fa-plane", "classDecr": "מטוס" },
+        { "className": ".fa-play", "classDecr": "השמע" },
+        { "className": ".fa-play-circle", "classDecr": "עיגול השמע" },
+        { "className": ".fa-play-circle-o", "classDecr": "עיגול השמע חסר" },
+        { "className": ".fa-plug", "classDecr": "תקע" },
+        { "className": ".fa-plus", "classDecr": "פלוס" },
+        { "className": ".fa-plus-circle", "classDecr": "עיגול פלוס" },
+        { "className": ".fa-plus-square", "classDecr": "מרובע פלוס" },
+        { "className": ".fa-plus-square-o", "classDecr": "מרובע פלוס חסר" },
+        { "className": ".fa-podcast", "classDecr": "פודקאסט" },
+        { "className": ".fa-power-off", "classDecr": "כיבוי" },
+        { "className": ".fa-print", "classDecr": "הדפסה" },
+        { "className": ".fa-product-hunt", "classDecr": "Product Hunt" },
+        { "className": ".fa-puzzle-piece", "classDecr": "חתיכת פאזל" },
+        { "className": ".fa-qq", "classDecr": "QQ" },
+        { "className": ".fa-qrcode", "classDecr": "קוד QR" },
+        { "className": ".fa-question", "classDecr": "שאלה" },
+        { "className": ".fa-question-circle", "classDecr": "עיגול שאלה" },
+        { "className": ".fa-question-circle-o", "classDecr": "עיגול שאלה חסר" },
+        { "className": ".fa-quora", "classDecr": "Quora" },
+        { "className": ".fa-quote-left", "classDecr": "ציטוט שמאל" },
+        { "className": ".fa-quote-right", "classDecr": "ציטוט ימין" },
+        { "className": ".fa-ra", "classDecr": "RA" },
+        { "className": ".fa-random", "classDecr": "אקראי" },
+        { "className": ".fa-ravelry", "classDecr": "Ravelry" },
+        { "className": ".fa-rebel", "classDecr": "Rebel" },
+        { "className": ".fa-recycle", "classDecr": "מחזור" },
+        { "className": ".fa-reddit", "classDecr": "Reddit" },
+        { "className": ".fa-reddit-alien", "classDecr": "Reddit Alien" },
+        { "className": ".fa-reddit-square", "classDecr": "Reddit " },
+        { "className": ".fa-refresh", "classDecr": "רענון" },
+        { "className": ".fa-registered", "classDecr": "רשום" },
+        { "className": ".fa-remove", "classDecr": "הסר" },
+        { "className": ".fa-renren", "classDecr": "Renren" },
+        { "className": ".fa-reorder", "classDecr": "סידור מחודש" },
+        { "className": ".fa-repeat", "classDecr": "חזרה" },
+        { "className": ".fa-reply", "classDecr": "תגובה" },
+        { "className": ".fa-reply-all", "classDecr": "תגובה לכולם" },
+        { "className": ".fa-resistance", "classDecr": "הת resistance" },
+        { "className": ".fa-retweet", "classDecr": "Retweet" },
+        { "className": ".fa-rmb", "classDecr": "RMB" },
+        { "className": ".fa-road", "classDecr": "דרך" },
+        { "className": ".fa-rocket", "classDecr": "רקטה" },
+        { "className": ".fa-rotate-left", "classDecr": "הסתובב לשמאל" },
+        { "className": ".fa-rotate-right", "classDecr": "הסתובב לימין" },
+        { "className": ".fa-rouble", "classDecr": "רובל" },
+        { "className": ".fa-rss", "classDecr": "RSS" },
+        { "className": ".fa-rss-square", "classDecr": "RSS " },
+        { "className": ".fa-rub", "classDecr": "רובל" },
+        { "className": ".fa-ruble", "classDecr": "רובל" },
+        { "className": ".fa-rupee", "classDecr": "רופי" },
+        { "className": ".fa-s15", "classDecr": "S15" },
+        { "className": ".fa-safari", "classDecr": "Safari" },
+        { "className": ".fa-save", "classDecr": "שמירה" },
+        { "className": ".fa-scissors", "classDecr": "מספריים" },
+        { "className": ".fa-scribd", "classDecr": "Scribd" },
+        { "className": ".fa-search", "classDecr": "חיפוש" },
+        { "className": ".fa-search-minus", "classDecr": "חיפוש מופחת" },
+        { "className": ".fa-search-plus", "classDecr": "חיפוש מוגבר" },
+        { "className": ".fa-sellsy", "classDecr": "Sellsy" },
+        { "className": ".fa-send", "classDecr": "שלח" },
+        { "className": ".fa-send-o", "classDecr": "שלח חסר" },
+        { "className": ".fa-server", "classDecr": "שרת" },
+        { "className": ".fa-share", "classDecr": "שיתוף" },
+        { "className": ".fa-share-alt", "classDecr": "שיתוף אלט" },
+        { "className": ".fa-share-alt-square", "classDecr": "שיתוף אלט " },
+        { "className": ".fa-share-square", "classDecr": "שיתוף " },
+        { "className": ".fa-share-square-o", "classDecr": "שיתוף  חסר" },
+        { "className": ".fa-shekel", "classDecr": "שח" },
+        { "className": ".fa-sheqel", "classDecr": "שח" },
+        { "className": ".fa-shield", "classDecr": "מגן" },
+        { "className": ".fa-ship", "classDecr": "ספינה" },
+        { "className": ".fa-shirtsinbulk", "classDecr": "Shirtsinbulk" },
+        { "className": ".fa-shopping-bag", "classDecr": "תיק קניות" },
+        { "className": ".fa-shopping-basket", "classDecr": "סל קניות" },
+        { "className": ".fa-shopping-cart,icon-cart", "classDecr": "עגלת קניות" },
+        { "className": ".fa-shower", "classDecr": "מקלחת" },
+        { "className": ".fa-sign-in", "classDecr": "התחבר" },
+        { "className": ".fa-sign-language", "classDecr": "שפת הסימנים" },
+        { "className": ".fa-sign-out", "classDecr": "התנתק" },
+        { "className": ".fa-signal", "classDecr": "אות" },
+        { "className": ".fa-signing", "classDecr": "חתימה" },
+        { "className": ".fa-simplybuilt", "classDecr": "SimplyBuilt" },
+        { "className": ".fa-sitemap", "classDecr": "מפת אתר" },
+        { "className": ".fa-skyatlas", "classDecr": "SkyAtlas" },
+        { "className": ".fa-skype", "classDecr": "Skype" },
+        { "className": ".fa-slack", "classDecr": "Slack" },
+        { "className": ".fa-sliders", "classDecr": "מחוונים" },
+        { "className": ".fa-slideshare", "classDecr": "SlideShare" },
+        { "className": ".fa-smile-o", "classDecr": "חיוך" },
+        { "className": ".fa-snapchat", "classDecr": "Snapchat" },
+        { "className": ".fa-snapchat-ghost", "classDecr": "Snapchat רוח" },
+        { "className": ".fa-snapchat-square", "classDecr": "Snapchat " },
+        { "className": ".fa-snowflake-o", "classDecr": "שלגיה" },
+        { "className": ".fa-soccer-ball-o", "classDecr": "כדור כדורגל" },
+        { "className": ".fa-sort", "classDecr": "מיון" },
+        { "className": ".fa-sort-alpha-asc", "classDecr": "מיון אלפביתי עולה" },
+        { "className": ".fa-sort-alpha-desc", "classDecr": "מיון אלפביתי יורד" },
+        { "className": ".fa-sort-amount-asc", "classDecr": "מיון כמות עולה" },
+        { "className": ".fa-sort-amount-desc", "classDecr": "מיון כמות יורד" },
+        { "className": ".fa-sort-asc", "classDecr": "מיון עולה" },
+        { "className": ".fa-sort-desc", "classDecr": "מיון יורד" },
+        { "className": ".fa-sort-down", "classDecr": "מיון למטה" },
+        { "className": ".fa-sort-numeric-asc", "classDecr": "מיון מספרי עולה" },
+        { "className": ".fa-sort-numeric-desc", "classDecr": "מיון מספרי יורד" },
+        { "className": ".fa-sort-up", "classDecr": "מיון למעלה" },
+        { "className": ".fa-soundcloud", "classDecr": "SoundCloud" },
+        { "className": ".fa-space-shuttle", "classDecr": "מעבורת חלל" },
+        { "className": ".fa-spinner", "classDecr": "ספינר" },
+        { "className": ".fa-spoon", "classDecr": "כף" },
+        { "className": ".fa-spotify", "classDecr": "Spotify" },
+        { "className": ".fa-square", "classDecr": "מרובע" },
+        { "className": ".fa-square-o", "classDecr": "מרובע חסר" },
+        { "className": ".fa-stack-exchange", "classDecr": "Stack Exchange" },
+        { "className": ".fa-stack-overflow", "classDecr": "Stack Overflow" },
+        { "className": ".fa-star", "classDecr": "כוכב" },
+        { "className": ".fa-star-half", "classDecr": "כוכב חצי" },
+        { "className": ".fa-star-half-empty", "classDecr": "כוכב חצי ריק" },
+        { "className": ".fa-star-half-full", "classDecr": "כוכב חצי מלא" },
+        { "className": ".fa-star-half-o", "classDecr": "כוכב חצי חסר" },
+        { "className": ".fa-star-o", "classDecr": "כוכב חסר" },
+        { "className": ".fa-steam", "classDecr": "Steam" },
+        { "className": ".fa-steam-square", "classDecr": "Steam " },
+        { "className": ".fa-step-backward", "classDecr": "צעד אחורה" },
+        { "className": ".fa-step-forward", "classDecr": "צעד קדימה" },
+        { "className": ".fa-stethoscope", "classDecr": "סטטוסקופ" },
+        { "className": ".fa-sticky-note", "classDecr": "פתק שייח" },
+        { "className": ".fa-sticky-note-o", "classDecr": "פתק שייח חסר" },
+        { "className": ".fa-stop", "classDecr": "עצור" },
+        { "className": ".fa-stop-circle", "classDecr": "עצור בעיגול" },
+        { "className": ".fa-stop-circle-o", "classDecr": "עצור בעיגול חסר" },
+        { "className": ".fa-street-view", "classDecr": "תצוגת רחוב" },
+        { "className": ".fa-strikethrough", "classDecr": "קו חוצה" },
+        { "className": ".fa-stumbleupon", "classDecr": "StumbleUpon" },
+        { "className": ".fa-stumbleupon-circle", "classDecr": "StumbleUpon בעיגול" },
+        { "className": ".fa-subscript", "classDecr": "כתובית תחתונה" },
+        { "className": ".fa-subway", "classDecr": "רכבת תחתית" },
+        { "className": ".fa-suitcase", "classDecr": "מזוודה" },
+        { "className": ".fa-sun-o", "classDecr": "שמש" },
+        { "className": ".fa-superpowers", "classDecr": "כוחות על" },
+        { "className": ".fa-superscript", "classDecr": "כתובית עליונה" },
+        { "className": ".fa-support", "classDecr": "תמיכה" },
+        { "className": ".fa-table", "classDecr": "שולחן" },
+        { "className": ".fa-tablet", "classDecr": "טאבלט" },
+        { "className": ".fa-tachometer", "classDecr": "מד מהירות" },
+        { "className": ".fa-tag", "classDecr": "תג" },
+        { "className": ".fa-tags", "classDecr": "תגיות" },
+        { "className": ".fa-tasks", "classDecr": "משימות" },
+        { "className": ".fa-taxi", "classDecr": "מונית" },
+        { "className": ".fa-telegram", "classDecr": "Telegram" },
+        { "className": ".fa-television", "classDecr": "טלוויזיה" },
+        { "className": ".fa-tencent-weibo", "classDecr": "Tencent Weibo" },
+        { "className": ".fa-terminal", "classDecr": "טרמינל" },
+        { "className": ".fa-text-height", "classDecr": "גובה הטקסט" },
+        { "className": ".fa-text-width", "classDecr": "רוחב הטקסט" },
+        { "className": ".fa-th", "classDecr": "רשת" },
+        { "className": ".fa-th-large", "classDecr": "רשת גדולה" },
+        { "className": ".fa-th-list", "classDecr": "רשימת רשת" },
+        { "className": ".fa-themeisle", "classDecr": "ThemeIsle" },
+        { "className": ".fa-thermometer", "classDecr": "חום" },
+        { "className": ".fa-thermometer-0", "classDecr": "חום 0" },
+        { "className": ".fa-thermometer-1", "classDecr": "חום 1" },
+        { "className": ".fa-thermometer-2", "classDecr": "חום 2" },
+        { "className": ".fa-thermometer-3", "classDecr": "חום 3" },
+        { "className": ".fa-thermometer-4", "classDecr": "חום 4" },
+        { "className": ".fa-thermometer-empty", "classDecr": "חום ריק" },
+        { "className": ".fa-thermometer-full", "classDecr": "חום מלא" },
+        { "className": ".fa-thermometer-half", "classDecr": "חום חצי" },
+        { "className": ".fa-thermometer-quarter", "classDecr": "חום רבע" },
+        { "className": ".fa-thermometer-three-quarters", "classDecr": "חום שלושת הרבעים" },
+        { "className": ".fa-thumb-tack", "classDecr": "מזכרת" },
+        { "className": ".fa-thumbs-down", "classDecr": "אגודל למטה" },
+        { "className": ".fa-thumbs-o-down", "classDecr": "אגודל למטה חסר" },
+        { "className": ".fa-thumbs-o-up", "classDecr": "אגודל למעלה חסר" },
+        { "className": ".fa-thumbs-up", "classDecr": "אגודל למעלה" },
+        { "className": ".fa-ticket", "classDecr": "כרטיס" },
+        { "className": ".fa-times", "classDecr": "סגור" },
+        { "className": ".fa-times-circle", "classDecr": "סגור בעיגול" },
+        { "className": ".fa-times-circle-o", "classDecr": "סגור בעיגול חסר" },
+        { "className": ".fa-times-rectangle", "classDecr": "סגור במלבן" },
+        { "className": ".fa-times-rectangle-o", "classDecr": "סגור במלבן חסר" },
+        { "className": ".fa-tint", "classDecr": "טינט" },
+        { "className": ".fa-toggle-down", "classDecr": "מתג למטה" },
+        { "className": ".fa-toggle-left", "classDecr": "מתג שמאלה" },
+        { "className": ".fa-toggle-off", "classDecr": "מתג כבוי" },
+        { "className": ".fa-toggle-on", "classDecr": "מתג פעיל" },
+        { "className": ".fa-toggle-right", "classDecr": "מתג ימינה" },
+        { "className": ".fa-toggle-up", "classDecr": "מתג למעלה" },
+        { "className": ".fa-trademark", "classDecr": "סימן מסחר" },
+        { "className": ".fa-train", "classDecr": "רכבת" },
+        { "className": ".fa-transgender", "classDecr": "טרנסג'נדר" },
+        { "className": ".fa-transgender-alt", "classDecr": "טרנסג'נדר" },
+        { "className": ".fa-trash", "classDecr": "זבל" },
+        { "className": ".fa-trash-o", "classDecr": "זבל חסר" },
+        { "className": ".fa-tree", "classDecr": "עץ" },
+        { "className": ".fa-trello", "classDecr": "Trello" },
+        { "className": ".fa-tripadvisor", "classDecr": "TripAdvisor" },
+        { "className": ".fa-trophy", "classDecr": "גביע" },
+        { "className": ".fa-truck", "classDecr": "משאית" },
+        { "className": ".fa-try", "classDecr": "לירה טורקית" },
+        { "className": ".fa-tty", "classDecr": "TTY" },
+        { "className": ".fa-tumblr", "classDecr": "Tumblr" },
+        { "className": ".fa-tumblr-square", "classDecr": "Tumblr " },
+        { "className": ".fa-turkish-lira", "classDecr": "לירה טורקית" },
+        { "className": ".fa-tv", "classDecr": "טלוויזיה" },
+        { "className": ".fa-twitch", "classDecr": "Twitch" },
+        { "className": ".fa-twitter", "classDecr": "Twitter" },
+        { "className": ".fa-twitter-square", "classDecr": "Twitter " },
+        { "className": ".fa-umbrella", "classDecr": "מטריה" },
+        { "className": ".fa-underline", "classDecr": "קו תחתון" },
+        { "className": ".fa-undo", "classDecr": "ביטול" },
+        { "className": ".fa-universal-access", "classDecr": "גישה אוניברסלית" },
+        { "className": ".fa-university", "classDecr": "אוניברסיטה" },
+        { "className": ".fa-unlink", "classDecr": "ביטול הקישור" },
+        { "className": ".fa-unlock", "classDecr": "פתח" },
+        { "className": ".fa-unlock-alt", "classDecr": "פתח אלט" },
+        { "className": ".fa-unsorted", "classDecr": "לא ממוין" },
+        { "className": ".fa-upload", "classDecr": "העלאה" },
+        { "className": ".fa-usb", "classDecr": "USB" },
+        { "className": ".fa-usd", "classDecr": "דולר" },
+        { "className": ".fa-user", "classDecr": "משתמש" },
+        { "className": ".fa-user-circle", "classDecr": "משתמש" },
+        { "className": ".fa-user-circle-o", "classDecr": " משתמש חסר" },
+        { "className": ".fa-user-md", "classDecr": "רופא" },
+        { "className": ".fa-user-o", "classDecr": "משתמש חסר" },
+        { "className": ".fa-user-plus", "classDecr": "הוספת משתמש" },
+        { "className": ".fa-user-secret", "classDecr": "משתמש סודי" },
+        { "className": ".fa-user-times", "classDecr": "הסרת משתמש" },
+        { "className": ".fa-users", "classDecr": "משתמשים" },
+        { "className": ".fa-vcard", "classDecr": "כרטיס אישי" },
+        { "className": ".fa-vcard-o", "classDecr": "כרטיס אישי חסר" },
+        { "className": ".fa-venus", "classDecr": "ונוס" },
+        { "className": ".fa-venus-double", "classDecr": "ונוס כפול" },
+        { "className": ".fa-venus-mars", "classDecr": "ונוס ומאדים" },
+        { "className": ".fa-viacoin", "classDecr": "Viacoin" },
+        { "className": ".fa-viadeo", "classDecr": "Viadeo" },
+        { "className": ".fa-viadeo-square", "classDecr": "Viadeo " },
+        { "className": ".fa-video-camera", "classDecr": "מצלמת וידאו" },
+        { "className": ".fa-vimeo", "classDecr": "Vimeo" },
+        { "className": ".fa-vimeo-square", "classDecr": "Vimeo " },
+        { "className": ".fa-vine", "classDecr": "Vine" },
+        { "className": ".icon-account", "classDecr": "אזור אישי" },
+        { "className": ".fa-vk", "classDecr": "VK" },
+];
+
+allDecrs.forEach(function (obj) {
+
+        document.querySelectorAll(obj['className']).forEach(function (icon) {
+                icon.addAttr({ 'aria-label': obj['classDecr'], 'role': 'img' })
+        })
+
+})
+				UA('.jet-listing-grid__item').forEach(function(elm){
+    if(elm.querySelector('img')?.getAttribute('alt') == ''){
+        elm.querySelector('img')?.setAttribute('alt',  elm.getText().trim())
+    }
+});
+
+
+UA('.jet-listing-grid__item').forEach(function(elm, index){
+	elm.querySelector('img')?.getAttribute('alt') == '' ? elm.querySelector('img')?.setAttribute('alt', elm.getText()):'';
+});
+
+	
+UA('.jet-filters-pagination__item').forEach(function(elm, index){
+    elm.setAttribute('tabindex', '0');
+    elm.setAttribute('role', 'link');
+	elm.setAttribute('aria-label', 'page number ' + (index+1));
+});
+	
+UA1('.jet-filters-pagination__item.prev-next.next')?.setAttribute('aria-label', 'Next page');
+UA1('.jet-filters-pagination__item.prev-next.next')?.setAttribute('role', 'link');
+UA1('.jet-filters-pagination__item.prev-next.next')?.setAttribute('tabindex', '0');
+
+UA1('.jet-filters-pagination__item.prev-next.prev')?.setAttribute('aria-label', 'previous page');
+UA1('.jet-filters-pagination__item.prev-next.prev')?.setAttribute('role', 'link');
+UA1('.jet-filters-pagination__item.prev-next.prev')?.setAttribute('tabindex', '0');
+
+UA('.jet-filters-pagination__item').forEach(function(elm, index){
+	elm.setAttribute('aria-label', 'page number ' + (index+1));
+	elm.addEventListener('keyup', function(e){
+		if(e.key == 'Enter') this.click();
+	})
+});
+
+
+UA('.jet-active-filter__remove').forEach(function(elm){
+	elm.addAttr({'tabindex': '0', 'aria-label':'הסר', 'role':'button'});
+});
+
+jetSelectors = '.jet-slick-dots > li';
+UA(jetSelectors).forEach(function(elm){
+	elm.addAttr({'role':'button', 'tabindex':0, 'aria-label': 'לשקופית מספר ' + elm.innerText});//aria-current
+	if(elm.isIt('[class*="active"]')) elm.addAttr({'aria-current':'true'});
+	elm.addEventListener('click', function(e){
+		let that = this;
+		setTimeout(function(){
+			UA(jetSelectors).forEach(function(innerElm){
+				innerElm.removeAttribute('aria-current');
+			});
+			that.addAttr({'aria-current':'true'});
+		},750);
+	});
+});
+				if(!andiUA.runOnce){
+	andiUA.runOnce = true;
+	andiUA.readWebsiteErrorsAndmessages = function( errorsClass){
+		let errorsClassArr = errorsClass.split(',')
+    	let timeToRun = 2500;
+		let timeOut = -1;
+		let runAfterDomChange = function(){
+			setTimeout(function(){
+				checkErrs();
+			},1000);
+		};
+
+		let OnNodeInserted = function(event){
+		const target = event.target;
+			if( target.nodeType == 1 && target.id !== 'uaerrors' ){
+				clearTimeout(timeOut)
+				timeOut = setTimeout(function(){
+					runAfterDomChange();
+				}, timeToRun);
+			}
+		};
+		document.body.addEventListener ('DOMNodeInserted', OnNodeInserted, false);  
+  
+  
+    	let intervel = -1;
+    	function checkErrs(){
+			document.querySelector('#uaerrors')?.remove();
+			for(let i; i < errorsClassArr.length;i++){
+				let that = errorsClassArr[i];
+				let newCss = `${that}, ${that} [andiallelmwithtext]`;
+			}
+			
+    		let Label = '';
+    		document.querySelectorAll(errorsClass).forEach(function(err){
+				
+    			if(!andiUA.TUAifElmIsHidden2(err) && err.innerText  && Label.indexOf(err.innerText.trim() ) == -1 ){
+    			    Label += ' ' + err.innerText;
+    			} 
+    		});
+			
+    		if(Label != ''){
+				document.querySelector('#uaerrors')?.remove()
+    			document.body.appendHtml('<span id="uaerrors" class="sr-only" role="alert">'+Label+'</span>');
+				return true;
+    		}
+    		return false;
+			
+    	}
+    	   
+        document.addEventListener('keydown', function(event) {
+    		if(event.key == 'Enter'){
+				setTimeout(function(){
+					checkErrs();
+				},1000);
+    		}
+    	});
+    	
+    	document.addEventListener('click', function(event) {
+			setTimeout(function(){
+				checkErrs();
+			},1000);
+    	});
+		
+		
+		let haveErrs = checkErrs();
+		if(haveErrs){
+			document.querySelector('#uaerrors2')?.remove();
+			document.body.appendHtml('<span id="uaerrors2" class="sr-only" role="alert"> לחץ ALT  +  W כדי לעבור לשגיאה הראשונה  </span>');
+		}
+       
+    	document.addEventListener('keydown', function(event) {
+              if (event.altKey && event.key === 'w') {
+                document.querySelector(errorsClass).addAttr({'tabindex':'0'});
+                document.querySelector(errorsClass).focus();
+              }
+        });
+    }
+    
+        andiUA.readWebsiteErrorsAndmessages( 'body [class*="err"],body [class*="message"],body [class*="msg"],[class*="alert"],  body [class*="thank"], body .wpcf7-response-output, body .status.success');
+
+
+
+}
+				function getHoverCSSRules() {
+    let allRules = [];
+    let inaccessibleSheets = [];
+    for (let sheet of document.styleSheets) {
+        try {
+            let rules = sheet.cssRules;
+            for (let rule of rules) {
+                const cleanedRule = rule.cssText.replace(/\/\*[\s\S]*?\*\//g, '').trim();
+                if (cleanedRule) allRules.push(cleanedRule);
+            }
+        } catch (e) {
+            //console.error("Cannot read styles from a different domain due to CORS policy", e);
+            inaccessibleSheets.push(sheet.href ? sheet.href : 'Inline style');
+        }
+    }
+    return { allRules, inaccessibleSheets };
+}
+
+
+
+function addTabindex(cssSelector){
+	if(endWithHoverRegex.test(cssSelector)){
+		let tempCssSelector = cssSelector.replaceAll(':not(:hover)', '');
+		tempCssSelector = tempCssSelector.replaceAll(':hover', '');
+		document.querySelectorAll(  tempCssSelector).forEach(function(elm){
+			elm.setAttribute('tabindex', 0);
+		});
+	}
+	if(inMiddleHoverRegex.test(cssSelector)){		
+		let tempCssSelector = cssSelector.replaceAll(':not(:hover)', '');
+		tempCssSelector = tempCssSelector.replaceAll(':has(:hover)', ''); 		
+		tempCssSelector = tempCssSelector.split(':hover')[0];
+		document.querySelectorAll( tempCssSelector ).forEach(function(elm){
+			elm.setAttribute('tabindex', 0);
+		});
+	}
+}
+
+function splitCSSSelectors(selectorString) {
+    selectorString = selectorString.replace(/\/\*.*?\*\//g, '');
+    const regex = /\s*,\s*(?![^()]*\))(?![^[]*\])(?![^{}]*\})(?![^"']*["'][^"']*["'])/g;
+    return selectorString.split(regex).map(s => s.trim());
+}
+
+function checkIfNeedTabindex(cssSelector){	
+	if(cssSelector.indexOf(',') > -1){
+		let cssSelectorArr = splitCSSSelectors(cssSelector);
+		for(let i = 0; i < cssSelectorArr.length; i++){
+			addTabindex(cssSelectorArr[i]);
+		}		
+	} else {
+		addTabindex(cssSelector);
+	}	
+}
+
+function makeHoverWithoutFocusAccessible(cssRole){
+	let thisCss = cssRole
+	let cssStylesWithoutSelectors = thisCss.split('{');
+	let thisCssArr = cssStylesWithoutSelectors[0].trim();
+	if(cssStylesWithoutSelectors[1].indexOf('}') == -1) cssStylesWithoutSelectors[1] += '}';
+	let temp = '';		
+	if(endWithHoverRegex.test(thisCssArr)){
+		checkIfNeedTabindex(thisCssArr)
+		temp += `${thisCssArr.replaceAll(':hover', ':focus')}  { ${cssStylesWithoutSelectors[1]} `;
+	} else if(inMiddleHoverRegex.test(thisCssArr)){
+		checkIfNeedTabindex(thisCssArr)
+		temp += `${thisCssArr.replaceAll(':hover', ':focus')} { ${cssStylesWithoutSelectors[1]} `;
+		temp += `${thisCssArr.replaceAll(':hover', ':focus-within')} { ${cssStylesWithoutSelectors[1]} `;
+	}
+	return temp;
+}
+
+
+let onlyHoverRoles = [];
+let withFocusRoles = [];
+let endWithHoverRegex = /:hover$/;
+let inMiddleHoverRegex = /.+:hover.+/;
+let newAccessibleCssRules = '';
+let result = getHoverCSSRules();
+let cssFocusReturn = '';
+
+for(let i = 0; i < result.allRules.length; i++){
+	let thisCss = result.allRules[i];
+	if( thisCss.indexOf('@media print') == -1){
+		let madia_at = '';
+		if( thisCss.indexOf('@media') == -1){
+			if(thisCss.indexOf(':hover') > -1 && thisCss.indexOf(':focus') == -1){
+				cssFocusReturn += makeHoverWithoutFocusAccessible(thisCss);
+			}
+		} else {
+			madia_at = thisCss.match(/@media[^{]*\{/g);
+			let madiaArr = thisCss.split(/@media[^{]*\{/g);
+			madiaArr = madiaArr[1].replace(/}([^}]*)$/, '$1');
+			madiaArr = madiaArr.replace(/\n/g, '');
+			let tempCssMediaRoles = madiaArr.split('}');
+			let tempMediaRolesCSS = madia_at[0];
+			for(let s = 0; s < tempCssMediaRoles.length; s++){
+				if(tempCssMediaRoles[s].indexOf(':hover') > -1 && tempCssMediaRoles[s].indexOf(':focus') == -1){
+					tempMediaRolesCSS += makeHoverWithoutFocusAccessible(tempCssMediaRoles[s]);					
 				}
-				andiUA.getScript(andiUA.KpAEX + "/js/andi2Funcions2.js", andiUA.emptyFn);
-			  }
-			  UA1("body").taddClass("loadFASTaddon");
-			}, 0);
+			}
+			tempMediaRolesCSS += '}'
+			if(tempMediaRolesCSS.indexOf(':focus')>-1){
+				cssFocusReturn += tempMediaRolesCSS;
+			}
+		}
+	}
+}
+
+let hostElement = document.createElement('style');
+hostElement.id = 'ua_auto_css';
+hostElement.innerHTML = cssFocusReturn;
+document.body.appendChild(hostElement);
+			}
+			andiUA.loadmore();
+			andiUA.getScript(andiUA.TUAjsPath + "andiFuncions2.js", andiUA.emptyFn);
+			
