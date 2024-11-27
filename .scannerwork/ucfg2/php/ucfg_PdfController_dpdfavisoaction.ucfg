@@ -1,0 +1,181 @@
+
+4app\controller\pdfcontroller::downloadpdfavisoaction2
+(C:\test\src\Controller\PdfController.php` `(*"1*
+1a a(,r
+p
+` `(*
+
+$request"__id*R
+
+__unknown_file (6
+4
+$request(symfony\component\httpfoundation\requestjh
+a a(+
+%1*(
+
+__unknown_file (
+
+
+$request*'
+
+__unknown_file (	
+idAviso2getB
+@
+a a(+
+
+$idAviso"__id*"
+
+__unknown_file (
+
+%1pn
+b b(1
+%2*(
+
+__unknown_file (
+
+
+$request*-
+
+__unknown_file (
+nombreSeccion2getB
+@
+b b(1
+
+$seccion"__id*"
+
+__unknown_file (
+
+%2sq
+c c(=
+%3*(
+
+__unknown_file (
+
+
+$request*0
+
+__unknown_file (
+fechaPublicacion2getK
+I
+c c(=
+$fechaPublicacion"__id*"
+
+__unknown_file (
+
+%3mk
+d d(3
+%4*(
+
+__unknown_file (
+
+
+$request**
+
+__unknown_file (
+
+suplemento2getG
+E
+d d(3
+$isSuplemento"__id*"
+
+__unknown_file (
+
+%4e
+c
+f f(&
+%5"__id*K
+
+__unknown_file (/*-
+app\controller\pdfcontroller"
+	containerhf
+f f(:
+%6*"
+
+__unknown_file (
+
+%5*+
+
+__unknown_file (
+pdf_service2getE
+C
+f f(:
+$pdfService"__id*"
+
+__unknown_file (
+
+%6ƒ€
+g g(c
+%7*+
+
+__unknown_file (
+
+$pdfService*(
+
+__unknown_file (
+
+
+$seccion*(
+
+__unknown_file (
+
+
+$idAviso*1
+
+__unknown_file (
+
+$fechaPublicacion*-
+
+__unknown_file (
+
+$isSuplemento2getpdfavisoD
+B
+g g(c
+
+$pdfBase64"__id*"
+
+__unknown_file (
+
+%7
+h  h(>
+%9"$Array™
+–
+h  h(>
+%10"__mapSet*"
+
+__unknown_file (
+
+%9*)
+
+__unknown_file (
+	pdfBase64**
+
+__unknown_file (
+
+
+$pdfBase64A?
+h h(?
+%8"-symfony\component\httpfoundation\jsonresponse˜
+•
+h h(?
+%11":symfony\component\httpfoundation\jsonresponse::__construct*"
+
+__unknown_file (
+
+%8*"
+
+__unknown_file (
+
+%9l
+j
+h h(@4
+%12-symfony\component\httpfoundation\jsonresponse"__id*"
+
+__unknown_file (
+
+%8"B
+h h(@6
+4
+%12-symfony\component\httpfoundation\jsonresponse:@
+`+ `(;4
+$request(symfony\component\httpfoundation\requestB 
+app\controller\pdfcontrollerH

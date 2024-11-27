@@ -1,0 +1,215 @@
+
+'app\entity\requestanexo::serializarjson-
+#C:\test\src\Entity\RequestAnexo.phpi i(""1*¯
+2n n(-Z
+X
+n n(,
+%6"__concat*
+n n(	
+
+$json*%
+n n(,
+"es_suplemento": "1",?
+=
+n n(,
+$json"__id*"
+
+__unknown_file (
+
+%6*
+3*˜
+3q q(PWU
+q0 q(C
+%7*7
+
+__unknown_file (
+app\entity\requestanexo2
+getidanexoJ
+H
+q( q(C
+%8"__passthrough_cast*"
+
+__unknown_file (
+
+%7ˆ
+…
+q q(O
+%9"__concat*
+q q(
+"id_anexo": *
+q" q(%
+"*
+q( q(C
+
+%8*
+qF q(I
+"*
+qL q(O
+,H
+F
+q q(O
+%10"__concat*
+q q(	
+
+$json*
+q q(O
+
+%9@
+>
+q q(O
+$json"__id*#
+
+__unknown_file (
+
+%10YW
+r4 r(H
+%11*7
+
+__unknown_file (
+app\entity\requestanexo2getnroanexoL
+J
+r, r(H
+%12"__passthrough_cast*#
+
+__unknown_file (
+
+%11Ž
+‹
+r r(T
+%13"__concat* 
+r r(#
+"numero_anexo": *
+r& r()
+"*
+r, r(H
+
+%12*
+rK r(N
+"*
+rQ r(T
+,I
+G
+r r(T
+%14"__concat*
+r r(	
+
+$json*
+r r(T
+
+%13@
+>
+r r(T
+$json"__id*#
+
+__unknown_file (
+
+%14VT
+s2 s(C
+%15*7
+
+__unknown_file (
+app\entity\requestanexo2getfecha
+}
+s s(I
+%16"__concat*%
+s s((
+"fecha_publicacion": *
+s+ s(.
+"*
+s2 s(C
+
+%15*
+sF s(I
+"I
+G
+s s(I
+%17"__concat*
+s s(	
+
+$json*
+s s(I
+
+%16@
+>
+s s(I
+$json"__id*#
+
+__unknown_file (
+
+%17G
+E
+t t(
+%18"__concat*
+t t(	
+
+$json*
+t t(
+}@
+>
+t t(
+$json"__id*#
+
+__unknown_file (
+
+%18"
+u u(	
+
+$json*ó
+1j j(>
+<
+j j(
+$json"__id*!
+
+__unknown_file (
+{WU
+k6 k(I
+%1*7
+
+__unknown_file (
+app\entity\requestanexo2
+getseccionJ
+H
+k. k(I
+%2"__passthrough_cast*"
+
+__unknown_file (
+
+%1Ž
+‹
+k k(U
+%3"__concat*"
+k k(%
+"nombre_seccion": *
+k( k(+
+"*
+k. k(I
+
+%2*
+kL k(O
+"*
+kR k(U
+,G
+E
+k k(U
+%4"__concat*
+k k(	
+
+$json*
+k k(U
+
+%3?
+=
+k k(U
+$json"__id*"
+
+__unknown_file (
+
+%4\Z
+m m($
+%5*7
+
+__unknown_file (
+app\entity\requestanexo2getissuplemento*
+2
+3B
+app\entity\requestanexoH

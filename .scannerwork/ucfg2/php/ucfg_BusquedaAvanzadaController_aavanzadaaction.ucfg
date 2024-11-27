@@ -1,0 +1,63 @@
+
+Aapp\controller\busquedaavanzadacontroller::busquedaavanzadaactionA
+5C:\test\src\Controller\BusquedaAvanzadaController.phpª ª(*"1*Â
+1
+¬ ¬(6t
+r
+
+ª ª(*
+
+$request"__id*R
+
+__unknown_file (6
+4
+$request(symfony\component\httpfoundation\request1
+/
+
+ª= ª(K
+$nombreSeccion"__source_commonb
+`
+
+¬ ¬(5
+$twig"__id*C
+
+__unknown_file ('%
+#Busqueda/busquedaAvanzada.html.twig÷ô
+
+­ ­(K
+%1*I
+
+__unknown_file (-+
+)app\controller\busquedaavanzadacontroller*(
+
+__unknown_file (
+
+
+$request*.
+
+__unknown_file (
+
+$nombreSeccion*%
+
+__unknown_file (	
+
+$twig2busquedaavanzadashowi
+g
+
+­ ­(L/
+%2)symfony\component\httpfoundation\response"__id*"
+
+__unknown_file (
+
+%1"?
+
+­ ­(L1
+/
+%2)symfony\component\httpfoundation\response:B
+
+ª+ ª(;4
+$request(symfony\component\httpfoundation\request:
+
+ª= ª(K
+$nombreSeccionB-+
+)app\controller\busquedaavanzadacontrollerH

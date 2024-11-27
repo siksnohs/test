@@ -1,0 +1,173 @@
+
+.app\entity\requestdetalleaviso::serializarjson4
+*C:\test\src\Entity\RequestDetalleAviso.phpO O(""1*¯
+2T T(-Z
+X
+T T(,
+%6"__concat*
+T T(	
+
+$json*%
+T T(,
+"es_suplemento": "1",?
+=
+T T(,
+$json"__id*"
+
+__unknown_file (
+
+%6*
+3*â
+3W W(V^\
+W6 W(I
+%7*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso2
+getseccionJ
+H
+W. W(I
+%8"__passthrough_cast*"
+
+__unknown_file (
+
+%7Ž
+‹
+W W(U
+%9"__concat*"
+W W(%
+"nombre_seccion": *
+W( W(+
+"*
+W. W(I
+
+%8*
+WL W(O
+"*
+WR W(U
+,H
+F
+W W(U
+%10"__concat*
+W W(	
+
+$json*
+W W(U
+
+%9@
+>
+W W(U
+$json"__id*#
+
+__unknown_file (
+
+%10][
+X/ X(@
+%11*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso2getfecha|
+z
+X X(F
+%12"__concat*"
+X X(%
+"fecha_contexto": *
+X( X(+
+"*
+X/ X(@
+
+%11*
+XC X(F
+"I
+G
+X X(F
+%13"__concat*
+X X(	
+
+$json*
+X X(F
+
+%12@
+>
+X X(F
+$json"__id*#
+
+__unknown_file (
+
+%13G
+E
+Y Y(
+%14"__concat*
+Y Y(	
+
+$json*
+Y Y(
+}@
+>
+Y Y(
+$json"__id*#
+
+__unknown_file (
+
+%14"
+Z Z(	
+
+$json*ý
+1P P(>
+<
+P P(
+$json"__id*!
+
+__unknown_file (
+{^\
+Q2 Q(E
+%1*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso2
+getidavisoJ
+H
+Q* Q(E
+%2"__passthrough_cast*"
+
+__unknown_file (
+
+%1Š
+‡
+Q Q(Q
+%3"__concat*
+Q Q(!
+"id_tramite": *
+Q$ Q('
+"*
+Q* Q(E
+
+%2*
+QH Q(K
+"*
+QN Q(Q
+,G
+E
+Q Q(Q
+%4"__concat*
+Q Q(	
+
+$json*
+Q Q(Q
+
+%3?
+=
+Q Q(Q
+$json"__id*"
+
+__unknown_file (
+
+%4ca
+S S($
+%5*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso2getissuplemento*
+2
+3B" 
+app\entity\requestdetalleavisoH

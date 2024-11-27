@@ -1,0 +1,153 @@
+
+9app\controller\pdfcontroller::getformateddatesfromsession4
+(C:\test\src\Controller\PdfController.phpÆ Æ(0"1*Ô
+2
+Ë Ë(<pn
+
+Ë Ë(;
+%5*-
+
+__unknown_file (
+
+$fechaEdicion*#
+
+__unknown_file (
+Ymd2formatL
+J
+
+Ë Ë(;
+$fechaEdicionYMD"__id*"
+
+__unknown_file (
+
+%5*
+3*
+3
+Í Í(Y
+
+Í Í(X
+%6"$Array 
+
+
+Í Í(X
+%7"__mapSet*"
+
+__unknown_file (
+
+%6*,
+
+__unknown_file (
+fechaEdicion*-
+
+__unknown_file (
+
+$fechaEdicion¦
+£
+
+Í Í(X
+%8"__mapSet*"
+
+__unknown_file (
+
+%6*/
+
+__unknown_file (
+fechaEdicionYMD*0
+
+__unknown_file (
+
+$fechaEdicionYMD"
+
+Í Í(Y
+
+%6*Ö
+1
+Ç Ç(Cg
+e
+
+Ç Ç(*
+%1"__id*K
+
+__unknown_file (/*-
+app\controller\pdfcontroller"
+	containernl
+
+Ç Ç(B
+%2*"
+
+__unknown_file (
+
+%1*/
+
+__unknown_file (
+portada_service2getK
+I
+
+Ç Ç(B
+$portadaService"__id*"
+
+__unknown_file (
+
+%2œ
+™
+
+È È(~
+%3"?app\utils\commonfunctions::obteneryactualizarfechaultimaedicion*9
+
+__unknown_file ("
+app\utils\commonfunctions*/
+
+__unknown_file (
+
+$portadaService*(
+
+__unknown_file (
+
+
+$session*.
+
+__unknown_file (
+
+$nombreSeccionO
+M
+
+È È(~
+$fechaUltimaEdicion"__id*"
+
+__unknown_file (
+
+%3Û
+Ø
+
+É É(W
+%4"*app\utils\commonfunctions::getfechaedicion*9
+
+__unknown_file ("
+app\utils\commonfunctions*(
+
+__unknown_file (
+
+
+$session*3
+
+__unknown_file (
+
+$fechaUltimaEdicionI
+G
+
+É É(W
+$fechaEdicion"__id*"
+
+__unknown_file (
+
+%4*
+2
+3:
+
+Æ1 Æ(9
+
+$session:
+
+Æ; Æ(I
+$nombreSeccionB 
+app\controller\pdfcontrollerH

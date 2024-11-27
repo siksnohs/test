@@ -1,0 +1,244 @@
+
+6app\controller\pdfcontroller::downloadpdfsectionaction2
+(C:\test\src\Controller\PdfController.php4 4(,"1*Æ
+3; ;(`HF
+;8 ;(N
+%6*(
+
+__unknown_file (
+
+
+$request2
+getsessionÂ¿
+; ;(_
+%7*<
+
+__unknown_file ( 
+app\controller\pdfcontroller*"
+
+__unknown_file (
+
+%6*.
+
+__unknown_file (
+
+$nombreSeccion2getformateddatesfromsession@
+>
+; ;(_
+$dates"__id*"
+
+__unknown_file (
+
+%7u
+s
+<D <(]
+%8"__mapGet*&
+
+__unknown_file (
+
+
+$dates*/
+
+__unknown_file (
+fechaEdicionYMD£ 
+< <(^
+%9*+
+
+__unknown_file (
+
+$pdfService*.
+
+__unknown_file (
+
+$nombreSeccion*"
+
+__unknown_file (
+
+%82getpdfseccionD
+B
+< <(^
+
+$pdfBase64"__id*"
+
+__unknown_file (
+
+%9*
+5*¹
+4? ?(Btr
+?  ?(A
+%10*(
+
+__unknown_file (
+
+
+$request*0
+
+__unknown_file (
+fechaPublicacion2getL
+J
+? ?(A
+$fechaPublicacion"__id*#
+
+__unknown_file (
+
+%10™–
+@ @(|
+%11*+
+
+__unknown_file (
+
+$pdfService*.
+
+__unknown_file (
+
+$nombreSeccion*1
+
+__unknown_file (
+
+$fechaPublicacion*,
+
+__unknown_file (
+
+$paginaDesde*,
+
+__unknown_file (
+
+$paginaHasta2getpdfseccionporpaginasE
+C
+@ @(|
+
+$pdfBase64"__id*#
+
+__unknown_file (
+
+%11*
+5*Û
+5C C(@
+C  C(>
+%13"$Arrayš
+—
+C  C(>
+%14"__mapSet*#
+
+__unknown_file (
+
+%13*)
+
+__unknown_file (
+	pdfBase64**
+
+__unknown_file (
+
+
+$pdfBase64B@
+C C(?
+%12"-symfony\component\httpfoundation\jsonresponseš
+—
+C C(?
+%15":symfony\component\httpfoundation\jsonresponse::__construct*#
+
+__unknown_file (
+
+%12*#
+
+__unknown_file (
+
+%13m
+k
+C C(@4
+%16-symfony\component\httpfoundation\jsonresponse"__id*#
+
+__unknown_file (
+
+%12"B
+C C(@6
+4
+%16-symfony\component\httpfoundation\jsonresponse*Í
+15 5(8r
+p
+4 4(,
+
+$request"__id*R
+
+__unknown_file (6
+4
+$request(symfony\component\httpfoundation\requestpn
+5 5(7
+%1*(
+
+__unknown_file (
+
+
+$request*-
+
+__unknown_file (
+nombreSeccion2getH
+F
+5 5(7
+$nombreSeccion"__id*"
+
+__unknown_file (
+
+%1nl
+6 6(3
+%2*(
+
+__unknown_file (
+
+
+$request*+
+
+__unknown_file (
+paginaDesde2getF
+D
+6 6(3
+$paginaDesde"__id*"
+
+__unknown_file (
+
+%2nl
+7 7(3
+%3*(
+
+__unknown_file (
+
+
+$request*+
+
+__unknown_file (
+paginaHasta2getF
+D
+7 7(3
+$paginaHasta"__id*"
+
+__unknown_file (
+
+%3e
+c
+9 9(&
+%4"__id*K
+
+__unknown_file (/*-
+app\controller\pdfcontroller"
+	containerhf
+9 9(:
+%5*"
+
+__unknown_file (
+
+%4*+
+
+__unknown_file (
+pdf_service2getE
+C
+9 9(:
+$pdfService"__id*"
+
+__unknown_file (
+
+%5*
+3
+4:@
+4- 4(=4
+$request(symfony\component\httpfoundation\requestB 
+app\controller\pdfcontrollerH

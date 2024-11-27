@@ -1,0 +1,64 @@
+
+8app\controller\estaticascontroller::redirecttohomeaction8
+.C:\test\src\Controller\EstaticasController.php (("1*”
+1 (7r
+p
+ ((
+
+$request"__id*R
+
+__unknown_file (6
+4
+$request(symfony\component\httpfoundation\requestHF
+ (
+%1*(
+
+__unknown_file (
+
+
+$request2
+getsessionCA
+ (-
+%2*"
+
+__unknown_file (
+
+%12getflashbag=;
+ (6
+%3*"
+
+__unknown_file (
+
+%22clear«ƒ
+ (@
+%4*B
+
+__unknown_file (&$
+"app\controller\estaticascontroller*'
+
+__unknown_file (	
+warning*;
+
+__unknown_file (
+La url ingresada no existe.2addflashèå
+ (.
+%5*B
+
+__unknown_file (&$
+"app\controller\estaticascontroller*%
+
+__unknown_file (	
+index2redirecttorouteg
+e
+ (//
+%6)symfony\component\httpfoundation\response"__id*"
+
+__unknown_file (
+
+%5"=
+ (/1
+/
+%6)symfony\component\httpfoundation\response:@
+) (94
+$request(symfony\component\httpfoundation\requestB&$
+"app\controller\estaticascontrollerH

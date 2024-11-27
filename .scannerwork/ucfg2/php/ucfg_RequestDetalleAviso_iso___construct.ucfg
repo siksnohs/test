@@ -1,0 +1,61 @@
+
++app\entity\requestdetalleaviso::__construct4
+*C:\test\src\Entity\RequestDetalleAviso.php ("1*?
+2
+RequestDetalleAviso.php"
+ (
+implicit return*È
+1 ($‰†
+ (#
+%1*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso*(
+
+__unknown_file (
+
+
+$idAviso2
+setidaviso‰†
+ (#
+%2*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso*(
+
+__unknown_file (
+
+
+$seccion2
+setseccion…‚
+ (
+%3*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso*&
+
+__unknown_file (
+
+
+$fecha2setfecha“
+ (-
+%4*>
+
+__unknown_file (" 
+app\entity\requestdetalleaviso*-
+
+__unknown_file (
+
+$isSuplemento2setissuplemento*
+2:
+  ((
+
+$idAviso:
+* (2
+
+$seccion:
+4 (:
+$fecha:
+< (N
+$isSuplementoB" 
+app\entity\requestdetalleavisoH

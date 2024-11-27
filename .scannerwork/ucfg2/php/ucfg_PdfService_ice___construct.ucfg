@@ -1,0 +1,31 @@
+
+#app\service\pdfservice::__construct,
+"C:\test\src\Service\PdfService.php ("1*6
+2
+PdfService.php"
+ (
+implicit return*…
+1 (&‡
+„
+ (
+
+$container"__id*d
+
+__unknown_file (H
+F
+
+$container8symfony\component\dependencyinjection\containerinterfaceg
+e
+ (%'
+app\service\pdfservice"
+	container"__id**
+
+__unknown_file (
+
+
+$container*
+2:R
+  (=F
+
+$container8symfony\component\dependencyinjection\containerinterfaceB
+app\service\pdfserviceH

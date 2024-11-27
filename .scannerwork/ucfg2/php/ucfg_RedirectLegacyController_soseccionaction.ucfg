@@ -1,0 +1,82 @@
+
+Japp\controller\redirectlegacycontroller::redirectdetalleavisoseccionaction=
+3C:\test\src\Controller\RedirectLegacyController.php (5"1*§
+1 "(5
+3
+6 (J
+$detalleNormaSeccion"__source_common-
++
+K (W
+$idSoapAviso"__source_common2
+0
+Y (j
+$fechaPublicacion"__source_common
+4 "(	
+%1"$Array¦
+£
+4 "(	
+%2"__mapSet*"
+
+__unknown_file (
+
+%1*-
+
+__unknown_file (
+nombreSeccion*4
+
+__unknown_file (
+
+$detalleNormaSeccion˜
+•
+4 "(	
+%3"__mapSet*"
+
+__unknown_file (
+
+%1*'
+
+__unknown_file (	
+idAviso*,
+
+__unknown_file (
+
+$idSoapAviso¦
+£
+4 "(	
+%4"__mapSet*"
+
+__unknown_file (
+
+%1*0
+
+__unknown_file (
+fechaPublicacion*1
+
+__unknown_file (
+
+$fechaPublicacionàÝ
+ "(
+%5*G
+
+__unknown_file (+)
+'app\controller\redirectlegacycontroller**
+
+__unknown_file (
+
+aviso_show*"
+
+__unknown_file (
+
+%1*!
+
+__unknown_file (2­2redirecttoroute"
+ "(
+
+%5:"
+6 (J
+$detalleNormaSeccion:
+K (W
+$idSoapAviso:
+Y (j
+$fechaPublicacionB+)
+'app\controller\redirectlegacycontrollerH

@@ -1,0 +1,184 @@
+
+Bapp\controller\detalleavisocontroller::obtenerpdfseccionporpaginas=
+1C:\test\src\Controller\DetalleAvisoController.phpø ø(0"1*õ
+2
+√ √(4v
+t
+
+√ √(3
+%4"__mapGet*(
+
+__unknown_file (
+
+
+$detalle*,
+
+__unknown_file (
+pagina_desdeH
+F
+
+√ √(3
+$paginaDesde"__id*"
+
+__unknown_file (
+
+%4v
+t
+
+ƒ ƒ(3
+%5"__mapGet*(
+
+__unknown_file (
+
+
+$detalle*,
+
+__unknown_file (
+pagina_hastaH
+F
+
+ƒ ƒ(3
+$paginaHasta"__id*"
+
+__unknown_file (
+
+%5*
+4
+5*€
+4∆ ∆(ët
+r
+∆z ∆(è
+%6"__mapGet*(
+
+__unknown_file (
+
+
+$detalle*)
+
+__unknown_file (
+	documentoπ∂
+∆ ∆(ê
+%7*+
+
+__unknown_file (
+
+$pdfService*(
+
+__unknown_file (
+
+
+$seccion*1
+
+__unknown_file (
+
+$fechaPublicacion*,
+
+__unknown_file (
+
+$paginaDesde*,
+
+__unknown_file (
+
+$paginaHasta*"
+
+__unknown_file (
+
+%62getpdfseccionporpaginasG
+E
+∆ ∆(ê
+
+$pdfBase64"__id*"
+
+__unknown_file (
+
+%7û
+õ
+
+« «(#
+%8"__mapSet*,
+
+__unknown_file (
+
+$pdfResponse*#
+
+__unknown_file (
+pdf**
+
+__unknown_file (
+
+
+$pdfBase64ß
+§
+
+» »(2
+%9"__mapSet*,
+
+__unknown_file (
+
+$pdfResponse*2
+
+__unknown_file (
+paginas_publicadas*$
+
+__unknown_file (
+true*
+5*/
+5
+À À("
+
+À À(
+
+$pdfResponse*¶
+1
+¿ ¿(;p
+n
+
+¿ ¿(&
+%1"__id*T
+
+__unknown_file (8*6'
+%app\controller\detalleavisocontroller"
+	containerjh
+
+¿ ¿(:
+%2*"
+
+__unknown_file (
+
+%1*+
+
+__unknown_file (
+pdf_service2getG
+E
+
+¿ ¿(:
+$pdfService"__id*"
+
+__unknown_file (
+
+%2
+
+¡ ¡(
+%3"$ArrayH
+F
+
+¡ ¡(
+$pdfResponse"__id*"
+
+__unknown_file (
+
+%3*
+2
+5:
+
+ø1 ø(9
+
+$seccion:!
+
+ø; ø(L
+$fechaPublicacion:
+
+øN ø(V
+
+$detalleB)'
+%app\controller\detalleavisocontrollerH

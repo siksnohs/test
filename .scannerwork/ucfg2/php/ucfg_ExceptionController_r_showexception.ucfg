@@ -1,0 +1,45 @@
+
+1app\controller\exceptioncontroller::showexception8
+.C:\test\src\Controller\ExceptionController.php (!"1*Æ
+1 (xr
+p
+ (!
+
+$request"__id*R
+
+__unknown_file (6
+4
+$request(symfony\component\httpfoundation\requestýú
+ (w
+%1*B
+
+__unknown_file (&$
+"app\controller\exceptioncontroller*&
+
+__unknown_file (
+
+danger*r
+
+__unknown_file (VT
+RHubo un error en el sistema. Por favor contactarse con el administrador del mismo.2addflashš—
+ (9
+%2*B
+
+__unknown_file (&$
+"app\controller\exceptioncontroller*9
+
+__unknown_file (
+Exception/error.html.twig2renderg
+e
+ (:/
+%3)symfony\component\httpfoundation\response"__id*"
+
+__unknown_file (
+
+%2"=
+ (:1
+/
+%3)symfony\component\httpfoundation\response:@
+" (24
+$request(symfony\component\httpfoundation\requestB&$
+"app\controller\exceptioncontrollerH

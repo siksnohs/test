@@ -1,0 +1,72 @@
+
+$app\entity\requestanexo::__construct-
+#C:\test\src\Entity\RequestAnexo.php ("1*8
+2
+RequestAnexo.php"
+ (
+implicit return*Ø
+1 ($Å
+ (#
+%1*7
+
+__unknown_file (
+app\entity\requestanexo*(
+
+__unknown_file (
+
+
+$seccion2
+setseccionÅ
+ (#
+%2*7
+
+__unknown_file (
+app\entity\requestanexo*(
+
+__unknown_file (
+
+
+$idAnexo2
+setidanexoÑÅ
+ (%
+%3*7
+
+__unknown_file (
+app\entity\requestanexo*)
+
+__unknown_file (
+
+	$nroAnexo2setnroanexo}{
+ (
+%4*7
+
+__unknown_file (
+app\entity\requestanexo*&
+
+__unknown_file (
+
+
+$fecha2setfechaåâ
+ (-
+%5*7
+
+__unknown_file (
+app\entity\requestanexo*-
+
+__unknown_file (
+
+$isSuplemento2setissuplemento*
+2:
+  ((
+
+$seccion:
+* (3
+	$nroAnexo:
+5 (=
+
+$idAnexo:
+? (E
+$fecha:
+G (Y
+$isSuplementoB
+app\entity\requestanexoH

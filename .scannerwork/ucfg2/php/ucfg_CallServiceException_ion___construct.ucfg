@@ -1,0 +1,43 @@
+
++app\utils\callserviceexception::__construct4
+*C:\test\src\Utils\CallServiceException.php ("1*@
+2
+CallServiceException.php"
+ (
+implicit return*±
+1 (8„
+
+ (
+	$previous"__id*b
+
+__unknown_file (F
+D
+	$previous7symfony\component\config\definition\exception\exception•
+’
+ (7
+%1"Dsymfony\component\config\definition\exception\exception::__construct*>
+
+__unknown_file (" 
+app\utils\callserviceexception*(
+
+__unknown_file (
+
+
+$message*%
+
+__unknown_file (	
+
+$code*)
+
+__unknown_file (
+
+	$previous*
+2:
+  ((
+
+$message:
+* (3
+$code:P
+5 (OD
+	$previous7symfony\component\config\definition\exception\exceptionB" 
+app\utils\callserviceexceptionH

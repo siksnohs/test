@@ -1,0 +1,256 @@
+
+6app\controller\detalleavisocontroller::obtenerdatosseo=
+1C:\test\src\Controller\DetalleAvisoController.phpÏ Ï($"1*Õ
+2
+Ô Ô(.p
+n
+
+Ô Ô(-
+%1"__mapGet*(
+
+__unknown_file (
+
+
+$detalle*&
+
+__unknown_file (
+
+tituloH
+F
+
+Ô Ô(-
+$tituloAviso"__id*"
+
+__unknown_file (
+
+%1s
+q
+
+Õ Õ(3
+%2"__mapGet*(
+
+__unknown_file (
+
+
+$detalle*)
+
+__unknown_file (
+	subtituloK
+I
+
+Õ Õ(3
+$subtituloAviso"__id*"
+
+__unknown_file (
+
+%2r
+p
+
+Ö Ö(1
+%3"__mapGet*(
+
+__unknown_file (
+
+
+$detalle*(
+
+__unknown_file (
+
+sintesisJ
+H
+
+Ö Ö(1
+$sintesisAviso"__id*"
+
+__unknown_file (
+
+%3*
+3
+7*Š
+3
+Ù Ù(3U
+S
+
+Ù Ù(2
+%4"__concat*
+
+Ù Ù(#
+ - *
+
+Ù& Ù(2
+
+$tituloAvisoR
+P
+
+Ù Ù(2
+%5"__concat*
+
+Ù Ù(
+
+
+$tituloSeo*
+
+Ù Ù(2
+
+%4F
+D
+
+Ù Ù(2
+
+$tituloSeo"__id*"
+
+__unknown_file (
+
+%5*
+4
+5*Š
+4
+Û Û(:X
+V
+
+Û" Û(9
+%6"__concat*
+
+Û" Û('
+ - *!
+
+Û* Û(9
+
+$subtituloAvisoR
+P
+
+Û Û(9
+%7"__concat*
+
+Û Û(
+
+
+$tituloSeo*
+
+Û" Û(9
+
+%6F
+D
+
+Û Û(9
+
+$tituloSeo"__id*"
+
+__unknown_file (
+
+%7*
+5*l
+5
+Ý Ý(-S
+Q
+
+Ý Ý(,
+$descripcionSeo"__id**
+
+__unknown_file (
+
+
+$tituloSeo*
+6
+7*“
+6
+ß ß(>W
+U
+
+ß' ß(=
+%8"__concat*
+
+ß' ß(,
+ - * 
+
+ß/ ß(=
+
+$sintesisAvisoW
+U
+
+ß ß(=
+%9"__concat*!
+
+ß ß(#
+
+$descripcionSeo*
+
+ß' ß(=
+
+%8K
+I
+
+ß ß(=
+$descripcionSeo"__id*"
+
+__unknown_file (
+
+%9*
+7*‡
+7
+ã ã(O
+
+ã ã(N
+%10"$Array™
+–
+
+ã ã(N
+%11"__mapSet*#
+
+__unknown_file (
+
+%10*&
+
+__unknown_file (
+
+titulo**
+
+__unknown_file (
+
+
+$tituloSeo£
+ 
+
+ã ã(N
+%12"__mapSet*#
+
+__unknown_file (
+
+%10*+
+
+__unknown_file (
+descripcion*/
+
+__unknown_file (
+
+$descripcionSeo"
+
+ã ã(O
+
+%10*Õ
+1
+Ñ Ñ(;g
+e
+
+Ñ Ñ(:
+
+$tituloSeo"__id*C
+
+__unknown_file ('%
+#BOLETIN OFICIAL REPUBLICA ARGENTINAS
+Q
+
+Ò Ò($
+$descripcionSeo"__id**
+
+__unknown_file (
+
+
+$tituloSeo*
+2
+7:
+
+Ï% Ï(-
+
+$detalleB)'
+%app\controller\detalleavisocontrollerH
