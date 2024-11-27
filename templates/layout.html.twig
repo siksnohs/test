@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+
+    <meta name="theme-color" content="#0072b8">
+    <meta name="msapplication-navbutton-color" content="#0072b8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0072b8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    {% block metatagsSeo %}
+        <title>BOLETIN OFICIAL REPUBLICA ARGENTINA</title>
+        <meta name="description" content="BORA - Boletín Oficial de la República Argentina">
+    {% endblock %}
+
+    {% block metatagsSociales %}
+
+        <meta property="og:url" content="https://www.boletinoficial.gob.ar/" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Boletín Oficial de la República Argentina" />
+        <meta property="og:description" content="Boletín Oficial de la República Argentina" />
+        <meta property="og:image" content="{{ asset('/images/bora_share.jpg') }}" />
+        <meta property="og:locale" content="es_AR" />
+
+        <meta name="twitter:card" content="Boletín Oficial de la República Argentina" />
+        <meta name="twitter:title" content="Boletín Oficial de la República Argentina" />
+        <meta name="twitter:description" content="Boletín Oficial de la República Argentina" />
+        <meta name="twitter:image" content="{{ asset('/images/bora_share.jpg') }}" />
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    
+    {% block stylesheets %}
+
+        <link href='{{ asset('css/roboto-fontface.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/bootstrap.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/font-awesome.min.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/poncho.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/magicsuggest.css') }}' rel="stylesheet">
+        <link href='{{ asset('css/bootstrap-datepicker.css') }}' rel="stylesheet">
+        {#<link href='{{ asset('css/datepicker.css') }}' rel='stylesheet' type='text/css'>#}
+        <link href='{{ asset('css/styles.css') }}' rel='stylesheet' type='text/css'>
+
+        <link href='{{ asset('css/own/main.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/breakpoints.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/vars.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/header.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/buttons.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/cards.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/section.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/bottom-cards.css') }}' rel='stylesheet' type='text/css'>
+        <link href='{{ asset('css/own/footer.css') }}' rel='stylesheet' type='text/css'>
+
+    {% endblock %}
+
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('js/generales.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/share.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/analitics.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/downloadPdf.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/contactos.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.es.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/sammy/sammy.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/magicsuggest.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/busqueda.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/imageMapResizer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/calendario.js') }}"></script>
+        <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    {% endblock %}
+
+
+    <!-- Google Analytics -->
+    <!--TODO:-->
+    <!-- End Google Analytics -->
+
+</head>
+<body>
+    <div id="accessibility"></div>
+    <script src="{{ asset('./js/accessibility.min.js?version=20231214') }}"></script>
+
+    <div id="loader" class="loader-div" style="display: none;">
+        <img src="{{ asset('/images/loader.gif') }}">
+    </div>
+
+{% block header %}
+    {{ include ('header.html.twig') }}
+{% endblock %}
+
+<div class="container-fluid">
+
+    {% for label, messages in app.flashes %}
+        <div class="row">
+            {% for message in messages %}
+                <div class="alert alert-info alert-dismisable bg-{{ label }} alert-bora">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message|raw }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    {% block js_flashes %}
+        {{ include ('mensajes_js.html.twig', { 'modal': false }) }}
+    {% endblock %}
+
+
+</div>
+
+
+{% block content %}
+{% endblock %}
+
+
+
+{% block footer %}
+    {{ include ('footer.html.twig') }}
+    {{ include ('Modals/red_boletines_provinciales_modal.html.twig') }}
+{% endblock %}
+
+{% block datepicker %}
+    <script type="text/javascript">
+        $('#datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: "es",
+        });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+{% endblock %}
+
+
+{% block backtotop %}
+    <script>
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-top').fadeIn();
+                } else {
+                    $('.back-top').fadeOut();
+                }
+            });
+
+// scroll body to 0px on click
+            $('.back-top').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 1000);
+                return false;
+            });
+        });
+
+        $('#rapidaInput').keypress(function (e) {
+            var key = e.which;
+            if(key === 13)  // the enter key code
+            {
+                $('#busquedaRapidaButton').click();
+                return false;
+            }
+        });
+    </script>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+.bg-primary {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--primary-nav),
+    var(--primary-nav) 45px,
+    var(--primary-nav-alt) 45px,
+    var(--primary-nav-alt) 85px
+  );
+}
+
+.bg-secondary {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--secondary-nav),
+    var(--secondary-nav) 45px,
+    var(--secondary-nav-alt) 45px,
+    var(--secondary-nav-alt) 85px
+  );
+}
+
+.bg-dark {
+  background-color: var(--black) !important;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.navbar {
+  border-radius: 0%;
+  border: 0px;
+}
+
+.nav li,
+.navbar-brand {
+  min-height: 60px;
+  padding-bottom: 0;
+}
+
+.nav > li > a {
+  color: var(--white) !important;
+}
+
+.nav > li > a:hover {
+  color: var(--white) !important;
+  background-color: transparent;
+}
+
+.li-primary {
+  margin-left: 20px;
+}
+
+.li-primary:hover {
+  color: var(--white) !important;
+  background-color: var(--secondary-nav) !important;
+}
+
+.navbar-toggle {
+  color: white !important;
+  text-align: left !important;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-left: 15px;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: transparent;
+  border: none;
+}
+
+.navbar-text-box {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  height: 80px;
+  margin-bottom: -30px;
+  padding: 15px;
+  width: 220px;
+  border-radius: 0 0 10px 10px;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  background: transparent;
+  border: none !important;
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  border: none !important;
+  color: #fff;
+}
+
+*,
+::after,
+::before {
+  box-sizing: none !important;
+}

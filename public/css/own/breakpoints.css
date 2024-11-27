@@ -1,0 +1,45 @@
+@media screen and (max-width: 1200px) {
+  .text-btns-main {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .navbar-text-box {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .navbar-brand {
+    margin-top: -12px !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .nav-mobile {
+    margin: 0 !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .number-card {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .number-card-mobile {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  nav {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .nav-mobile {
+    margin: 0 !important;
+  }
+}

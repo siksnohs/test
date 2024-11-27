@@ -1,0 +1,71 @@
+{% block itemBusqueda %}
+
+    {% if  nro_pagina is same as(1) %}
+        <div class="row" id="divVolverBusqAnterior" style="display: none">
+            <div  class=" col-md-12">
+                <a class="puntero" onclick="volverBusquedaAnterior('{{ path("realizar_busqueda") }}', '{{ path("realizar_busqueda_segunda") }}')"><i class="fa fa-chevron-left"></i> Volver</a>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if  nro_pagina is same as(1) and menu_rubros is defined and menu_rubros is not null and menu_rubros|length > 0 %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-menu menu-rubros-panel">
+                    <div class="panel-heading">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="pull-right text-muted">
+                            <small> Desplegar menú</small> <i onclick="collapseMenu('collapseOne')" class="fa fa-angle-down"></i>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class="row panels-row">
+                                {% for rubro in menu_rubros %}
+                                    <div class="col-md-6 col-sm-4 col-xs-6 form-group">
+                                        <p>
+                                            <a class="puntero text-primary-alt" onclick="actualizarBusquedaRubro('{{ rubro.id }}', '{{ path("realizar_busqueda") }}', '{{ path("realizar_busqueda_segunda") }}'); return false;"> {{ rubro.descripcion }} ({{ rubro.cantidad }})
+                                            </a>
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if  nro_pagina is same as(1) %}
+        <hr id="resultadosBusqueda" class="secciones-titulo-hr">
+    {% endif %}
+
+    {% if elements is defined and elements is not null and elements|length > 0 %}
+        {% for element in elements %}
+            {% set nro_seccion = element.seccion %}
+            {% if encabezados_seccion[nro_seccion] is defined %}
+                {% if not ult_seccion is same as(nro_seccion) or nro_pagina is same as(1)  %}
+                    {% set titulo_seccion =  encabezados_seccion[nro_seccion]["tituloSeccion"]%}
+                    {% set subtitulo_seccion =  encabezados_seccion[nro_seccion]["subtituloSeccion"]%}
+                    {%  include "secciones/titulo_seccion.html.twig" %}
+                {% endif %}
+            {% endif %}
+
+            {% set rubros = element.rubros %}
+            {% set seccion = element.nombre_seccion %}
+            {%  include "secciones/item_avisos.html.twig" %}
+        {% endfor %}
+    {% else %}
+        {% if segunda_seccion is not null and segunda_seccion.items is not null and segunda_seccion.items|length > 0 %}
+            {%  include "secciones/item_avisos_busq_segunda.html.twig" %}
+        {% endif %}
+    {% endif %}
+
+    {% if  nro_pagina is same as(1) %}
+        <script>
+
+            actualizarVistaVolverBusqueda("#divVolverBusqAnterior");
+
+        </script>
+    {% endif %}
+
+{% endblock %}

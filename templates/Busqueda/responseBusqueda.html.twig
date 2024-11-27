@@ -1,0 +1,141 @@
+<div class="col-md-4  form-group margin-top-40 margin-menu">
+	{% if navegacionMenu is defined %}
+		{{ navegacionMenu | raw }}
+	{% endif %}
+	<h5>Secciones</h5>
+	<ul class="nav nav-pills nav-stacked form-group">
+		<li id="itemLateralMenuPrimera">
+			<a href="/seccion/primera" onclick="sendSectionEvent('Open', 'Primera');">
+                <img id="imagePrimera" {% if seccion is defined and seccion == "primera" %} src="/images/sections/number1-on.png" {% else %} src="/images/sections/number1-off.png" {% endif %} width="100%"/>
+			</a>
+		</li>
+		<li id="itemLateralMenuSegunda">
+			<a href="/seccion/segunda" onclick="sendSectionEvent('Open', 'Segunda');">
+                <img id="imageSegunda" {% if seccion is defined and seccion == "segunda" %} src="/images/sections/number2-on.png" {% else %} src="/images/sections/number2-off.png" {% endif %} width="100%"/>
+			</a>
+		</li>
+		<li id="itemLateralMenuTercera">
+			<a href="/seccion/tercera" onclick="sendSectionEvent('Open', 'Tercera');">
+                <img id="imageTercera" {% if seccion is defined and seccion == "tercera" %} src="/images/sections/number3-on.png" {% else %} src="/images/sections/number3-off.png" {% endif %} width="100%"/>
+			</a>
+		</li>
+		<li id="itemLateralMenuCuarta">
+			<a href="/seccion/cuarta" onclick="sendSectionEvent('Open', 'Cuarta');">
+                <img id="imageCuarta" {% if seccion is defined and seccion == "cuarta" %} src="/images/sections/number4-on.png" {% else %} src="/images/sections/number4-off.png" {% endif %} width="100%"/>
+			</a>
+		</li>
+	</ul>
+</div>
+
+
+<div
+	id="respuestaDivContainer" class="col-md-8 form-group">
+
+
+	<!------- Respuesta -------->
+
+	<div id="resultadosBusquedaRapidaDiv" style="display: none">
+		<div id="sumarizadoDeBusquedaRapida">
+			<h2>Búsqueda</h2>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+					<h5 style="margin-bottom: 15px;">Cantidad de resultados
+						<small id="counterBusquedaRapTotal"></small>
+					</h5>
+				</div>
+				<div class="col-md-6">
+					{% if seccion != 'cuarta' %}
+						<a class="pull-right margin-10" href="/busquedaAvanzada/{{ seccion }}">
+							<small class="text-muted puntero">Búsqueda avanzada
+								<i class="fa fa-chevron-right small"></i>
+							</small>
+						</a>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="row" id="counterRapDiv" style="display: none">
+				<div id="counter1Rap" style="display: none" class="col-md-3 col-sm-6 col-xs-6 form-group">
+					<a class="puntero" id="counter1Rap" onclick="actualizarBusqueda('{{ path("realizar_busqueda") }}', 'primera', 1, 'rapida'); return false;">
+						<span class="text-primary-alt">Legislación y Avisos Oficiales
+						</span>
+						<span id="spanCounterPrimeraRap" class="text-primary-alt"></span><br><span class="text-muted font-size-14 font-regular">
+							Primera Sección
+						</span>
+					</a>
+				</div>
+				<div id="counter2Rap" style="display: none" class="col-md-3 col-sm-6 col-xs-6  form-group">
+					<a class="puntero" id="counter2Rap" onclick="actualizarBusqueda('{{ path("realizar_busqueda") }}', 'segunda', 2, 'rapida');  return false;">
+						<span class="text-primary-alt">Sociedades y Avisos Judiciales
+						</span>
+						<span id="spanCounterSegundaRap" class="text-primary-alt"></span><br><span class="text-muted font-size-14 font-regular">
+							Segunda Sección
+						</span>
+					</a>
+				</div>
+				<div id="counter3Rap" style="display: none" class="col-md-3 col-sm-6 col-xs-6  form-group">
+					<a class="puntero" id="counter3Rap" onclick="actualizarBusqueda('{{ path("realizar_busqueda") }}', 'tercera', 3, 'rapida');  return false;">
+						<span class="text-primary-alt">Contrataciones
+						</span>
+						<span id="spanCounterTerceraRap" class="text-primary-alt"></span><br><span class="text-muted font-size-14 font-regular">
+							Tercera Sección
+						</span>
+					</a>
+				</div>
+				{#<div id="counter4Rap" style="display: none" class="col-md-3 col-sm-6 col-xs-6  form-group">#}
+			{#<a class="puntero" id="counter4Rap" onclick="actualizarBusqueda('{{ path("realizar_busqueda") }}', 'cuarta', 4, 'Rapida'); return false;"><span>Dominios de Internet </span><span id="spanCounterCuartaRap"></span><br><span class="text-muted font-size-14 font-regular"> Cuarta Sección </span></a>#}
+				{#</div>#}
+			</div>
+			<h5>
+				<small id="sinResultados"></small>
+			</h5>
+		</div>
+
+		<div id="resultadosBusquedaRapida"></div>
+
+	</div>
+
+	<div id="cargandoListadoBusqueda" class="cargando-div col-md-4 form-group margin-top-40" style="display: none;">
+		<img src="{{ asset('/images/loader.gif') }}" height="75px">
+	</div>
+
+</div>
+
+<script>
+	var ejecutandoLlamadaAsincronicaBusquedaRapida = false;
+var hayMasResultadosBusquedaRapida = true;
+sessionStorage.removeItem('searchParams');
+// if (sessionStorage.getItem('searchParams') !== null) {
+//     sessionStorage.removeItem('searchParams');
+// }
+$(window).on("scroll", function () {
+if ((window.innerHeight + getScrollPosition() + 200) >= document.body.offsetHeight) {
+if (hayMasResultadosBusquedaRapida) {
+if (ejecutandoLlamadaAsincronicaBusquedaRapida) {
+return false;
+}
+ejecutandoLlamadaAsincronicaSeccion = true;
+ejecutandoLlamadaAsincronicaBusquedaRapida = true;
+if (sessionStorage.getItem('searchParams') !== null) {
+var searchParams = JSON.parse(sessionStorage.getItem('searchParams'));
+
+if (searchParams.ejecutandoLlamadaAsincronicaBusqueda) {
+return false;
+}
+if (searchParams.tipoBusqueda === 'Rapida') {
+$('#cargandoListadoBusqueda').show();
+cargarRespuestasRapida(searchParams, "{{ path("realizar_busqueda") }}", false);
+} else {
+ejecutandoLlamadaAsincronicaSeccion = false;
+ejecutandoLlamadaAsincronicaBusquedaRapida = false;
+}
+} else {
+ejecutandoLlamadaAsincronicaSeccion = false;
+ejecutandoLlamadaAsincronicaBusquedaRapida = false;
+}
+}
+}
+
+});
+</script>

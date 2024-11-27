@@ -1,0 +1,45 @@
+<header>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ id_analitics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ id_analitics }}');
+</script>
+	<!-- End Google Tag Manager -->
+	<nav class="navbar navbar-top navbar-default bg-light bg-primary responsive-nav" role="navigation">
+		<div class="container-fluid nav-mobile">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="fa fa-bars" aria-hidden="true"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="main-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li>
+						<a class="navbar-brand" href="{{ path('index') }}">
+							<img alt="Brand" src="/images/presidencia.png" height="65"/>
+						</a>
+					</li>
+					<li class="navbar-text-box bg-dark bg-secondary">
+						<div style="margin: auto;"><a href="{{ path('index') }}">Boletín Oficial de la República Argentina</a></div>
+					</li>
+					<li class="li-primary">
+						<a href="/estatica/institucional-mision" onclick="sendEstaticaEvent('Visto', 'Institucional-Mision')">Institucional</a>
+					</li>
+					<li class="li-primary">
+						<a href="/estatica/prodyserv" onclick="sendEstaticaEvent('Visto', 'Prodyserv')">Productos y servicios</a>
+					</li>
+					<li class="li-primary">
+						<a href="/estatica/faq-preguntas" onclick="sendEstaticaEvent('Visto', 'Faq Preguntas')">Preguntas Frecuentes</a>
+					</li>
+					<li class="li-primary">
+						<a href="/contacto" onclick="sendContactoEvent('Visto', 'Contacto')">Contacto</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>

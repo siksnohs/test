@@ -1,0 +1,41 @@
+# This file is the entry point to configure your own HTTP routes.
+# Files in the routes/ subdirectory configure the routes for your dependencies.
+
+index:
+    path: /
+    defaults: { _controller: 'App\Controller\HomeController::homeAction' }
+
+home:
+  path: /
+  defaults: { _controller: 'App\Controller\HomeController' }
+
+seccion:
+    path:     /seccion
+    defaults: { _controller: 'App\Controller\SeccionController' }
+
+estatica:
+    path:     /estatica
+    defaults: { _controller: 'App\Controller\EstaticasController' }
+
+calendario:
+    path:     /calendario
+    defaults: { _controller: 'App\Controller\CalendarioController' }
+
+edicion:
+    path:     /edicion
+    defaults: { _controller: 'App\Controller\EdicionController' }
+
+contacto:
+    path:     /contacto
+    defaults: { _controller: 'App\Controller\ContactoController' }
+
+busquedaAvanzada:
+  path:     /busquedaAvanzada
+  defaults: { _controller: 'App\Controller\BusquedaAvanzadaController' }
+
+webUtils:
+  path:     /webUtils
+  defaults: { _controller: 'App\Controller\WebUtilsController' }
+
+
+

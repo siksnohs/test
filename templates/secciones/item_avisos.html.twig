@@ -1,0 +1,130 @@
+{% block itemAvisos %}
+<div class="row">
+    <div class="col-md-12 avisosSeccionDiv" id="avisosSeccionDiv">
+        {% if rubros  is defined and rubros|length > 0 %}
+            {% if seccion == 'cuarta' %}
+                {% set cambio_rubro = false %}
+                {% for rubro in rubros %}
+                    {%if cambio_rubro == true or ult_rubro != rubro.extension or nro_pagina is same as(1) %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <h5 class="seccion-rubro text-white bg-fourth-section">{{ rubro.extension }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% for dominio in rubro.elements %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group linea-aviso">
+                                    <div class="row centrar-cuarta">
+                                        <div class="col-title">
+                                        <span class="pull-left">
+                                        <a class="text-black" href="//{{ dominio.dominio }}" target="_blank">{{ dominio.dominio }}</a>
+                                        <p class="margin-0 text-black"><small>{{ dominio.titular }} </small></p></span>
+                                        </div>
+                                        <div class="col-icon" id="tipoOperacion-{{ dominio.dominio }}">
+                                            {% set tipoOperacion = dominio.tipoOperacion|upper %}
+                                            {% if tipoOperacion == "ALTA" %}
+                                                {% set classByTipoOperacion = "fa fa-check pull-right fa-lg text-success" %}
+                                            {% elseif tipoOperacion == "BAJA" %}
+                                                {% set classByTipoOperacion = "fa fa-arrow-down pull-right fa-lg text-danger" %}
+                                            {% else %}
+                                                {% set classByTipoOperacion = "fa fa-refresh pull-right fa-lg text-muted" %}
+                                            {% endif %}
+                                            <i data-toggle="tooltip" title="{{ tipoOperacion }}" class="{{ classByTipoOperacion }}" >
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    {% set cambio_rubro = true %}
+                {% endfor %}
+            {% else %}
+                {% if rubros  is defined and rubros|length > 0 %}
+                    {% set rubro_anterior = null %}
+                    {% set cambio_rubro = false %}
+                    {% for rubro in rubros %}
+                       {% if cambio_rubro == true or (ult_rubro != rubro.rubro or (rubro_anterior is not null and rubro_anterior.nuevo != rubro.nuevo)) or nro_pagina is same as(1) %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                   <h5 class="seccion-rubro text-white {{ sectionClassBg | default('bg-primary') }}">{{ rubro.rubro }} {% if rubro.nuevo == false %} - ANTERIOR {% endif %}
+                                    </h5>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% set cambio_rubro = true %}
+                        {% set rubro_anterior = rubro %}
+                        {% for aviso in rubro.avisos %}
+                            {% set esSuplemento = '' %}
+                            {% set paramsUrl = '' %}
+                            {% if es_busqueda_especial is defined and es_busqueda_especial %}
+                                {% set paramsUrl = '?busqueda=3' %}
+                            {% elseif es_busqueda is defined and es_busqueda == 'Avanzada' %}
+                                {% set paramsUrl = '?busqueda=1' %}
+                            {% elseif es_busqueda is defined and es_busqueda == 'Rapida' %}
+                                {% set paramsUrl = '?busqueda=2' %}
+                            {% endif %}
+                            {% if aviso.nombre_suplemento %}
+                                {% if paramsUrl == '' %}
+                                    {% set paramsUrl = '?suplemento=1' %}
+                                {% else %}
+                                    {% set paramsUrl = paramsUrl ~'&suplemento=1' %}
+                                {% endif %}
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% set aviso_fecha_pub_Ymd = aviso.fecha_publicacion|split('-')|join('') %}
+                                    {% if aviso.tieneAnexo is defined and aviso.tieneAnexo != null %}
+                                        {% set paramsVerAnexos = '?anexos=1' %}
+                                        {% if paramsUrl != '' %}
+                                            {% set paramsVerAnexos = '&anexos=1' %}
+                                        {% endif %}
+                                        <a data-toggle="tooltip" style="margin-left: 10px; margin-top: 10px"
+                                           href="{{ path("aviso_show", { 'nombreSeccion': seccion, 'idAviso': aviso.id_aviso, 'fechaPublicacion': aviso_fecha_pub_Ymd }) }}{{ paramsUrl }}{{ paramsVerAnexos }}"
+                                           onclick="sendDetalleEvent('Visto', 'Aviso de la Seccion: {{ seccion|capitalize }} ID: {{ aviso.id_aviso }}');"
+                                           data-container="body" title="Ver anexos" class="btn btn-sm btn-link pull-right {{ sectionClassBg | default('bg-primary') }}">
+                                            <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if aviso.id_aviso %}
+                                    <a href="{{ path("aviso_show", { 'nombreSeccion': seccion, 'idAviso': aviso.id_aviso, 'fechaPublicacion': aviso_fecha_pub_Ymd }) }}{{ paramsUrl }}" onclick="sendDetalleEvent('Visto', 'Aviso de la Seccion: {{ seccion|capitalize }} ID: {{ aviso.id_aviso }}');">
+                                    {% else %}
+                                    {% set esSuplemento = '(Suplemento)' %}
+                                    <a {% if aviso.url_suplemento %}target="_blank" href="{{ aviso.url_suplemento }}{% endif %}">
+                                    {% endif %}
+                                        <div class="linea-aviso">
+                                            <p class="item">{{ aviso.titulo|raw }} {{ esSuplemento }}</p>
+                                            {% if aviso.subtitulo %}
+                                                <p class="item-detalle">
+                                                    <small>{{ aviso.subtitulo|raw }}</small>
+                                                </p>
+                                            {% endif %}
+                                            {% if aviso.fecha_publicacion != null and  es_busqueda is defined and es_busqueda == 'Avanzada' %}
+                                                {% set fechaPubdmYConBarras = aviso_fecha_pub_Ymd|slice(6,2) ~ "/" ~ aviso_fecha_pub_Ymd|slice(4,2) ~ "/" ~ aviso_fecha_pub_Ymd|slice(0,4)%}
+                                                <p class="item-detalle">
+                                                    <small>Fecha de Publicacion: {{ fechaPubdmYConBarras }}</small>
+                                                </p>
+                                            {% endif %}
+                                            {% if seccion == 'primera' or es_busqueda is defined %}
+                                                <p class="item-detalle" >
+                                                    <small>{{ aviso.sintesis|raw }}</small>
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

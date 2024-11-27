@@ -1,0 +1,342 @@
+{% extends 'layout.html.twig' %}
+
+{% block metatagsSeo %}
+
+    <title>{{ datosSeo.titulo }}</title>
+    <meta name="description" content="{{ datosSeo.descripcion }}">
+
+{% endblock %}
+
+{% block metatagsSociales %}
+
+    <meta property="og:title" content="{{ datosSeo.titulo }}" />
+    <meta property="og:description" content="{{ datosSeo.descripcion }}" />
+
+    <meta name="twitter:card" content="{{ datosSeo.titulo }}" />
+    <meta name="twitter:title" content="{{ datosSeo.titulo }}" />
+    <meta name="twitter:description" content="{{ datosSeo.descripcion }}" />
+
+    <meta property="og:url" content="https://www.boletinoficial.gob.ar/detalleAviso/primera/{{ idAviso }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="{{ asset('/images/bora_share.jpg') }}" />
+    <meta property="og:locale" content="es_AR" />
+    <meta name="twitter:image" content="{{ asset('/images/bora_share.jpg') }}" />
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3 col-md-push-9 margin-top-40">
+						<div class="panel panel-default text-center">
+							<div class="panel-body">
+								<div class="margin-bottom-20 fecha-ultima-edicion">
+									<div class="social-btns">
+									<div class="row">
+										<div class="col-xs-4">
+										<a
+											class=""
+											href="/contacto"
+											onclick="sendContactoEvent('Visto', 'Contacto')"
+										>
+											<i class="fa fa-envelope"></i>
+										</a>
+										</div>
+										<div class="col-xs-4">
+										<a href="https://www.instagram.com/boletinoficialarg" target="_blank">
+											<img src="/images/instagram.png" width="25" alt="Instagram" />
+										</a>
+										</div>
+										<div class="col-xs-4">
+										<a href="https://twitter.com/boletin_oficial" target="_blank">
+											<img src="/images/twitter.png" width="30" alt="Twitter" />
+										</a>
+										</div>
+									</div>
+									</div>
+									<div class="row row-panel ">
+										<hr>
+									</div>
+									<h6 class="text-primary-alt text-bold">Edición del</h6>
+									<h6 class="text-primary-alt text-bold">
+										<b>{{ fechaEdicionPortada }}</b>
+									</h6>
+									<div class="row row-panel ">
+										<hr>
+									</div>
+									<div>
+										<h6>
+											<b>Ediciones Anteriores</b>
+										</h6>
+										{%  include "Calendario/calendario.html.twig" %}
+									</div>
+								</div>
+								<div>
+									<div class="form-group">
+										<div class="input-group">
+											<input class="form-control input-index" id="rapidaInput" type="text" placeholder="Buscar en avisos del día">
+											<span class="input-group-btn">
+												<button class="btn btn-tertiary btn-home" id="busquedaRapidaButton" onclick="realizarBusquedaRapida('{{ path("realizar_busqueda") }}', 'all', true, true );sendbtnbusquedarapidaevent('busqueda rapida all','busqueda rapida');return false;" type="button">
+													<i class="fa fa-search"></i>
+												</button>
+											</span>
+										</div>
+										<div class="form-group">
+											<a class="btn btn-sm btn-primary btn-block margin-top-15 puntero" onclick="ejecutarBusquedaAvanzadaConTexto('#rapidaInput', '{{ path('busquedaAvanzada_show', {'nombreSeccion': 'all'}) }}');sendBtnBusquedaAvanzadaEvent('Busqueda avanzada all','Busqueda Avanzada');return false;">
+												Búsqueda avanzada
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="text-center">
+							<img class="img-responsive center-block" src="/images/131-aniversario.png" width="243" height="183"/>
+						</div>
+            </div>
+
+
+            <div class="col-md-9 col-md-pull-3">
+                <div class="row">
+                    <div id="includeResultadosBusquedaRapida">
+                        {%  include "Busqueda/responseBusqueda.html.twig" %}
+                    </div>
+
+                    {% set paramsUrl = '' %}
+                    {% if is_suplemento == 1 %}
+                        {% set paramsUrl = '?suplemento=1' %}
+                    {% endif %}
+
+                    <div id="layoutContent">
+                        <div id="subLayouyContentDiv" class="subLayouyContentDivDetalleAviso col-md-8 form-group margin-top-15">
+
+                            <div class="row avisoHeader">
+                                <div id="btnVolver" class=" col-md-12 margin-top-40">
+                                    {% if is_busqueda == 1 %}
+                                        <a class="{{ sectionClass }}" href="/busquedaAvanzada/{{ seccion }}?volver=1"><i class="fa fa-chevron-left"></i> Volver</a>
+                                    {% elseif is_busqueda == 2 %}
+                                        {% set arrayVolver = app.session.get('arrayVolver')|json_encode|raw %}
+                                        {% set parametrosUltimaBusqueda = app.session.get('parametrosBusquedaUltimo')|json_encode|raw %}
+                                        <a class="puntero {{ sectionClass }}" onclick="volverBusquedaRapida('{{ path("realizar_busqueda") }}', {{ arrayVolver }}, {{ parametrosUltimaBusqueda }})"><i class="fa fa-chevron-left"></i> Volver</a>
+                                    {% elseif is_busqueda == 3 %}
+                                        <a class="{{ sectionClass }}" href="{{ path('realizar_busqueda_especial') }}"><i class="fa fa-chevron-left"></i> Volver</a>
+                                    {% else %}
+                                        <a class="{{ sectionClass }}" href="/seccion/{{ seccion }}"><i class="fa fa-chevron-left"></i> Volver</a>
+                                    {% endif %}
+                                </div>
+
+                                {% if seccion == "primera" %}
+                                    <div class="col-title margin-bottom-10">
+                                        <h2 class="title-busqueda {{ sectionClass }}">Legislación y Avisos Oficiales<br>
+                                            <small>Primera sección</small>
+                                        </h2>
+                                    </div>
+                                {% endif %}
+                                {% if seccion == "segunda" %}
+                                    <div class="col-title margin-bottom-10">
+                                        <h2 class="title-busqueda {{ sectionClass }}">Sociedades y Avisos Judiciales<br>
+                                            <small>Segunda sección</small></h2>
+                                    </div>
+                                {% endif %}
+                                {% if seccion == "tercera" %}
+                                    <div class="col-title margin-bottom-10">
+                                        <h2 class="title-busqueda {{ sectionClass }}">Contrataciones<br>
+                                            <small>Tercera sección</small></h2>
+                                    </div>
+                                {% endif %}
+                                {% if seccion == "cuarta" %}
+                                    <div class="col-title margin-bottom-10">
+                                        <h2 class="title-busqueda {{ sectionClass }}">Dominios de Internet<br>
+                                            <small>Cuarta sección</small></h2>
+                                    </div>
+                                {% endif %}
+
+                                <div class="col-download margin-top-20">
+                                    {% if pdfContingencia is not defined or pdfContingencia is null or pdfContingencia == '' %}
+                                        <button class="btn btn-primary btn-circle btn-sm pull-right {{ sectionClassBg }}" data-toggle="tooltip" title="Descargar texto publicado" data-container="body" data-placement="bottom" onclick='descargarPDFAviso("{{ seccion }}", "{{ idAviso }}", "{{ fechaPublicacion|date('Ymd') }}", "{{ path('download_pdf_aviso') }}{{ paramsUrl }}"); sendPDFEvent("{{ seccion|capitalize }}", "Aviso {{ seccion|capitalize }}: {{ idAviso }}");'><i
+                                                    class="fa fa-download"></i></button>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <hr class="secciones-titulo-hr avisoHeader">
+                            <script>
+                                $(function () {
+                                    $('[data-toggle="popover"]').popover()
+                                })
+                            </script>
+                            <div class="row avisoHeader" >
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <ol class="breadcrumb margin-0">
+                                        <li><a class="{{ sectionClass }}" href="/seccion/{{ seccion }}/{{ fechaPublicacion|date('Ymd') }}">{{ seccion|capitalize }}</a></li>
+                                        {% if aviso is not null and aviso.rubro is defined and aviso.rubro is not null %}
+                                            <li><a class="puntero {{ sectionClass }}" href="/seccion/{{ seccion }}/{{ fechaPublicacion|date('Ymd') }}?rubro={{ aviso.rubro.id }}">{{ aviso.rubro.nombre }}</a></li>
+                                            <li class="active"><a class="{{ sectionClass }}" href="#">Detalle</a></li>
+                                        {% endif %}
+                                    </ol>
+                                </div>
+                                {% if trajo_pdf %}
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                        <div class="pull-right icon-aviso">
+                                            <a target="_blank" onclick="aumentarTexto('#detalleAviso')" class="btn-media icon-popover {{ sectionClass }}">
+                                                 <i class="fa fa-search-plus puntero"></i>
+                                             </a>
+                                             <a target="_blank" onclick="disminuirTexto('#detalleAviso')" class="btn-media icon-popover {{ sectionClass }}">
+                                                 <i class="fa fa-search-minus puntero"></i>
+                                             </a>
+                                             <span class="icon-popover">|</span>
+                                            <a target="_blank" onclick="shareFB()" class="btn-media icon-popover facebook {{ sectionClass }}">
+                                                <i class="fa fa-facebook puntero"></i>
+                                            </a>
+                                            <a target="_blank" onclick="shareTW()" class="btn-media icon-popover twitter {{ sectionClass }}">
+                                                <i class="fa fa-twitter puntero"></i>
+                                            </a>
+                                            <a class="email-ic mr-3 icon-popover {{ sectionClass }}" data-toggle="modal" onclick="setDefaultValuesSharing()" data-target="#shareMailModal"><i class="fa fa-envelope-o puntero"> </i></a>
+
+                                            {% if pdfContingencia is not defined or pdfContingencia is null or pdfContingencia == '' %}
+                                                <span class="icon-popover pdf-aviso-printer">|</span>
+                                                <a class="fa fa-print icon-popover puntero pdf-aviso-printer {{ sectionClass }}" onclick='renderPDFAviso("{{ path('render_pdf_aviso', { 'seccion': seccion, 'id': idAviso, 'fechaPublicacion': fechaPublicacion|date('Ymd') }) }}{{ paramsUrl }}"); sendPDFEvent("Render", "Aviso {{ seccion }}: {{ idAviso }}");'>&nbsp;</a>
+                                            {% endif %}
+                                            {% if aviso.cantidad_anexos is defined and aviso.cantidad_anexos > 0 %}
+                                                <a data-toggle="tooltip" title="Ver Anexos" data-container="body" class="puntero btn btn-xs btn-link {{ sectionClassBg }}" onclick="scrollFunc('anexosDiv')">
+                                                    <i class="font-size-14 fa fa-paperclip icon-popover"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% if aviso is defined and aviso != null and paginasPublicadas == false and trajo_pdf == true %}
+                                <div class="row avisoContenido" >
+                                    <div class="col-md-12">
+                                        {% if is_suplemento == 1 %}
+                                            <a target="_blank" href="{{ get_url_suplemento(fechaPublicacion, aviso.nombre_suplemento) }}" class="btn btn-xs btn-primary margin-top-20 {{ sectionClassBg }}">Ver páginas publicadas</a>
+                                        {% else %}
+                                            <button onclick='mostrarPdfSeccionPorPaginas("{{ seccion }}", "{{ fechaPublicacion|date('Ymd') }}","{{ aviso.pagina_desde }}" , "{{ aviso.pagina_hasta }}", "{{ path('download_pdf_section') }}", ".pdfPaginas", ".avisoContenido"); return false;' class="btn btn-xs btn-primary margin-top-20 {{ sectionClassBg }}">Ver páginas publicadas</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row pdfPaginas" style="display: none;" >
+                                    <div class="col-md-12">
+                                        <button onclick='verTextoAviso(".pdfPaginas", ".avisoContenido", ".pdf-aviso-printer"); return false;' class="btn btn-xs btn-primary margin-top-20 {{ sectionClassBg }}">Ver texto del aviso</button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="row pdfPaginas" style="display: none;">
+                                <div class="col-md-12">
+                                    <iframe style="width:100%; height:750px;position: relative;"  frameborder="0" allowtransparency="true"  scrolling="no"></iframe>
+                                </div>
+                            </div>
+                            <div class="avisoContenido">
+                                <article>
+                                    {% if aviso is defined and aviso != null and aviso.texto != "" %}
+                                        <div class="row" id="detalleAviso">
+                                            <div id="tituloDetalleAviso" class="col-md-12 form-group">
+                                                <h1>{{ aviso.titulo | raw }}</h1>
+                                                {% if aviso.subtitulo is not null and aviso.subtitulo != ""  %}
+                                                    <h2>{{ aviso.subtitulo | raw }}</h2>
+                                                {% endif %}
+                                                {% if aviso.sintesis is not null and aviso.sintesis != ""  %}
+                                                    <h6>{{ aviso.sintesis | raw }}</h6>
+                                                {% endif %}
+
+                                            </div>
+                                            <div id="cuerpoDetalleAviso" class="col-md-12 form-group detalle-cuerpo justified">
+                                                <p>{{ aviso.cuerpo_texto | raw }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if pdfContingencia is defined and pdfContingencia != '' %}
+                                        <script>sendPDFEvent("Render PDF de contingencia", "PDF Aviso: {{ seccion|capitalize }}");</script>
+                                        <div class="margin-top-20">
+                                            <iframe id="iframeContingencia" type="application/pdf" style="width:100%; height:750px;position: relative;"  frameborder="0" allowtransparency="true"  scrolling="no" onload="$('#loader').hide();"></iframe>
+                                        </div>
+                                        <script>
+                                            $("#loader").show();
+                                            pdfUrl = convertBase64InUrlBlob("{{ pdfContingencia }}");
+                                            $("#iframeContingencia")[0].src = "/web/utils/pdfView?file="+ encodeURIComponent(pdfUrl);
+                                        </script>
+                                    {% endif %}
+                                    {% if fechaDetalleDMY != null and fechaDetalleDMY != ""  %}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p class="text-muted"><small>Fecha de publicación {{ fechaDetalleDMY }}</small></p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if aviso != null and aviso.cantidad_anexos is defined and aviso.cantidad_anexos > 0 %}
+                                        <div class="row" id="anexosDiv">
+                                            {% for i in 0..aviso.cantidad_anexos-1 %}
+                                                <div class="col-md-4 col-sm-6 col-xs-12 text-center">
+                                                    <a class="panel panel-default puntero" style="height: 52px;">
+                                                        <div class="panel-body" onclick='descargarPDFAnexo("{{ seccion }}","{{ i + 1 }}", "{{ aviso.id_anexos }}", "{{ fechaPublicacion|date('Ymd') }}", "{{ path('download_pdf_anexo') }}{{ paramsUrl }}"); sendPDFEvent("Descarga", "Anexo ID: {{ aviso.id_anexos }}");'>
+                                                            <span><i class="fa fa-paperclip fa-lg"></i>&nbsp;&nbsp;Anexo - {{ i + 1 }}</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </article>
+                            </div>
+                            <script>
+                                sessionStorage.removeItem('idRubro');
+                                {% if aviso.cantidad_anexos is defined and aviso.cantidad_anexos > 0 and anexos is defined %}
+                                    $("document").ready(function(){
+                                        if ('{{ anexos }}' == '1'){
+                                            scrollFunc('anexosDiv');
+                                        }
+                                    })
+                                {% endif %}
+                            </script>
+                            {{ include ('Share/modal_share_mail.html.twig', { 'seccion': seccion, 'idAviso': idAviso, 'fechaPublicacion': fechaPublicacion|date('Ymd'), 'siteKeyCaptcha': siteKeyCaptcha }) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    {{ include ('Modals/biblioteca_normativas_modal.html.twig') }}
+
+    {% if habilitar_captcha == 'true' %}
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    {% endif %}
+
+    <script>
+        calcularOffsetsMinYMaxTexto('#detalleAviso', 0.25, 2);
+
+        function setDefaultValuesSharing(){
+            $('#share-mail-form').trigger("reset");
+            $("#inputPara").val("");
+            $("#inputAsunto").val("");
+            removeCssError($("#inputPara"), $("#spanPara"));
+            removeCssError($("#inputAsunto"), $("#spanAsunto"));
+            $("#inputAviso").val(document.URL);
+            $("#inputAviso").attr("disabled","disabled");
+            hideFlashMessage(true);
+            {% if habilitar_captcha == 'true' %}
+                grecaptcha.reset();
+            {% endif %}
+        }
+
+
+        function verTextoAviso(classPdfPaginas, classAviso, classPrinter){
+            $(classPdfPaginas).hide();
+            $(classAviso).show();
+            $(classPrinter).show();
+        }
+    </script>
+
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,36 @@
+:root {
+  /* Navbar */
+  --primary-nav: #213867;
+  --primary-nav-alt: #1d2e5b;
+  --secondary-nav: #012025;
+  --secondary-nav-alt: #012025;
+
+  /* Common */
+  --primary: #213867;
+  --secondary: #333333;
+  --tertiary: #868686;
+  --white: #fff;
+  --black: #000;
+
+  /* Sections */
+  --first-section: #213867;
+  --second-section: #3d5276;
+  --third-section: #6b7d96;
+  --fourth-section: #96a5bc;
+
+  /* Sections hovers */
+  --first-section-hover: #1a2c55;
+  --second-section-hover: #33475f;
+  --third-section-hover: #5b6a7f;
+  --fourth-section-hover: #7e92a3;
+
+  /* Texts */
+  --text-primary: #37bbed;
+  --section-text: #e6ba61;
+
+  /* Footer */
+  --footer-bg: #012025;
+
+  --bottom-border: #6b7d96;
+  --bottom-border-hover: #5c6a82;
+}

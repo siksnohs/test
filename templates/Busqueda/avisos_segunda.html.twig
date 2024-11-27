@@ -1,0 +1,22 @@
+
+{% for aviso in item_interno.avisos %}
+    {% set fechaPublicacionYmd = aviso.fecha_inicio_publicacion|split('-')|join('') %}
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-10" style="padding-right: 0px">
+            <a class="puntero" href='{{ path("aviso_show", { 'nombreSeccion': seccion, 'idAviso': aviso.id, 'fechaPublicacion': fechaPublicacionYmd }) }}?busqueda=1'>
+                <p class="item-detalle" style="text-indent: 1em;"><small>{{ aviso.contenido }}</small></p>
+            </a>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-2" style="padding-left: 0px; padding-top: 3px;">
+            {% if aviso.tiene_anexos %}
+                {% set parameters_aviso = "?busqueda=1&anexos=1" %}
+                <a data-toggle="tooltip"
+                   href="{{ path("aviso_show", { 'nombreSeccion': seccion, 'idAviso': aviso.id, 'fechaPublicacion': fechaPublicacionYmd }) }}{{ parameters_aviso }}"
+                   onclick="sendDetalleEvent('Visto', 'Aviso de la Seccion: {{ seccion|capitalize }} ID: {{ aviso.id }}');"
+                   data-container="body" title="Ver anexos" class="btn btn-xs btn-link">
+                    <i class="fa fa-paperclip bg-second-section" aria-hidden="true"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

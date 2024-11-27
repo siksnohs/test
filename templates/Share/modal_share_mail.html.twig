@@ -1,0 +1,66 @@
+{% block mailModal %}
+
+    <div class="modal fade" id="shareMailModal" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Compartir por email</h5>
+                </div>
+
+                <div class="modal-body" style="padding-top: 0px">
+                    {{ include ('mensajes_js.html.twig', { 'modal': true }) }}
+                    <form class="form-horizontal" id="share-mail-form">
+                        <div class="form-group" style="padding-top: 15px">
+                            <label for="inputPara" class="col-sm-3 control-label">Para: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="input-sm form-control" id="inputPara"
+                                       placeholder="Correo Electrónico">
+                                <span id="spanPara" style="color:#d9534f"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAsunto" class="col-sm-3 control-label">Asunto: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="input-sm form-control" id="inputAsunto"
+                                       placeholder="Asunto del mensaje">
+                                <span id="spanAsunto" style="color:#d9534f"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAviso" class="col-sm-3 control-label">Aviso: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="input-sm form-control" id="inputAviso" disabled="disabled"
+                                       value="">
+                                <span id="spanAviso" style="color:#d9534f"></span>
+                            </div>
+                        </div>
+                        {% if habilitar_captcha == 'true' %}
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-push-3">
+                                    <div class="g-recaptcha" data-sitekey="{{ siteKeyCaptcha }}"></div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <button type="button" class="btn btn-sm btn-link pull-left margin-0 btn-normativa" data-dismiss="modal">Cerrar</button>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <button id="shareMailBtn"
+                                    onclick="shareMail('{{ path("share_mail") }}', '{{ seccion }}', '{{ idAviso }}', '{{ fechaPublicacion }}','{{ habilitar_captcha }}'); sendShareEvent('Compartir', 'Se compartio un aviso por mail'); return false;"
+                                    class="btn btn-sm btn-primary margin-0 btn-normativa">Enviar</button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

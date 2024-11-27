@@ -1,0 +1,71 @@
+#banners-footer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.bottom-btn-group {
+  margin-left: 25px;
+}
+
+.bottom-button {
+  display: inline-block;
+  text-align: center;
+  font-size: 16px !important;
+  margin: 25px;
+  width: 222px;
+  height: 85px;
+  border-radius: 10px;
+  text-transform: none;
+  color: var(--primary) !important;
+  background-color: var(--white);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bottom-border {
+  border-top: 10px solid var(--black);
+}
+
+.bottom-border:hover {
+  border-top: 10px solid grey;
+}
+
+.bottom-button-cd {
+  margin: 25px;
+  width: 260px;
+  height: 85px;
+  border-radius: 10px;
+  text-transform: none;
+  color: var(--white) !important;
+  background-color: var(--primary);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 10px;
+}
+
+.bottom-border-cd {
+  border-top: 10px solid var(--bottom-border);
+}
+
+.bottom-border-cd:hover {
+  border-top: 10px solid var(--bottom-border-hover);
+}
+
+.bottom-text {
+  margin: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bottom-text-cd {
+  vertical-align: middle;
+}
+
+.dropdown-menu li a:hover {
+  background-color: var(--primary) !important;
+}
+
+.bottom-icon {
+  width: 32px;
+  height: 32px;
+  margin-left: -15px;
+}

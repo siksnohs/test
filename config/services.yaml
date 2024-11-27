@@ -1,0 +1,83 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    #Event listeners
+    app.request_listener:
+        class: App\EventListener\RequestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+        arguments:
+            $container: '@service_container'
+
+    app.exception_listener:
+        class: App\EventListener\ExceptionListener
+        arguments:
+            - "@router"
+            - "@kernel"
+            - '@service_container'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    #Services
+    portada_service:
+        class: App\Service\PortadaService
+        public: true
+
+    estatica_service:
+        class: App\Service\EstaticaService
+        public: true
+
+    calendario_service:
+        class: App\Service\CalendarioService
+        public: true
+
+    seccion_service:
+        class: App\Service\SeccionService
+        public: true
+
+    pdf_service:
+        class: App\Service\PdfService
+        public: true
+
+    aviso_service:
+        class: App\Service\AvisoService
+        public: true
+
+    busqueda_service:
+        class: App\Service\BusquedaService
+        public: true
+
+    administrador_banners_service:
+        class: App\Service\AdministradorBannersService
+        public: true
+
+    imagenes_service:
+        class: App\Service\ImagenesService
+        public: true

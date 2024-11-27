@@ -1,0 +1,145 @@
+{% block seccionContent %}
+
+    <script>
+        sendSectionEvent('Open', '{{ seccion|capitalize }}');
+    </script>
+    {%  include "secciones/titulo_seccion.html.twig" %}
+    <hr class="secciones-titulo-hr">
+    {% import "secciones/Menu/menu-macros.html.twig" as macros %}
+    {% if items_menu  is defined and items_menu|length > 0 %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-menu menu-rubros-panel">
+                    <div class="panel-heading">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="pull-right text-muted">
+                            <small> Desplegar menú</small> <i onclick="collapseMenu('collapseOne')" class="fa fa-angle-down"></i>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class="row panels-row">
+                                {% for item in items_menu %}
+                                    <div class="col-md-6 col-sm-4 col-xs-6 form-group">
+                                        <p>
+                                            {{ macros.menu_items(item, seccion, fecha_sin_formato) }}
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {%  include "secciones/item_avisos.html.twig" %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="resultadosBusqueda" class="avisosSeccionDiv">
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div id="cargandoListadoAvisosSeccion" class="cargando-div" style="display: none;">
+            <img src="{{ asset('/images/loader.gif') }}" height="75px">
+        </div>
+    </div>
+</div>
+
+
+{% if pdf_seccion is defined and (pdf_seccion != null or pdf_seccion != '') %}
+    <script>sendPDFEvent("Render PDF de contingencia", "PDF Seccion: {{ seccion|capitalize }}");</script>
+    <iframe id="iframeContingencia" type="application/pdf" style="width:100%; height:750px;position: relative;"  frameborder="0" allowtransparency="true"  scrolling="no" onload="$('#loader').hide();"></iframe>
+    <script>
+        $("#loader").show();
+        pdfUrl = convertBase64InUrlBlob("{{ pdf_seccion }}");
+        $("#iframeContingencia")[0].src = "/web/utils/pdfView?file="+ encodeURIComponent(pdfUrl);
+    </script>
+{% endif %}
+
+{% endblock %}
+
+<script>
+
+    $(document).ready(function(){
+        if("{{ rubroSearch }}" ){
+            $.when( realizarBusquedaRubro('{{ path("busqueda_por_rubro") }}', '{{ seccion }}', '{{ rubroSearch }}', '{{ fecha_sin_formato }}'))
+                .then(function() {
+                    sessionStorage.setItem('idRubro', '{{ rubroSearch }}');
+                });
+        }
+    });
+
+    $(function() {
+        sessionStorage.removeItem('idRubro');
+        sessionStorage.removeItem('ultRubro');
+
+    });
+
+    var numeroPagina = 2;
+    var IdRubro;
+    var ultimoRubro = '{{ ult_rubro }}';
+
+    urlActualizarSeccion = "{{ path('actualizar_seccion', { 'nombreSeccion': 0 }) }}";
+    urlActualizarSeccion = urlActualizarSeccion.substring(0, urlActualizarSeccion.lastIndexOf("/"));
+    urlActualizarSeccion += "/" + "{{ seccion }}";
+
+    hayMasResultadosSeccion = true;
+    var ultRubroLS = '';
+    var IdRubroLS = '';
+    var ejecutandoLlamadaAsincronicaSeccion = false;
+    $(window).on("scroll", function(){
+        if (hayMasResultadosSeccion){
+            if ((window.innerHeight + getScrollPosition() + 200) >= document.body.offsetHeight){
+                if (ejecutandoLlamadaAsincronicaSeccion){
+                    return false;
+                }
+                hayMasResultadosBusquedaRapida = false;
+                ejecutandoLlamadaAsincronicaSeccion = true;
+                url = urlActualizarSeccion + "?pag="+numeroPagina.toString();
+
+                if (sessionStorage.getItem('idRubro') != null) {
+                    IdRubroLS = sessionStorage.getItem('idRubro');
+                    url = url+"&id_rubro="+IdRubroLS;
+                    ultimoRubro='';
+                }
+
+                if (sessionStorage.getItem('ultRubro') != null) {
+                    ultRubroLS = sessionStorage.getItem('ultRubro');
+                    url = url+"&ult_rubro_bsq="+ultRubroLS;
+                    ultimoRubro='';
+                }
+                (ultimoRubro) ? url = url+"&ult_rubro="+ultimoRubro : null;
+
+                $('#cargandoListadoAvisosSeccion').show();
+                $.ajax({
+                    url: url, success: function (result) {
+                        if(result){
+                            $(".avisosSeccionDiv:last").append(result['html']);
+                            hayMasResultadosSeccion = result['hay_mas_datos'];
+                            numeroPagina = result['sig_pag'];
+                            sessionStorage.setItem('ultRubro', result['ult_rubro']);
+                            ultimoRubro = result['ult_rubro'];
+                        }
+                        ejecutandoLlamadaAsincronicaSeccion = false;
+                        $('#cargandoListadoAvisosSeccion').hide();
+                        $('[data-toggle="tooltip"]').tooltip();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        hayMasResultadosSeccion = false;
+                        ejecutandoLlamadaAsincronicaSeccion = false;
+                        $('#cargandoListadoAvisosSeccion').hide();
+                        $('[data-toggle="tooltip"]').tooltip();
+                    }
+                });
+            }
+
+        }
+
+    });
+</script>

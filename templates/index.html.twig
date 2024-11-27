@@ -1,0 +1,362 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+	<content>
+
+		<div id="indexContentDiv" class="container {% if sliders|length > 0 %} margin-top-40 {% endif %} container-responsive">
+			{% if sliders|length > 0 %}
+				<div class="row">
+					<div class="col-md-12">
+						{% if mensaje|length > 0 %}
+							<div class="alert alert-warning" role="alert" style="margin-top: 10px;">
+								{{ mensaje|raw }}
+							</div>
+						{% endif %}
+						<div
+							id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+							<!-- Indicators -->
+							{% if sliders|length > 1 %}
+								<ol class="carousel-indicators">
+									{% for slider in sliders %}
+										<li data-target="#carousel-example-generic" data-slide-to="{{ slider.numero }}" {% if slider.numero == 0 %} class="active" {% endif %}></li>
+									{% endfor %}
+								</ol>
+							{% endif %}
+
+							{% if sliders|length > 0 %}
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner" role="listbox">
+									{% for slider in sliders %}
+										<div class="item margin-top-0 {% if slider.numero == 0 %}active{% endif %}">
+											{{ slider.html|raw }}
+										</div>
+									{% endfor %}
+								</div>
+							{% endif %}
+
+							{% if sliders|length > 1 %}
+								<!-- Controls -->
+								<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+									<span class="fa fa-angle-left" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+									<span class="fa fa-angle-right" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endif %}
+
+			<!--- Secciones --->
+        	<div class="row">
+				<!-- Lateral Derecho -->
+					<div id="layoutContent" class="col-md-9">
+						<main class="margin-top-40 mx-5 d-md-p4 d-flex flex-column gap-60 ml-md">
+							<div class="bg-first-section card mx-5 m-auto p-3 position-relative rounded d-flex flex-row border-0 justify-content-between align-items-center mb-35">
+								<h3 class="number-card first-section h-1 fw-bold">1</h3>
+								<h3 class="number-card-mobile h-1 fw-bold">1</h3>
+								<span class="bg-first-section"></span>
+								<p class="text-section color-light display-1 fw-bold bg-text rotate-vertical">sección</p>
+								<p class="font-lg fw-bold text-white m-l-3 text-center section-name">Legislación y Avisos <br> Oficiales</p>
+								<div class="d-flex flex-column gap-20">
+									<a class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" href="{{ path('seccion_show', { 'nombreSeccion': 'primera' }) }}">
+										<span class="fa fa-share-square-o" aria-hidden="true"></span>
+										<span class="text-btns-main">Ingresar</span>
+									</a>
+									<button class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" onclick='descargarPDFSeccion("primera",fechaSeleccionadaYMD, "{{ path('download_pdf_section') }}", "{{ pdfLinkPrimera }}"); sendpdfevent("descarga", "seccion primera");'>
+										<span class="fa fa-download" aria-hidden="true"></span>
+										<span class="text-btns-main">Descargar</span>
+									</button>
+								</div>
+							</div>
+							<div class="bg-second-section card mx-5 m-auto p-3 position-relative rounded d-flex flex-row border-0 justify-content-between align-items-center mb-35">
+								<h3 class="number-card second-section h-1 fw-bold">2</h3>
+								<h3 class="number-card-mobile h-1 fw-bold">2</h3>
+								<span class="bg-second-section"></span>
+								<p class="text-section color-light display-1 fw-bold bg-text rotate-vertical">sección</p>
+								<p class="font-lg fw-bold text-white m-l-3 text-center section-name">Sociedades y Avisos <br> Judiciales</p>
+								<div class="d-flex flex-column gap-20">
+									<a class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" href="{{ path('seccion_show', { 'nombreSeccion': 'segunda' }) }}">
+										<span class="fa fa-share-square-o" aria-hidden="true"></span>
+										<span class="text-btns-main">Ingresar</span>
+									</a>
+									<button class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" onclick='descargarPDFSeccion("segunda",fechaSeleccionadaYMD, "{{ path('download_pdf_section') }}", "{{ pdfLinkSegunda }}"); sendpdfevent("descarga", "seccion segunda");'>
+										<span class="fa fa-download" aria-hidden="true"></span>
+										<span class="text-btns-main">Descargar</span>
+									</button>
+								</div>
+							</div>
+							<div class="bg-third-section card mx-5 m-auto p-3 position-relative rounded d-flex flex-row border-0 justify-content-between align-items-center mb-35">
+								<h3 class="number-card third-section h-1 fw-bold">3</h3>
+								<h3 class="number-card-mobile h-1 fw-bold">3</h3>
+								<span class="bg-third-section"></span>
+								<p class="text-section color-light display-1 fw-bold bg-text rotate-vertical">sección</p>
+								<p class="font-lg fw-bold text-white m-l-3 text-center section-name">Contrataciones</p>
+								<div class="d-flex flex-column gap-20">
+									<a class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" href="{{ path('seccion_show', { 'nombreSeccion': 'tercera' }) }}">
+										<span class="fa fa-share-square-o" aria-hidden="true"></span>
+										<span class="text-btns-main">Ingresar</span>
+									</a>
+									<button class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" onclick='descargarPDFSeccion("tercera",fechaSeleccionadaYMD, "{{ path('download_pdf_section') }}", "{{ pdfLinkTercera }}"); sendpdfevent("descarga", "seccion tercera");'>
+										<span class="fa fa-download" aria-hidden="true"></span>
+										<span class="text-btns-main">Descargar</span>
+									</button>
+								</div>
+							</div>
+							<div class="bg-fourth-section card mx-5 m-auto p-3 position-relative rounded d-flex flex-row border-0 justify-content-between align-items-center mb-35">
+								<h3 class="number-card fourth-section h-1 fw-bold">4</h3>
+								<h3 class="number-card-mobile h-1 fw-bold">4</h3>
+								<span class="bg-fourth-section"></span>
+								<p class="text-section color-light display-1 fw-bold bg-text rotate-vertical">sección</p>
+								<p class="font-lg fw-bold text-white m-l-3 text-center section-name">Dominios de Internet</p>
+								<div class="d-flex flex-column gap-20">
+									<a class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" href="{{ path('seccion_show', { 'nombreSeccion': 'cuarta' }) }}">
+										<span class="fa fa-share-square-o" aria-hidden="true"></span>
+										<span class="text-btns-main">Ingresar</span>
+									</a>
+									<button class="btns-main-sections text-button rounded p-x-1 py-1 text-white border-0" onclick='descargarPDFSeccion("cuarta",fechaSeleccionadaYMD, "{{ path('download_pdf_section') }}", "{{ pdfLinkCuarta }}"); sendpdfevent("descarga", "seccion cuarta");'>
+										<span class="fa fa-download" aria-hidden="true"></span>
+										<span class="text-btns-main">Descargar</span>
+									</button>
+								</div>
+							</div>
+						</main>
+					</div>
+					<div id="includeResultadosBusquedaRapida" style="display: none;" class="col-md-9">
+						<div class="row">
+							{%  include "Busqueda/responseBusqueda.html.twig" %}
+						</div>
+					</div>
+					<div class="col-md-3 margin-top-40">
+						<div class="panel panel-default text-center">
+							<div class="panel-body">
+								<div class="margin-bottom-20 fecha-ultima-edicion">
+									<div class="social-btns">
+										<div class="row">
+											<div class="col-xs-4">
+												<a class="" href="/contacto" onclick="sendContactoEvent('Visto', 'Contacto')">
+													<i class="fa fa-envelope"></i>
+												</a>
+											</div>
+											<div class="col-xs-4">
+												<a href="https://www.instagram.com/boletinoficialarg" target="_blank">
+													<img src="/images/instagram.png" width="25" alt="Instagram"/>
+												</a>
+											</div>
+											<div class="col-xs-4">
+												<a href="https://twitter.com/boletin_oficial" target="_blank">
+													<img src="/images/twitter.png" width="30" alt="Twitter"/>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="row row-panel ">
+										<hr>
+									</div>
+									<h6 class="text-primary-alt text-bold">Edición del</h6>
+									<h6 class="text-primary-alt text-bold">
+										<b>{{ fechaEdicionPortada }}</b>
+									</h6>
+									<div class="row row-panel ">
+										<hr>
+									</div>
+									<div>
+										<h6>
+											<b>Ediciones Anteriores</b>
+										</h6>
+										{%  include "Calendario/calendario.html.twig" %}
+									</div>
+								</div>
+								<div>
+									<div class="form-group">
+										<div class="input-group">
+											<input class="form-control input-index" id="rapidaInput" type="text" placeholder="Buscar en avisos del día">
+											<span class="input-group-btn">
+												<button class="btn btn-tertiary btn-home" id="busquedaRapidaButton" onclick="realizarBusquedaRapida('{{ path("realizar_busqueda") }}', 'all', true, true );sendbtnbusquedarapidaevent('busqueda rapida all','busqueda rapida');return false;" type="button">
+													<i class="fa fa-search"></i>
+												</button>
+											</span>
+										</div>
+										<div class="form-group">
+											<a class="btn btn-sm btn-primary btn-block margin-top-15 puntero" onclick="ejecutarBusquedaAvanzadaConTexto('#rapidaInput', '{{ path('busquedaAvanzada_show', {'nombreSeccion': 'all'}) }}');sendBtnBusquedaAvanzadaEvent('Busqueda avanzada all','Busqueda Avanzada');return false;">
+												Búsqueda avanzada
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="text-center">
+							<img class="img-responsive center-block" src="/images/131-aniversario.png" width="243" height="183"/>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--- BANNER FOOTER --->
+
+			<div id="banners-footer">
+				<div class="row">
+					<div class="col">
+						<div class="btn-group bottom-btn-group">
+							<button type="button" class="btn bottom-button bottom-border dropdown-toggle" data-toggle="dropdown">
+                                <img class="bottom-icon" src="/images/publicar-avisos.png"/>  
+                                <span class="bottom-text">Publicar avisos</span>
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="https://en.boletinoficial.gob.ar" target="_blank">Extranet Oficial</a>
+								</li>
+								<li>
+									<a href="https://judiciales.boletinoficial.gob.ar" target="_blank">Avisos Sucesorios</a>
+								</li>
+								<li>
+									<a href="https://dv.boletinoficial.gob.ar" target="_blank">Delegación Virtual</a>
+								</li>
+								<li>
+									<a href="https://tramitesadistancia.gob.ar" target="_blank">Trámites a Distancia</a>
+								</li>
+							</ul>
+						</div>
+						<div class="btn-group bottom-btn-group">
+							<button type="button" class="btn bottom-button bottom-border dropdown-toggle" data-toggle="dropdown">
+                                <img class="bottom-icon" src="/images/biblioteca.png"/> 
+                                <span class="bottom-text">Biblioteca</span>
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="https://timeline.boletinoficial.gob.ar/" target="_blank">Historial de Sociedades Comerciales</a>
+								</li>
+								<li>
+									<a href="http://www.infoleg.gob.ar" target="_blank">Biblioteca de Normativas</a>
+								</li>
+								<li>
+									<a>Biblioteca Editorial</a>
+								</li>
+								<li>
+									<a href="http://s3.arsat.com.ar/cdn-bo-001/banner/Digesto_Juridico_Emergencia_Sanitaria_Tomo_I_2020.pdf" target="_blank">Digesto Jurídico</a>
+								</li>
+								<li>
+									<a href="https://s3.arsat.com.ar/cdn-bo-001/130_Aniversario-Historia.pdf" target="_blank">Historia del Boletín Oficial R.A.</a>
+								</li>
+							</ul>
+						</div>
+						{% if banners[3] is defined and banners[3].link is defined %}
+							<a class="btn bottom-button bottom-border" href="{{ banners[3].link }}" target="_blank">
+								<img class="bottom-icon" src="/images/suplemento.png"/>
+								<span class="bottom-text">Último Suplemento</span>
+							</a>
+						{% else %}
+							<a class="btn bottom-button bottom-border" href="#" target="_blank">
+								<img class="bottom-icon" src="/images/suplemento.png"/>
+								<span class="bottom-text">Último Suplemento</span>
+							</a>
+						{% endif %}
+						<a class="btn bottom-button-cd bottom-border-cd" href="http://s3.arsat.com.ar/cdn-bo-001/banner/CDD_LAST.pdf" target="_blank">
+                            <img class="bottom-icon pull-left" src="/images/cdd.png"/> 
+                            <span class="bottom-text-cd">Centro de Digitalización Documental</span>
+                        </a>
+					</div>
+				</div>
+				{# 				
+				<div class="row panels-row">
+					{% for banner in banners %}
+						<div class="col-md-3 col-sm-6 col-xs-6">
+							<div class="panel panel-default panel-border text-center img-center">
+								<div class="panel-body-banner">
+									{{ banner.html|raw }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div> 
+				#}
+			</div>
+		</div>
+		<script>
+
+			$(document).ready(function () {
+
+var currentLocation = window.location;
+uri = currentLocation.hash;
+
+validDetalleURI = [
+'#!DetalleNorma',
+'#!DetalleSegunda',
+'#!DetalleTercera',
+'#!DetalleNormaBusquedaAvanzada',
+'#!DetalleSegundaBusquedaAvanzada',
+'#!DetalleTerceraBusquedaAvanzada'
+];
+
+invalidURI = ['#!DetalleNormativa',];
+
+clearUri = ['#!MisSuscripciones', '#!AyudaAlertas', '#!MisConsumos',];
+
+
+// Redireccion de url de detalle de aviso y busqueda avanzada legacy
+if (validarUri(validDetalleURI, uri)) {
+
+var validHash = uri.replace("#!", "");
+var strArray = validHash.split("/");
+
+paramUrl = strArray[0];
+seccion = null;
+
+switch (paramUrl) {
+case "DetalleNorma":
+case "DetalleNormaBusquedaAvanzada":
+seccion = 'primera';
+break;
+case "DetalleSegunda":
+case "DetalleSegundaBusquedaAvanzada":
+seccion = 'segunda';
+break;
+case "DetalleTercera":
+case "DetalleTerceraBusquedaAvanzada":
+seccion = 'tercera';
+break;
+}
+
+idSoap = strArray[1];
+fechaPub = strArray[2];
+
+pathRedirect = "{{ path('redirect_detalle_aviso_seccion', {'detalleNormaSeccion': 'seccion','idSoapAviso': 'soap', 'fechaPublicacion': 'fechaPub'}) }}";
+newPath = pathRedirect.replace("fechaPub", fechaPub);
+newPath = newPath.replace("soap", idSoap);
+newPath = newPath.replace("seccion", seccion);
+window.location = newPath;
+}
+
+
+// Redireccion de url que ya no existe
+if (validarUri(invalidURI, uri)) {
+newPath = "{{ path('index') }}";
+window.location = newPath;
+}
+
+if (validarUri(clearUri, uri)) {
+window.location = "{{ path('index') }}";
+}
+
+
+});
+
+$('map').imageMapResize();
+
+// Internet Explorer 6-11
+var isIE = /*@cc_on!@*/
+false || !!document.documentMode;
+if (isIE === true) {
+$(".titulo-ie").addClass("titulo-padding-ie");
+}
+		</script>
+	</content>
+	{{ include ('Modals/biblioteca_normativas_modal.html.twig') }}
+{% endblock %}

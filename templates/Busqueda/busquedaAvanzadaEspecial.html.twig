@@ -1,0 +1,12 @@
+{% extends 'Busqueda/busquedaAvanzada.html.twig' %}
+
+{% block tituloBusqueda %}
+    <h2>Búsqueda especial</h2>
+{% endblock %}
+
+{% block buscadorAvanzado %}
+{% endblock %}
+
+ {% block itemBusqueda %}
+     {{ render(controller('App\\Controller\\BusquedaAvanzadaController::realizarBusquedaEspecial')) }}
+ {% endblock %}

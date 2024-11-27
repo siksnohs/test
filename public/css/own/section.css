@@ -1,0 +1,19 @@
+.item-detalle small {
+  color: var(--black) !important;
+}
+
+#itemLateralMenuPrimera:hover #imagePrimera {
+  content: url("../../images/sections/number1-on.png");
+}
+
+#itemLateralMenuSegunda:hover #imageSegunda {
+  content: url("../../images/sections/number2-on.png");
+}
+
+#itemLateralMenuTercera:hover #imageTercera {
+  content: url("../../images/sections/number3-on.png");
+}
+
+#itemLateralMenuCuarta:hover #imageCuarta {
+  content: url("../../images/sections/number4-on.png");
+}

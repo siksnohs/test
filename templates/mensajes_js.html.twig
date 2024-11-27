@@ -1,0 +1,10 @@
+<div class="row">
+    <div id="{% if modal == false %}div_flash_js{% else %}div_flash_js_modal{% endif %}" class="alert alert-info alert-dismisable alert-bora margin-top-30" style="display:none">
+        <div class="container">
+            <div class="col-md-12">
+                <button type="button" class="close" onclick="hideFlashMessage({{ modal }})" aria-label="Close">&times;</button>
+                <span id="{% if modal == false %}div_flash_js_msg{% else %}div_flash_js_msg_modal{% endif %}"></span>
+            </div>
+        </div>
+    </div>
+</div>

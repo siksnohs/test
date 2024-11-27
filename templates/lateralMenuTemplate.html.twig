@@ -1,0 +1,107 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3 col-md-push-9 margin-top-40">
+				<div class="panel panel-default text-center">
+					<div class="panel-body">
+						<div class="margin-bottom-20 fecha-ultima-edicion">
+							<div class="social-btns">
+								<div class="row">
+									<div class="col-xs-4">
+										<a class="" href="/contacto" onclick="sendContactoEvent('Visto', 'Contacto')">
+											<i class="fa fa-envelope"></i>
+										</a>
+									</div>
+									<div class="col-xs-4">
+										<a href="https://www.instagram.com/boletinoficialarg" target="_blank">
+											<img src="/images/instagram.png" width="25" alt="Instagram"/>
+										</a>
+									</div>
+									<div class="col-xs-4">
+										<a href="https://twitter.com/boletin_oficial" target="_blank">
+											<img src="/images/twitter.png" width="30" alt="Twitter"/>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="row row-panel ">
+								<hr>
+							</div>
+							<h6 class="text-primary-alt text-bold">Edición del</h6>
+							<h6 class="text-primary-alt text-bold">
+								<b>{{ fechaEdicionPortada }}</b>
+							</h6>
+							<div class="row row-panel ">
+								<hr>
+							</div>
+							<div>
+								<h6>
+									<b>Ediciones Anteriores</b>
+								</h6>
+								{%  include "Calendario/calendario.html.twig" %}
+							</div>
+						</div>
+						<div>
+							<div class="form-group">
+								<div class="input-group">
+									<input class="form-control input-index" id="rapidaInput" type="text" placeholder="Buscar en avisos del día">
+									<span class="input-group-btn">
+										<button class="btn btn-tertiary btn-home" id="busquedaRapidaButton" onclick="realizarBusquedaRapida('{{ path("realizar_busqueda") }}', 'all', true, true );sendbtnbusquedarapidaevent('busqueda rapida all','busqueda rapida');return false;" type="button">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+								{% if seccion != 'cuarta' %}
+									<div class="form-group">
+										<a class="btn btn-sm btn-primary btn-block margin-top-15 puntero" onclick="ejecutarBusquedaAvanzadaConTexto('#rapidaInput', '{{ path('busquedaAvanzada_show', {'nombreSeccion': seccion }) }}');sendBtnBusquedaAvanzadaEvent('Busqueda avanzada {{ seccion }}','Busqueda Avanzada');return false;">
+											Búsqueda avanzada
+										</a>
+									</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<img class="img-responsive center-block" src="/images/131-aniversario.png" width="243" height="183"/>
+				</div>
+			</div>
+
+
+			<div class="col-md-9 col-md-pull-3">
+				<div class="row">
+					<div id="includeResultadosBusquedaRapida">
+						{%  include "Busqueda/responseBusqueda.html.twig" %}
+					</div>
+
+
+					<div id="layoutContent">
+						<div id="subLayouyContentDiv" class="col-md-8 form-group margin-top-15">
+							{% if contenidoEstatica is defined %}
+								{{ contenidoEstatica | raw }}
+							{% else %}
+								{% include contentUrl %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+	{{ include ('Modals/biblioteca_normativas_modal.html.twig') }}
+
+	{% if servicioFaq is defined and servicioFaq != null and servicioFaq != "" %}
+		<script>
+			var servicioFaq = '{{ servicioFaq }}';
+scrollFunc(servicioFaq);
+		</script>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% block tituloSeccion %}
+	<div class="row">
+		<div class="col-title">
+			<h2 class="secciones-titulo-h2 {{ sectionClass }}">
+				{{ titulo_seccion }}<br>
+				<small>{{ subtitulo_seccion }}</small>
+			</h2>
+			{% if urlSuplementos is defined and urlSuplementos %}
+				{% for index, urlSup in urlSuplementos %}
+					{% set indexStr = "del día" %}
+					{% if urlSuplementos|length > 1 %}
+						{% set indexStr = (index + 1) ~ " del día" %}
+					{% endif %}
+					<div>
+						<p style="color: #0072BC; margin: 0">
+							<a target="_blank" href="{{ urlSup["url"] }}">Descargar suplemento
+								{{ indexStr }}</a>
+						</p>
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+		<div class="col-download">
+			{% if trajo_pdf %}
+				{% set today = "now"|date("Ymd")  %}
+				{% if today == fecha_sin_formato and pdfLink %}
+					<a target="_blank" href="{{ pdfLink }}">
+						<button class="btn btn-primary btn-circle btn-sm pull-right {{ sectionClassBg }}" href="" data-toggle="tooltip" data-placement="bottom" title="Descargar sección" data-container="body" onclick='sendPDFEvent("Descarga", "{{ subtitulo_seccion }}");'>
+							<i class="fa fa-download"></i>
+						</button>
+					</a>
+				{% else %}
+					<button class="btn btn-primary btn-circle btn-sm pull-right {{ sectionClassBg }}" data-toggle="tooltip" data-placement="bottom" title="Descargar sección" data-container="body" onclick='descargarPDFSeccion("{{ seccion }}","{{ fecha_sin_formato }}", "{{ path('download_pdf_section') }}"); sendpdfevent("descarga", "{{ subtitulo_seccion }}");'>
+						<i class="fa fa-download"></i>
+					</button>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

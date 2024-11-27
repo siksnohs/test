@@ -1,0 +1,23 @@
+.main-footer {
+    background-color: var(--footer-bg);
+}
+
+.main-footer h5 {
+    color: var(--text-primary);
+}
+
+.main-footer a {
+    color: var(--white);
+}
+
+.main-footer p strong {
+    color: var(--text-primary);
+}
+
+.main-footer p {
+    color: var(--white);
+}
+
+.datos {
+    padding-top: 2%;
+}

@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12" id="avisosSeccionDiv{{ nro_pagina }}">
+        {% if nro_pagina is same as(1)  %}
+            {%  include "secciones/titulo_seccion.html.twig" %}
+        {% endif %}
+
+
+        {% for item_externo in segunda_seccion.items %}
+            {% if item_externo is not null and item_externo.items is not null and item_externo.items|length > 0 and item_externo.nombre is not null %}
+
+                {% if ultimoItemExterno is null or ultimoItemExterno != item_externo.nombre %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h5 class="seccion-rubro text-white bg-second-section">{{ item_externo.nombre|raw }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    {% for item_interno in item_externo.items %}
+                        {% if item_interno is not null and item_interno.avisos is not null and item_interno.avisos|length > 0 and item_interno.nombre is not null %}
+                            {% set id_accordion = item_interno.id  %}
+                            <div id="accordion{{ id_accordion }}" role="tablist" aria-multiselectable="true" class="linea-aviso">
+                                <div role="tab" id="accordion{{ id_accordion }}">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion{{ id_accordion }}" href="#collapse{{ id_accordion }}" aria-expanded="true" aria-controls="accordion{{ id_accordion }}">
+                                        <p class="item">{{ item_interno.nombre|raw }}</p>
+                                    </a>
+                                </div>
+                                <div id="collapse{{ id_accordion }}" class="panel-collapse collapse avisos-seg-busq" role="tabpanel">
+                                    {%  include "Busqueda/avisos_segunda.html.twig" %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for item_interno in item_externo.items %}
+                        {% if item_interno is not null and item_interno.avisos is not null and item_interno.avisos|length > 0 and item_interno.nombre is not null %}
+                            {% if ultimoItemInterno is null or ultimoItemInterno != item_interno.nombre %}
+                                {% set id_accordion = item_interno.id  %}
+                                <div id="accordion{{ id_accordion }}" role="tablist" aria-multiselectable="true" class="linea-aviso">
+                                    <div role="tab" id="accordion{{ id_accordion }}">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion{{ id_accordion }}" href="#collapse{{ id_accordion }}" aria-expanded="true" aria-controls="accordion{{ id_accordion }}">
+                                            <p class="item">{{ item_interno.nombre|raw }}</p>
+                                        </a>
+                                    </div>
+                                    <div id="collapse{{ id_accordion }}" class="panel-collapse collapse avisos-seg-busq" role="tabpanel">
+                                        {%  include "Busqueda/avisos_segunda.html.twig" %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% set nro_pagina_anterior = nro_pagina - 1 %}
+                                <script>
+                                    $(".avisos-seg-busq:last").append("{{ html_primeros_avisos|raw }}");
+                                </script>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

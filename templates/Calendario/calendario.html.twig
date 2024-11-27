@@ -1,0 +1,82 @@
+
+<div id="divCalendario"></div>
+
+
+
+<script>
+
+    var producirRecarga = '{{ calendar_reload }}';
+    var cambioDeAnio = false;
+
+    var diaSeleccionado=new Date({{ fechaEdicion|date('Y') }},{{ fechaEdicion|date('m') }}-1,{{ fechaEdicion|date('d') }});
+    var fechaSeleccionada = '{{ fechaEdicion|date('d-m-Y') }}';
+    var fechaSeleccionadaYMD = '{{ fechaEdicion|date('Ymd') }}';
+    var anioAnteriorPortada = parseInt(fechaSeleccionada.split("-")[2]);
+    var fechaUltimaEdicionPortada = '{{ fechaUltimaEdicion|date('d-m-Y') }}';
+
+    urlGetDiasHabilitadosPorAnio = "{{ path('get_dias_publicacion', { 'anio': 0 , 'seccion': 0 }) }}";
+    urlGetDiasHabilitadosPorAnio = urlGetDiasHabilitadosPorAnio.substring(0, urlGetDiasHabilitadosPorAnio.lastIndexOf("/"));
+    urlGetDiasHabilitadosPorAnio = urlGetDiasHabilitadosPorAnio.substring(0, urlGetDiasHabilitadosPorAnio.lastIndexOf("/"));
+
+    urlActualizarFechaEdicion = "{{ path('actualizar_edicion', { 'fecha': 0 }) }}";
+    urlActualizarFechaEdicion = urlActualizarFechaEdicion.substring(0, urlActualizarFechaEdicion.lastIndexOf("/"));
+
+    urlPortadaSeccion = "{{ path('seccion_show', { 'nombreSeccion': seccion }) }}";
+
+    buttonClickedPortada = null;
+
+    nombreSeccionPortada = '{{ seccion }}';
+
+    {% if diasHabilitados is defined %}
+        var diasHabilitadosPortadaSuplemento = JSON.parse('{{ diasHabilitados|json_encode|raw }}');
+        var diasHabilitadosPortada = diasHabilitadosPortadaSuplemento['fechas'];
+        if (diasHabilitadosPortada != undefined && diasHabilitadosPortada != null && diasHabilitadosPortada.length != 0 && anioAnteriorPortada != diasHabilitadosPortada[0].substring(0,4)){
+            actualizarDiasHabilitadosPortada('#divCalendario',anioAnteriorPortada);
+        }
+    {% endif %}
+
+    $('#divCalendario').datepicker({
+        startDate: fechaInicioCalendario,
+        endDate: '{{ fechaUltimaEdicion|date('d-m-Y') }}',
+        weekStart: 0,
+        container: '#divCalendario',
+        language: "es",
+        format: 'dd-mm-yyyy',
+        beforeShowDay: function(datetime) {
+            if (diasHabilitadosPortada == null || diasHabilitadosPortada.length === 0) {
+                return true;
+            }
+
+            fechaHabilitada = fechaEstaHabilitada(diasHabilitadosPortada, datetime);
+            fechaSuplemento = formatFechaCalendario(datetime);
+            classDay = '';
+            tooltipDay = '';
+
+            if (diasHabilitadosPortadaSuplemento['fechas_con_suplemento'].indexOf(fechaSuplemento) > -1) {
+                classDay = 'day-suplemento';
+                tooltipDay = 'Fecha con suplemento';
+            }
+
+            return {enabled: fechaHabilitada, classes: classDay, tooltip: tooltipDay};
+        }
+    }).datepicker('setDate','{{ fechaEdicion|date('d-m-Y') }}')
+        .on('changeDate', onChangeDate)
+        .on('changeMonth', function(e){
+            onChangeMonthPortada("#divCalendario", cambioDeAnio);
+            cambioDeAnio = false;
+        }).on('changeYear', function(e){
+            cambioDeAnio = true;
+    });
+
+    changePreviousAndNextButtonCalendar("#divCalendario");
+
+    $("#divCalendario .datepicker .prev").on("click", function () {
+        buttonClickedPortada = "prev";
+    });
+
+    $("#divCalendario .datepicker .next").on("click", function () {
+        buttonClickedPortada = "next";
+    });
+
+</script>
+

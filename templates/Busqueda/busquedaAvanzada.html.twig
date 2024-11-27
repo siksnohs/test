@@ -1,0 +1,499 @@
+{% block busquedaAvanzada %}
+
+    <div class="row">
+        <div class="col-md-7">
+            {% block tituloBusqueda %}
+                <h2>
+                    Búsqueda avanzada
+                </h2>
+            {% endblock %}
+        </div>
+        <div class="col-md-5">
+            <button id="btnBibliotecaNormativasBusqueda" onclick="return false;" data-toggle="modal" data-target="#modalBibliotecaNormativa" class="btn btn-xs btn-primary pull-right btn-busq-biblioteca">Biblioteca de Normativas</button>
+        </div>
+    </div>
+    {% block buscadorAvanzado %}
+        <hr class="secciones-titulo-hr">
+        <form method="post" action="">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Palabra/s clave&nbsp;<i class="fa fa-question-circle text-primary" aria-hidden="true" data-container="body" data-toggle="tooltip" data-placement="right" title="Para buscar por frase, ingresa comillas.">
+                        </i></label>
+                    <input type="text" placeholder="Buscar por palabra y en caso de buscar frase, utilizar comillas." id="palabraClave" class="input-sm form-control"/>
+    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="font-size: small">
+                    <div class="form-group">
+                        <input id="checkTodasPalabras" type="radio" value="buscador" name="TextoTodasAlguna" checked="checked"> Todas las palabras
+                        <input id="checkAlgunasPalabras" type="radio" value="buscador" name="TextoTodasAlguna"> Alguna de las palabras
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+    
+                <div class="col-md-12 form-group">
+                    <label>Sección</label>
+                    <div id="magicsuggest"></div>
+                    <span id="spanSeccion" class="error-busq-avanzada"></span>
+                </div>
+    
+                <div id="rubroSelectorDiv" style="display: none;" class="col-md-6">
+                    <div class="form-group">
+                        <label id="rubroLB"></label>
+                        <span id="cargandoSelectRubrosSeccion" class="cargando-rubro" style="display: none;">
+                            <i class="fa fa-spinner fa-pulse text-primary fa-fw"></i>
+                            <span class="sr-only">Loading...</span>
+                        </span>
+                        <div id="magicSuggestRubros"></div>
+                    </div>
+    
+                </div>
+    
+                <div id="primeraDiv" style="display: none;" class="col-md-6">
+    
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="nroAnioNormaLB">Número</label>
+                                <input type="text" onkeypress="return isNumberMiles(event)" id="nroNormaIP" class="input-sm form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label id="nroAnioNormaLB">Año de norma</label>
+                                    <input type="text" onkeypress="return isNumber(event)" maxlength="4" id="anioNormaIP" class="input-sm form-control"/>
+                                    <span id="anioNormaIPSpan" class="error-busq-avanzada"></span>
+                            </div>
+                        </div>
+                </div>
+    
+                <div style="display: none;" class="segundaDiv col-md-6 form-group">
+                    {# Búsqueda de texto libre solo en los títulos #}
+                    <label>Denominación/Nombre</label>
+                    <input type="text" id="denominacion" class="input-sm form-control"/>
+                    <div style="font-size: small">
+                        <input id="checkComienzaDenominacion" type="radio" value="buscador" name="TextoComienzaDenominacion" checked="checked"> Comienza
+                        <input id="checkContieneDenominacion" type="radio" value="buscador" name="TextoComienzaDenominacion"> Contiene
+                    </div>
+                </div>
+                <div class="segundaDiv col-md-6" style="display: none;">
+                    <label>Ordenamiento</label>
+                    <select type="text" id="selectOrdenamientoSegunda" class="form-control input-sm form-group">
+                        <option value="0">Denominación-Rubro</option>
+                        <option value="1">Rubro-Denominación</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="row form-group" id="terceraDiv" style="display: none;">
+    
+    
+                <div class="col-md-6">
+                    <label id="tipoContratacionLB">Tipo Contratación</label>
+                    <input type="text" maxlength="10" id="tipoContratacion" class="input-sm form-control"/>
+                    <span id="tipoContratacionSpan" class="error-busq-avanzada"></span>
+                </div>
+                <div class="col-md-3">
+                    <label id="nroContratacionLB">N° Contratación</label>
+                    <input type="text" onkeypress="return isNumberOrLetter(event, false)" maxlength="20" id="nroContratacion" class="input-sm form-control"/>
+                    <span id="nroContratacionSpan" class="error-busq-avanzada"></span>
+                </div>
+                <div class="col-md-3">
+                    <label id="anioContratacionLB">Año</label>
+                    <input type="text" id="anioContratacion" maxlength="4" onkeypress="return isNumber(event)" class="input-sm form-control"/>
+                    <span id="anioContratacionSpan" class="error-busq-avanzada"></span>
+                </div>
+    
+    
+            </div>
+    
+            <div class="row">
+                <div class="col-md-6" id="fechaDesde">
+                    <label>Fecha Desde</label>
+                    <span id="cargandoFechaDesde" class="cargando-rubro" style="display: none;">
+                            <i class="fa fa-spinner fa-pulse text-primary fa-fw"></i>
+                            <span class="sr-only">Loading...</span>
+                    </span>
+                    <input id="fechaDesdeInput" class="input-sm form-control"  />
+                    <span id="fechaDesdeSpan" class="error-busq-avanzada"></span>
+                </div>
+    
+                <div class="col-md-6" id="fechaHasta">
+                    <label>Fecha Hasta</label>
+                    <span id="cargandoFechaHasta" class="cargando-rubro" style="display: none;">
+                            <i class="fa fa-spinner fa-pulse text-primary fa-fw"></i>
+                            <span class="sr-only">Loading...</span>
+                    </span>
+                    <input id="fechaHastaInput" class="input-sm form-control"/>
+                    <span id="fechaHastaSpan" class="error-busq-avanzada"></span>
+                </div>
+            </div>
+    
+            <br>
+    
+            <div class="row margin-bottom-30">
+                <div class="col-md-12">
+                    <button id="btnBusquedaAvanzada" class="btn btn-sm btn-success" onclick="arrayVolver=[]; realizarBusquedaAvanzada('{{ path("realizar_busqueda") }}', 0, null, true, true, null, '{{ path("realizar_busqueda_segunda") }}' ); return false;">Buscar</button>
+                </div>
+            </div>
+        </form>
+    {% endblock %}
+    
+    {#<!-------- Sumarizado ---------->#}
+
+
+    <div id="sumarizadoBusqAvanzada" style="display: none">
+        <hr>
+        <h5 style="margin-bottom: 15px;">Cantidad de resultados <small id="counterTotal"></small></h5>
+        <div class="row" id="counterAvanzadaDiv" style="display: none">
+            <div id="counterPrimera" style="display: none" class="col-md-4 col-sm-6 col-xs-6 form-group">
+                <a class="puntero" id="counterPrimera" onclick="actualizarBusqueda('{{ path("realizar_busqueda") }}', 'primera', 1, 'Avanzada'); return false;"><span>Legislación y Avisos Oficiales </span><span id="spanCounterPrimera"></span><br><span class="text-muted font-size-14 font-regular"> Primera Sección </span></a>
+            </div>
+            <div id="counterSegunda" style="display: none" class="col-md-4 col-sm-6 col-xs-6  form-group">
+                <a  class="puntero" id="counterSegunda" onclick="actualizarBusqueda('{{ path("realizar_busqueda") }}', 'segunda', 2, 'Avanzada'); return false;"><span>Sociedades y Avisos Judiciales </span><span id="spanCounterSegunda"></span><br><span class="text-muted font-size-14 font-regular"> Segunda Sección </span></a>
+            </div>
+            <div id="counterTercera" style="display: none" class="col-md-4 col-sm-6 col-xs-6  form-group">
+                <a class="puntero" id="counterTercera" onclick="actualizarBusqueda('{{ path("realizar_busqueda") }}', 'tercera', 3, 'Avanzada'); return false;"><span>Contrataciones </span><span id="spanCounterTercera"></span><br><span class="text-muted font-size-14 font-regular"> Tercera Sección </span></a>
+            </div>
+        </div>
+        <h5><small id="sinResultadosAvanzada"></small></h5>
+    </div>
+
+
+    <!------- Respuesta -------->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="resultadosBusqueda">
+                {% block itemBusqueda %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="cargandoListadoBusquedaAvanzada" class="cargando-div col-md-6 form-group" style="display: none;">
+                <img src="{{ asset('/images/loader.gif') }}" height="75px">
+            </div>
+        </div>
+    </div>
+    {{ include ('Modals/biblioteca_normativas_modal.html.twig') }}
+{% endblock %}
+
+<script>
+
+    anioAnteriorBusquedaDesde = anioActual;
+    anioAnteriorBusquedaHasta = anioActual;
+    {% if anioFechaDesde is defined %}
+        anioAnteriorBusquedaDesde = {{ anioFechaDesde }};
+    {% endif %}
+
+    {% if anioFechaHasta is defined %}
+        anioAnteriorBusquedaHasta = {{ anioFechaHasta }};
+    {% endif %}
+
+    diasHabilitadosBusqAvanzada = {};
+    urlGetDiasHabilitadosBusqueda = "{{ path('get_dias_publicacion_busqueda', { 'anio': 0  }) }}";
+    urlGetDiasHabilitadosBusqueda = urlGetDiasHabilitadosBusqueda.substring(0, urlGetDiasHabilitadosBusqueda.lastIndexOf("/"));
+    {% if diasHabilitadosBusqueda is defined %}
+        diasHabilitadosObject = JSON.parse({{ diasHabilitadosBusqueda|json_encode|raw }});
+        diasHabilitadosBusqAvanzada[anioAnteriorBusquedaDesde] = diasHabilitadosObject[anioAnteriorBusquedaDesde];
+        diasHabilitadosBusqAvanzada[anioAnteriorBusquedaHasta] = diasHabilitadosObject[anioAnteriorBusquedaHasta];
+    {% endif %}
+
+
+
+    var buttonClickedFechaDesde = null;
+
+    $('#fechaDesde input').datepicker({
+        language: "es",
+        startDate: fechaInicioCalendario,
+        endDate: '{{ fechaUltimaEdicion|date('d-m-Y') }}',
+        weekStart: 0,
+        container: '#fechaDesde',
+        format: 'dd/mm/yyyy',
+        // todayHighlight: true,
+        beforeShowDay: habilitarFechasBusqAvanzada
+    }).on("show", function(e) {
+        changePreviousAndNextButtonCalendar("#fechaDesde");
+        $("#fechaDesde .datepicker .prev").on("click", function () {
+            buttonClickedFechaDesde = "prev";
+        });
+
+        $("#fechaDesde .datepicker .next").on("click", function () {
+            buttonClickedFechaDesde = "next";
+        });
+
+    }).on('changeMonth', function(e){
+        onChangeMonthBusqueda(buttonClickedFechaDesde, anioAnteriorBusquedaDesde, "#fechaDesde");
+    }).on('changeYear', function(e){
+        onChangeMonthBusqueda(buttonClickedFechaDesde, anioAnteriorBusquedaDesde, "#fechaDesde", true, true);
+    });
+
+    var buttonClickedFechaHasta = null;
+    $('#fechaHasta input').datepicker({
+        language: "es",
+        startDate: fechaInicioCalendario,
+        endDate: '{{ fechaUltimaEdicion|date('d-m-Y') }}',
+        weekStart: 0,
+        container: '#fechaHasta',
+        format: 'dd/mm/yyyy',
+        // todayHighlight: true,
+        beforeShowDay: habilitarFechasBusqAvanzada
+    }).on("show", function(e) {
+        changePreviousAndNextButtonCalendar("#fechaHasta");
+        $("#fechaHasta .datepicker .prev").on("click", function () {
+            buttonClickedFechaHasta = "prev";
+        });
+
+        $("#fechaHasta .datepicker .next").on("click", function () {
+            buttonClickedFechaHasta = "next";
+        });
+    }).on('changeMonth', function(e){
+        onChangeMonthBusqueda(buttonClickedFechaHasta, anioAnteriorBusquedaHasta, "#fechaHasta", false);
+    }).on('changeYear', function(e){
+        onChangeMonthBusqueda(buttonClickedFechaHasta, anioAnteriorBusquedaHasta, "#fechaHasta", false, true);
+    });
+
+    function habilitarFechasBusqAvanzada(datetime) {
+        date = new Date(datetime);
+        date.setMinutes(date.getMinutes() + 480);
+        var anio = $.fn.datepicker.DPGlobal.formatDate(date, 'yyyy', 'es');
+        if (anio != ""){
+            anio = parseInt(anio);
+        }
+        return fechaEstaHabilitadaBusquedaAvanzada(diasHabilitadosBusqAvanzada[anio], date);
+    }
+
+    $('#subLayouyContentDiv').removeClass("margin-top-15");
+    cleanActiveOfLateralMenuElement();
+
+    var hayMasResultadosBusquedaAvanzada = true;
+    var ejecutandoLlamadaAsincronicaBusquedaAvanzada = false;
+    if (sessionStorage.getItem('searchParams') !== null) {
+        sessionStorage.removeItem('searchParams');
+    }
+    $(window).on("scroll", function(){
+        if ((window.innerHeight + getScrollPosition() + 200) >= document.body.offsetHeight) {
+            if (hayMasResultadosBusquedaAvanzada) {
+                if (ejecutandoLlamadaAsincronicaBusquedaAvanzada) {
+                    return false;
+                }
+                ejecutandoLlamadaAsincronicaBusquedaAvanzada = true;
+                if (sessionStorage.getItem('searchParams') !== null) {
+                    var searchParams = JSON.parse(sessionStorage.getItem('searchParams'));
+                    if (searchParams.tipoBusqueda === "Avanzada") {
+                        if (searchParams.seccionesOriginales.length === 1 && searchParams.seccionesOriginales[0] === 2){
+                            cargarRespuestasAvanzadaSegunda(params, '{{ path("realizar_busqueda_segunda") }}', false);
+                        }
+                        else{
+                            cargarRespuestasAvanzada(searchParams, "{{ path("realizar_busqueda") }}", false);
+                        }
+                    }
+                    else{
+                        ejecutandoLlamadaAsincronicaBusquedaAvanzada = false;
+                    }
+                }
+                else{
+                    ejecutandoLlamadaAsincronicaBusquedaAvanzada = false;
+                }
+            }
+        }
+    });
+
+    function actualizarForm(seccionValue, rubrosSeleccionados){
+        rubrosSeleccionados=setDefault(rubrosSeleccionados,[]);
+        if(seccionValue.length===1){
+            switch(seccionValue[0]){
+                case 1:
+                    actualizarBusquedaForm(seccionValue, rubrosSeleccionados ,"{{ path("get_rubros_seccion", {"nombreSeccion": "primera" }) }}");
+                    break;
+                case 2:
+                    actualizarBusquedaForm(seccionValue, rubrosSeleccionados ,"{{ path("get_rubros_seccion", {"nombreSeccion": "segunda" }) }}");
+                    break;
+                case 3:
+                    actualizarBusquedaForm(seccionValue, rubrosSeleccionados, "{{ path("get_rubros_seccion", {"nombreSeccion": "tercera" }) }}");
+                    break;
+            }
+        }else{
+            actualizarBusquedaForm(seccionValue, rubrosSeleccionados);
+        }
+    }
+
+    // initFechas("fechaDesde");
+    // initFechas("fechaHasta");
+
+//RECARGAR LOS FILTROS AL VOLVER
+    $( document ).ready(function() {
+
+        var ms = $('#magicsuggest').magicSuggest({
+            placeholder: "Elija una sección",
+            allowFreeEntries: false,
+            data: [{'id':1, 'name':'Primera y suplementos'}, {'id':2, 'name':'Segunda'}, {'id':3, 'name':'Tercera'}],
+            expandOnFocus: true
+        });
+
+        var magicSuggestRubros = $('#magicSuggestRubros').magicSuggest({
+            placeholder: "Elija un rubro",
+            allowFreeEntries: false,
+            data: [],
+            expandOnFocus: true,
+            maxSelection: 100,
+            maxSelectionRenderer: function () {
+                return "No puede seleccionar más de 100 rubros."
+            }
+        });
+
+
+        function setearFechaEnCalendarioBusqueda(fecha, idCalendario, esCalendarioFechaDesde){
+            anioNuevo = parseInt(fecha.substr(6,4));
+            if ($.isEmptyObject(diasHabilitadosBusqAvanzada[anioNuevo])){
+                actualizarDiasHabilitadosBusqueda(idCalendario, anioNuevo, esCalendarioFechaDesde);
+                $(idCalendario+' input').datepicker( "option", "beforeShowDay", habilitarFechasBusqAvanzada );
+            }
+            $(idCalendario+' input').datepicker('setDate', fecha);
+
+        }
+
+
+        esVolver = false;
+        {% set parametrosBusqueda = app.session.get('parametrosBusquedaOriginal') %}
+        {% if  parametrosBusqueda is not null %}
+            esVolver = true;
+            {% set arrayVolver = app.session.get('arrayVolver') %}
+            {% set parametrosUltimaBusqueda = app.session.get('parametrosBusquedaUltimo') %}
+
+            arrayVolver={{ arrayVolver|json_encode|raw }};
+            params = {{ parametrosUltimaBusqueda|json_encode|raw }};
+
+            realizarBusqueda('{{ path("realizar_busqueda") }}', params, true, '{{ path("realizar_busqueda_segunda") }}');
+
+            seccionesSeleccionadas = [];
+
+            {% for sec in parametrosBusqueda.seccion %}
+            seccionesSeleccionadas.push({{ sec }});
+            {% endfor %}
+
+            ms.setValue(seccionesSeleccionadas);
+
+            var rubrosSeleccionados=[];
+            {% if parametrosBusqueda.rubros != null and parametrosBusqueda.rubros|length > 0 %}
+                {% for rubroSeleccionado in parametrosBusqueda.rubros %}
+                    rubrosSeleccionados.push("{{ rubroSeleccionado }}");
+                {% endfor %}
+                actualizarForm(seccionesSeleccionadas, rubrosSeleccionados);
+            {% else %}
+                actualizarForm(seccionesSeleccionadas, rubrosSeleccionados);
+            {% endif %}
+
+            {% if parametrosBusqueda.texto != '' %}
+                valTexto = '{{ parametrosBusqueda.texto }}';
+                valTexto = valTexto.replace(/&quot;/g, '\"');
+                $("#palabraClave").val(valTexto);
+            {% endif %}
+
+            $("#checkTodasPalabras").prop("checked", false);
+            $("#checkAlgunasPalabras").prop("checked", true);
+            {% if parametrosBusqueda.todasLasPalabras != '' %}
+                todasLasPalabras = '{{ parametrosBusqueda.todasLasPalabras }}';
+                if (todasLasPalabras === "1"){
+                    $("#checkTodasPalabras").prop("checked", true);
+                    $("#checkAlgunasPalabras").prop("checked", false);
+                }
+
+            {% endif %}
+
+            {% if parametrosBusqueda.nroNorma != '' %}
+            valNroNorma = '{{ parametrosBusqueda.nroNorma }}';
+            $("#nroNormaIP").val(valNroNorma);
+            {% endif %}
+
+            {% if parametrosBusqueda.anioNorma != '' %}
+            valAnioNorma = '{{ parametrosBusqueda.anioNorma }}';
+            $("#anioNormaIP").val(valAnioNorma);
+            {% endif %}
+
+            {% if parametrosBusqueda.denominacion != '' %}
+            valDenominacion = '{{ parametrosBusqueda.denominacion }}';
+            $("#denominacion").val(valDenominacion);
+            {% endif %}
+
+            $("#checkComienzaDenominacion").prop("checked", false);
+            $("#checkContieneDenominacion").prop("checked", true);
+            {% if parametrosBusqueda.comienzaDenominacion != '' %}
+            comienza = '{{ parametrosBusqueda.comienzaDenominacion }}';
+            if (comienza === "1"){
+                $("#checkComienzaDenominacion").prop("checked", true);
+                $("#checkContieneDenominacion").prop("checked", false);
+            }
+            {% endif %}
+
+            ordenamientoSegunda = '{{ parametrosBusqueda.ordenamientoSegunda }}';
+            ordenamientoSegunda = ordenamientoSegunda == "" ? "0": ordenamientoSegunda;
+            $("#selectOrdenamientoSegunda").val(ordenamientoSegunda);
+
+
+            {% if parametrosBusqueda.tipoContratacion != '' %}
+            valTipoContratacion = '{{ parametrosBusqueda.tipoContratacion }}';
+            $("#tipoContratacion").val(valTipoContratacion);
+            {% endif %}
+
+            {% if parametrosBusqueda.anioContratacion != '' %}
+            valAnioContratacion = '{{ parametrosBusqueda.anioContratacion }}';
+            $("#anioContratacion").val(valAnioContratacion);
+            {% endif %}
+
+            {% if parametrosBusqueda.nroContratacion != '' %}
+            valNroContratacion = '{{ parametrosBusqueda.nroContratacion }}';
+            $("#nroContratacion").val(valNroContratacion);
+            {% endif %}
+
+            {% if parametrosBusqueda.fechaDesde is not null and parametrosBusqueda.fechaDesde != '' %}
+                setearFechaEnCalendarioBusqueda('{{ parametrosBusqueda.fechaDesde }}', "#fechaDesde", true);
+            {% endif %}
+
+            {% if parametrosBusqueda.fechaHasta is not null and parametrosBusqueda.fechaHasta != '' %}
+                setearFechaEnCalendarioBusqueda('{{ parametrosBusqueda.fechaHasta }}', "#fechaHasta", false);
+            {% endif %}
+
+        {% else %}
+            var secciones = {"primera": 1, "segunda": 2, "tercera": 3};
+            if("{{ seccion }}" !== "all"){
+                ms.setValue([secciones["{{ seccion }}"]]);
+            }else{
+                ms.setValue([1, 2, 3]);
+            }
+
+            actualizarForm(ms.getValue());
+        {% endif %}
+
+        $(ms).on('selectionchange', function(){
+            seccionValue = this.getValue();
+            actualizarForm(seccionValue)
+        });
+
+        {% if palabraClave is not null %}
+            palabraClave = "{{ palabraClave|raw }}";
+            palabraClave = palabraClave.replace(/&quot;/g, '\"');
+            palabraClave = decodeURIComponent(palabraClave);
+            $("#palabraClave").val(palabraClave);
+
+            $('#fechaDesde input').datepicker('setDate', '{{ fechaEdicion|date("d/m/Y") }}');
+            $('#fechaHasta input').datepicker('setDate', '{{ fechaEdicion|date("d/m/Y") }}');
+
+            arrayVolver=[];
+            realizarBusquedaAvanzada('{{ path("realizar_busqueda") }}', 0, null, true, true, null, '{{ path("realizar_busqueda_segunda") }}' );
+
+            setearFechaEnCalendarioBusqueda('{{ fechaEdicion|date("d/m/Y") }}', "#fechaDesde", true);
+            setearFechaEnCalendarioBusqueda('{{ fechaEdicion|date("d/m/Y") }}', "#fechaHasta", false);
+        {% endif %}
+    });
+
+
+
+
+
+
+</script>

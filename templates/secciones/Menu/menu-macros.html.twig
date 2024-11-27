@@ -1,0 +1,17 @@
+{% macro menu_items(items_menu, seccion, fecha) %}
+
+    {% if items_menu.hijos is empty %}
+        <a class="puntero text-primary-alt" onclick="realizarBusquedaRubro('{{ path("busqueda_por_rubro") }}', '{{ seccion }}', '{{ items_menu.id }}', '{{ fecha }}'); return false; "> {{ items_menu.descripcion|lower|capitalize }} ({{ items_menu.cantidad }})
+        </a>
+    {% else %}
+
+        {% import _self as self %}
+        {{ items_menu.descripcion|lower|capitalize }}<br>
+        <span class="menuRubros">
+        {% for item in items_menu.hijos %}
+            {{ self.menu_items(item, seccion, fecha) }}
+        {% endfor %}
+        </span>
+    {% endif %}
+
+{% endmacro %}
